@@ -4,33 +4,30 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from time import sleep
 
-#修改项
+# 修改项
 DevNumList="1903300540"
-ParamIdList="0x030000D9"
-
-ValList={"NpvMainIpC1":  "121.196.244.159",
-        "NpvbakIpC1":   "121.196.244.159",
-        "NpvMainPortC1":"8111",
-        "NpvbakPortC1": "8111",
-        "NpvMainIpC2":  "121.196.244.159",
-        "NpvbakIpC2":   "121.196.244.159",
-        "NpvMainPortC2":"8111",
-        "NpvbakPortC2": "8111",
-        "Vin":          "WJ123456720190521",
-        "ObosForever":  1,
-        }
+# 需要设置哪些参数
+VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever"]
+# 参数列表
+ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
+           "NpvMainPortC1":  ["0x1000001", "Word",   "8111"],
+           "NpvbakIpC1":     ["0x1000002", "String", "121.196.244.159"],
+           "NpvbakPortC1":   ["0x1000003", "Word",   "8111"],
+           "NpvMainIpC2":    ["0x1010000", "String", "121.196.244.159"],
+           "NpvMainPortC2":  ["0x1010001", "Word",   "8111"],
+           "NpvbakIpC2":     ["0x1010002", "String", "121.196.244.159"],
+           "NpvbakPortC2":   ["0x1010003", "Word",   "8111"],
+           "Vin":            ["0x3000001", "String", "WJ123456720190521"],
+           "ObosForever":    ["0x1000000", "DWord",  "1"],
+           "NpvGbTestMode":  ["0x30000AA", "DWord",  "0"],
+           "WakeUpMask":     ["0x300102F", "DWord",  "133121"],
+           "CanRecEn":       ["0x3000092", "Byte",   "0"],
+           "GpsLogEn":       ["0x3000096", "DWord",  "1"],
+           "NpvLogEn":       ["0x300009C", "DWord",  "1"],
+           "NpvHistFilePa":  ["0x300001C", "String",  "/media/card/data/queuefile/data_npv_chn"],
         
-IdList={"NpvMainIpC1":  "121.196.244.159",
-        "NpvbakIpC1":   "121.196.244.159",
-        "NpvMainPortC1":"8111",
-        "NpvbakPortC1": "8111",
-        "NpvMainIpC2":  "121.196.244.159",
-        "NpvbakIpC2":   "121.196.244.159",
-        "NpvMainPortC2":"8111",
-        "NpvbakPortC2": "8111",
-        "Vin":          "WJ123456720190521",
-        "ObosForever":  1,
         }
+    
 
 # 打开Chrome浏览器
 browser = webdriver.Chrome()
@@ -51,75 +48,44 @@ browser.find_element_by_id("taskdfdiv").click()
 browser.switch_to.window(browser.window_handles[1])
 #browser.implicitly_wait(1)
 
+#进入参数设置
+browser.switch_to.default_content()
+browser.switch_to.frame("left")
+browser.find_element_by_link_text("02-设置终端参数").click()
+#填充终端号
+browser.switch_to.default_content()
+browser.switch_to.frame("tdMainPage")
+browser.find_element_by_name("terminalID").send_keys(DevNumList)
 
-
-for i in range(2):
-    #进入参数设置
-    browser.switch_to.default_content()
-    browser.switch_to.frame("left")
-    browser.find_element_by_link_text("02-设置终端参数").click()
-
-    #填充终端号
-    browser.switch_to.default_content()
-    browser.switch_to.frame("tdMainPage")
-    browser.find_element_by_name("terminalID").send_keys(DevNumList)
-    browser.find_element_by_name("paramType").send_keys(ParamIdList)
+for i in range(len(VaildParam)):
+    #填充参数ID
+    browser.find_element_by_name("paramType").send_keys(ParamList[VaildParam[i]][0])
     #填充参数类型
     s1 = Select(browser.find_element_by_name("paramFormat"))  # 实例化Select
-    s1.select_by_value("DWord")
+    s1.select_by_value(ParamList[VaildParam[i]][1])
     #填充参数值
-    print("val=%d"%i)
-    browser.find_element_by_name("paramValue").send_keys(i)
+    browser.find_element_by_name("paramValue").send_keys(ParamList[VaildParam[i]][2])
     #添加
     browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[7]/td/input').click()
     browser.implicitly_wait(1)
-    #提交
-    browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[8]/td[1]/input').click() 
-    
-    browser.switch_to.default_content()
-    browser.switch_to.frame("left")
-    browser.find_element_by_link_text("01-查询任务进度").click()
-    
-    browser.switch_to.default_content()
-    browser.switch_to.frame("tdMainPage")
-    browser.find_element_by_name("terminal_id").send_keys(DevNumList)
-    browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td/input').click()
-    
-    sleep(10)
-    browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td/input').click()
-    sleep(2)
 
-
-'''
-browser.switch_to.frame(0)
-
-browser.find_element_by_link_text(TaskName).click()
-#browser.find_element_by_link_text(u"专网obos适配").click()
-#browser.find_element("title", TaskName).click()
-
-#browser.find_element_by_xpath("//*[@class='body-table']/tbody/tr[1]/td[6]").click();
-#ele = browser.find_element_by_id("taskPanel")
-#browser.find_element_by_xpath("//table[@class='body-row']/td[6]").click();
-
-#table1 = browser.find_element_by_id("taskInfo")
-#table_rows = table1.find_elements_by_tag_name('tr')
-
-#print(table_rows)
-#browser.find_element_by_class_name("item-span auto-link").click()
-browser.implicitly_wait(1)
+sleep(2)
+#提交
+browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[8]/td[1]/input').click()
+#查询  
 browser.switch_to.default_content()
-browser.switch_to.frame("main")
-browser.switch_to.frame("taskPage")
-browser.switch_to.frame("baseInfoFrm")
-
-browser.find_element_by_name("report_rate").send_keys(TaskRate)
-browser.find_element_by_name("report_in_work").send_keys(TaskTime)
-browser.find_element_by_name("operate_remark").send_keys(TaskContext)
-
-browser.switch_to.parent_frame()
-browser.find_element_by_xpath("//*[@id='operateDiv']/input[1]").click()
-
+browser.switch_to.frame("left")
+browser.find_element_by_link_text("01-查询任务进度").click()
 browser.switch_to.default_content()
-browser.find_element_by_xpath("//*[@id='dialogPanel']/div[2]/table/tbody/tr/td[2]/input[1]").click()
+browser.switch_to.frame("tdMainPage")
+browser.find_element_by_name("terminal_id").send_keys(DevNumList)
 
-'''
+for i in range(10):
+    browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td/input').click()
+    t = browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[3]/td[2]/font[1]').text
+    print("当前任务状态是%s"%t)
+    if t == "3":
+        print("Set param Success!")
+        break
+    sleep(5)
+

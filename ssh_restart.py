@@ -8,30 +8,6 @@ from time import sleep
 DevNumList="1903300540"
 ParamIdList="0x030000D9"
 
-ValList={"NpvMainIpC1":  "121.196.244.159",
-        "NpvbakIpC1":   "121.196.244.159",
-        "NpvMainPortC1":"8111",
-        "NpvbakPortC1": "8111",
-        "NpvMainIpC2":  "121.196.244.159",
-        "NpvbakIpC2":   "121.196.244.159",
-        "NpvMainPortC2":"8111",
-        "NpvbakPortC2": "8111",
-        "Vin":          "WJ123456720190521",
-        "ObosForever":  1,
-        }
-        
-IdList={"NpvMainIpC1":  "121.196.244.159",
-        "NpvbakIpC1":   "121.196.244.159",
-        "NpvMainPortC1":"8111",
-        "NpvbakPortC1": "8111",
-        "NpvMainIpC2":  "121.196.244.159",
-        "NpvbakIpC2":   "121.196.244.159",
-        "NpvMainPortC2":"8111",
-        "NpvbakPortC2": "8111",
-        "Vin":          "WJ123456720190521",
-        "ObosForever":  1,
-        }
-
 # 打开Chrome浏览器
 browser = webdriver.Chrome()
 browser.get("http://www.o-bos.com:50099/login.jsp")

@@ -7,7 +7,8 @@ from time import sleep
 # 修改项
 DevNumList="1903300540"
 # 需要设置哪些参数
-VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever"]
+#VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever"]
+VaildParam=["SshEn", "SshPort", "SshIp", "ObosForever"]
 # 参数列表
 ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "NpvMainPortC1":  ["0x1000001", "Word",   "8111"],
@@ -24,6 +25,9 @@ ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "CanRecEn":       ["0x3000092", "Byte",   "0"],
            "GpsLogEn":       ["0x3000096", "DWord",  "1"],
            "NpvLogEn":       ["0x300009C", "DWord",  "1"],
+           "SshEn":          ["0x30000D9", "DWord",  "1"],
+           "SshPort":        ["0x30000DB", "Word",   "7201"],
+           "SshIp":          ["0x30000DA", "String", "139.129.100.214"],
            "NpvHistFilePa":  ["0x300001C", "String",  "/media/card/data/queuefile/data_npv_chn"],
         
         }

@@ -3,7 +3,7 @@
 # author: WuJian
 from selenium import webdriver
 from selenium.common.exceptions import ElementNotInteractableException
-from selenium.webdriver.common.action_chains import ActionChains 
+#from selenium.webdriver.common.action_chains import ActionChains 
 from time import sleep
 
 #############以下内容为用户配置项#################
@@ -11,7 +11,7 @@ from time import sleep
 RdmUser="baosisi"
 RdmPasswd="123456"
 ## 评论内容
-CommentText="稍后处理"
+CommentText="待处理"
 ## RDM网址
 #RdmWeb="http://172.16.1.14:2000/"
 RdmWeb="http://rdm.hopechart.com:800/main.do"
@@ -38,38 +38,34 @@ def AddCommentNote(browser):
     browser.switch_to.frame("main")
     browser.switch_to.frame("workflowFrame")
     browser.switch_to.frame("tabs_panel_0")
-    '''
+    
     browser.find_element_by_id("addNoteBtn").click() 
     browser.implicitly_wait(5)
     browser.find_element_by_id("noteArea").send_keys(CommentText)
     browser.implicitly_wait(5)
     browser.find_element_by_id("saveNoteBtn").click()
     browser.implicitly_wait(5)
-    '''
+    
     browser.switch_to.default_content()
     browser.find_element_by_xpath('/html/body/div[3]/img').click()
 
 # 评论一页
 def CommnentOnePage(browser):
     row_num = GetRowsInOnePage(browser)
-    for row in range(row_num-10):
-        row = row + 10
-        print("----------------------开始评论第%d个任务:" % row)
+    for row in range(row_num):
         browser.switch_to.default_content()
         browser.switch_to.frame(0)
+        sleep(1)
         tr=browser.find_element_by_class_name("body-table").find_elements_by_tag_name('tr')
         td_list=tr[row].find_elements_by_tag_name('td')
+        print("----------------------开始评论第%s个任务:" % td_list[0].text)
         print(td_list[2].text)
-        print("8888888888888888888888888")
-        #browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        #browser.execute_script("window.scrollTo(0,document.body.scrollHeight);")
-        ActionChains(browser).move_to_element(tr).perform()
-        print("9999")
-        
+        #拖动到可见的元素
+        browser.execute_script("arguments[0].scrollIntoView();", td_list[2]) 
         tr[row].find_element_by_link_text(td_list[2].text).click()
         sleep(3)
         AddCommentNote(browser);
-        sleep(2)
+        sleep(1)
         
 def main():
     # 打开Chrome浏览器
@@ -87,7 +83,7 @@ def main():
             browser.find_element_by_id("pagination_nextPage").click()
             print("进入下一页")
         except ElementNotInteractableException:
-            print("没有下一页啦")
+            print("哈哈，评论完成，没有下一页啦")
             break
         sleep(2)
     browser.quit()

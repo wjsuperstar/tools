@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import Select
 from time import sleep
 
 #修改项
-DevNumList="1903300540"
+DevNumList="1908140921"
 ParamIdList="0x030000D9"
 
 # 打开Chrome浏览器
@@ -34,7 +34,7 @@ for i in range(2):
     browser.switch_to.default_content()
     browser.switch_to.frame("left")
     browser.find_element_by_link_text("02-设置终端参数").click()
-
+    sleep(2)
     #填充终端号
     browser.switch_to.default_content()
     browser.switch_to.frame("tdMainPage")
@@ -61,7 +61,7 @@ for i in range(2):
     browser.find_element_by_name("terminal_id").send_keys(DevNumList)
     browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td/input').click()
     
-    sleep(10)
+    sleep(20)
     browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td/input').click()
     sleep(2)
 

@@ -29,6 +29,7 @@ def LogOn(browser):
 def GetRowsInOnePage(browser):
     browser.switch_to.default_content()
     browser.switch_to.frame(0)
+    sleep(1)
     tab=browser.find_element_by_class_name("body-table")
     tr_list = tab.find_elements_by_tag_name('tr')
     return len(tr_list)

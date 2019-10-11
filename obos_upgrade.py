@@ -6,11 +6,13 @@ from time import sleep
 import os
 
 # 终端号
-DevNumList="1903300540"
+#DevNumList="1909121691"
+DevNumList="1906130556"
+
 # 上传目录
 UpDir="wj"
 # 待上传的升级文件名（包含路径）
-FilePathName=r"D:\share\py\learngit\a2B34r6.img"
+FilePathName=r"D:\test\upgrade\EV30\dp02.zip"
 
 DevOpt=1
 
@@ -44,10 +46,11 @@ browser.switch_to.default_content()
 browser.switch_to.frame("tdMainPage")
 browser.find_element_by_name("saveFile").send_keys("\\"+UpDir)
 browser.find_element_by_name("gateFileName").send_keys(FilePathName)
+sleep(2)
 browser.find_element_by_name("btn1").click()
-browser.implicitly_wait(10)
 # 点击弹出里面的确定按钮
 browser.switch_to_alert().accept()
+sleep(2)
 
 #切换到下发菜单
 browser.switch_to.default_content()
@@ -59,6 +62,7 @@ browser.switch_to.frame("tdMainPage")
 browser.find_element_by_name("terminalID").send_keys(DevNumList)
 browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[4]/td[2]/input').send_keys(DevOpt)
 browser.find_element_by_name("content").send_keys(UpDir+"\\"+os.path.basename(FilePathName))
+sleep(1)
 browser.find_element_by_name("btn1").click()
 browser.implicitly_wait(10)
 
@@ -81,4 +85,3 @@ for i in range(30):
     sleep(5)
 
 browser.quit()
-

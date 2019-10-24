@@ -8,7 +8,7 @@ from time import sleep
 
 #############以下内容为用户配置项#################
 ## 你的RDM用户名和密码：
-RdmUser="baosisi"
+RdmUser="wujian"
 RdmPasswd="123456"
 ## 评论内容
 CommentText="待处理"

@@ -15,3 +15,13 @@
 *.exe
 *.out
 *.app
+
+*.txt
+*.csv
+*.bin
+*.dat
+*.tar.gz
+*.zip
+*.tar
+*.flag
+*.log

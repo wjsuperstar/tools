@@ -88,7 +88,8 @@ def main():
             try:
                 data = re.search( r'(2323.*)', line).group(1)
                 #print(data)
-                Gb32960Parse(data).GetGpsPoint()
+                #Gb32960Parse(data).GetGpsPoint()
+                Gb32960Parse(data).display()
             except AttributeError:
                 # 忽略不合法的数据
                 continue

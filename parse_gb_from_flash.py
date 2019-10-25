@@ -9,6 +9,13 @@ FileName=r'D:\test\test_py\tbox_data.bin'
 
 
 # 以下元组是根据GB32960协议定义，不可更改。
+g_gps_keys = ("locationed", "longi", "lat")
+g_gps_name = ("定位状态", "经度", "纬度")
+
+g_fault_keys = ("fault_level", "common_fault", "bms_num", "bms_list", "motor_num", "motor_list", "engine_num", "engine_list", "other_num", "other_list")
+g_fault_name = ("最高报警等级", "通用报警标志", "可充电蓄能装置故障总数", "可充电蓄能装置故障代码列表", "电机故障总数", "电机故障代码列表", 
+                "发动机故障总数", "发动机故障列表", "其他故障总数", "其他故障列表")
+
 g_vehicle_keys = ("vehicle_stat", "charge_stat", "run_mode", "speed", "odo", "tot_volt", "tot_curr", "soc", "dcdc_stat", "gear", "resistance", "accel_pedal", "brake_pedal")
 g_vehicle_name = ('车辆状态', '充电状态', '运行模式', '车速', '累计里程', '总电压', '总电流', 'SOC', 'DCDC', '档位', '绝缘电阻', '加速踏板', '制动踏板')
 
@@ -28,80 +35,99 @@ g_extreme_name = ("最高电压电池子系统", "最高电压电池单体代号
 
 # 定位数据
 class GbParse0x05:
-    __locationed = 0
-    __lat   = 0
-    __longi = 0
-    
-    #定义构造方法
+    __gps_data = {}
+    __gps_desc = {}
     def __init__(self, s, len_out):
+        self.__gps_desc = dict(zip(g_gps_keys, g_gps_name))
+
         data = s
         idx = 0
         #print(data[idx:])
-        self.__locationed = struct.unpack(">B", data[idx:idx+1])[0]
-        idx += 1
-        self.__longi = struct.unpack(">I", data[idx:idx+4])[0]
-        idx += 4
-        self.__lat = struct.unpack(">I", data[idx:idx+4])[0]
-        idx += 4
+        tmp_values = struct.unpack(">BII", data[idx:idx+9])
+        self.__gps_data = dict(zip(g_gps_keys, tmp_values))
+        idx += 9
 
         len_out[0] = idx
 
+    def GetData(self):
+        return self.__gps_data
+    def GetDesc(self):
+        return self.__gps_desc
     def display(self):
-        print("车辆位置: location=%d, lat=%f, longi=%f" %(self.__locationed, self.__lat/1e6, self.__longi/1e6))
+        print("定位数据:")
+        for i in g_gps_keys:
+            print(self.__gps_desc[i], self.__gps_data[i], sep=':', end = ', ')
 
 # 报警数据
 class GbParse0x07:
-    
-    __bms_fault_list = []
-    __monitor_fault_list = []
-    __engine_fault_list = []
-    __other_fault_list = []
+    __fault_data = {}
+    __fault_desc = {}
     #定义构造方法
     def __init__(self, s, len_out):
+        self.__fault_desc = dict(zip(g_fault_keys, g_fault_name))
+
         data = s
         idx = 0
         #print(data[idx:])
         # 最高报警等级
-        self.__fault_level = struct.unpack(">B", data[idx:idx+1])[0]
-        idx += 1
-        # 通用报警标志
-        self.__common_fault = struct.unpack(">I", data[idx:idx+4])[0]
-        idx += 4
+        tmp_values = struct.unpack(">BIB", data[idx:idx+6])
+        idx += 6
+        self.__fault_data = dict(zip(g_fault_keys, tmp_values))
+
+        fault_list = []
         # 可充电蓄能装置故障总数
-        self.__bms_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
-        idx += 1
-        if self.__bms_fault_num > 0:
-            for i in range(self.__bms_fault_num):
-                self.__bms_fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
+        bms_fault_num = self.__fault_data['bms_num']
+        if bms_fault_num > 0:
+            for i in range(bms_fault_num):
+                fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
                 idx += 4
+        self.__fault_data['bms_list'] = fault_list
+        fault_list.clear()
+
         # 电机故障总数
-        self.__monitor_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
+        monitor_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
         idx += 1
-        if self.__monitor_fault_num > 0:
-            for i in range(self.__monitor_fault_num):
-                self.__monitor_fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
+        if monitor_fault_num > 0:
+            fault_list = []
+            for i in range(monitor_fault_num):
+                fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
                 idx += 4
+        self.__fault_data['motor_num'] = monitor_fault_num
+        self.__fault_data['motor_list'] = fault_list
+        fault_list.clear()
         # 发动机故障总数
-        self.__engine_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
+        engine_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
         idx += 1
-        if self.__engine_fault_num > 0:
-            for i in range(self.__engine_fault_num):
-                self.__engine_fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
+        if engine_fault_num > 0:
+            fault_list = []
+            for i in range(engine_fault_num):
+                fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
                 idx += 4
+        self.__fault_data['engine_num'] = engine_fault_num
+        self.__fault_data['engine_list'] = fault_list
+        fault_list.clear()
         # 其他故障总数
-        self.__other_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
+        other_fault_num = struct.unpack(">B", data[idx:idx+1])[0]
         idx += 1
-        if self.__other_fault_num > 0:
-            for i in range(self.__other_fault_num):
-                self.__other_fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
+        if other_fault_num > 0:
+            fault_list = []
+            for i in range(other_fault_num):
+                fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
                 idx += 4
-        
+        self.__fault_data['other_num'] = other_fault_num
+        self.__fault_data['other_list'] = fault_list
+        fault_list.clear()
+
         len_out[0] = idx
 
+    def GetData(self):
+        return self.__fault_data
+    def GetDesc(self):
+        return self.__fault_desc
     def display(self):
-        print("报警数据: fault level=%d, common fault=0x%X, bms=%d, monitor=%d, engine=%d, other=%d" 
-            %(self.__fault_level, self.__common_fault, self.__bms_fault_num, self.__monitor_fault_num, self.__engine_fault_num, self.__other_fault_num))
-
+        print("\n报警数据:")
+        for i in g_fault_keys:
+            print(self.__fault_desc[i], self.__fault_data[i], sep=':', end = ', ')
 # 整车数据
 class GbParse0x01:
     __vehicle_data = {}
@@ -123,7 +149,7 @@ class GbParse0x01:
     def GetDesc(self):
         return self.__vehicle_desc
     def display(self):
-        print("整车数据:")
+        print("\n整车数据:")
         for i in g_vehicle_keys:
             print(self.__vehicle_desc[i], self.__vehicle_data[i], sep=':', end = ', ')
 
@@ -152,7 +178,7 @@ class GbParse0x02:
         return self.__motor_desc
     def display(self):
         for motor_idx in range(len(self.__motor_data)):
-            print("电机%d数据:" % (motor_idx+1))
+            print("\n电机%d数据:" % (motor_idx+1))
             for i in g_motor_keys:
                 print(self.__motor_desc[i], self.__motor_data[motor_idx][i], sep=':', end = ', ')
 
@@ -263,7 +289,7 @@ class GbMainParse:
         idx += 6
         tot_len -= 6
         self.__time = str(2000+y)+'-'+str(m)+'-'+str(d)+' '+str(h)+':'+str(min)+':'+str(s)
-        print(self.__time)
+        print("\n\n\n数据采集时间:", self.__time)
         
         # 解析各个数据块
         used_len = [0]
@@ -296,16 +322,19 @@ class GbMainParse:
             tot_len -= used_len[0]
             self.__block.display()
             #print("\nused_len=", used_len[0], "idx=", idx, "tot_len=", tot_len)
-        # 校验码 TODO
+    
         
 def main():
+    count = 0
     with open(FileName, mode='rb') as fd:
         packet = fd.read(1024)
         while packet != '':
+            count += 1
             data_len = struct.unpack("<H", packet[10:12])[0] - 28
-            print("data_len=", data_len)
+            print("\ndata_len=%d, count=%d" % (data_len, count))
             GbMainParse(packet[28:], data_len)
-            break
+            packet = fd.read(1024)
+            #break
             
 
 if __name__ == '__main__':

@@ -35,9 +35,9 @@ g_extreme_name = ("最高电压电池子系统", "最高电压电池单体代号
 
 # 定位数据
 class GbParse0x05:
-    __gps_data = {}
-    __gps_desc = {}
+    
     def __init__(self, s, len_out):
+        self.__gps_data = {}
         self.__gps_desc = dict(zip(g_gps_keys, g_gps_name))
 
         data = s
@@ -46,7 +46,9 @@ class GbParse0x05:
         tmp_values = struct.unpack(">BII", data[idx:idx+9])
         self.__gps_data = dict(zip(g_gps_keys, tmp_values))
         idx += 9
-
+        self.__gps_data[g_gps_keys[1]] /= 1e6
+        self.__gps_data[g_gps_keys[2]] /= 1e6
+        
         len_out[0] = idx
 
     def GetData(self):
@@ -60,10 +62,10 @@ class GbParse0x05:
 
 # 报警数据
 class GbParse0x07:
-    __fault_data = {}
-    __fault_desc = {}
+    
     #定义构造方法
     def __init__(self, s, len_out):
+        self.__fault_data = {}
         self.__fault_desc = dict(zip(g_fault_keys, g_fault_name))
 
         data = s
@@ -130,9 +132,9 @@ class GbParse0x07:
             print(self.__fault_desc[i], self.__fault_data[i], sep=':', end = ', ')
 # 整车数据
 class GbParse0x01:
-    __vehicle_data = {}
-    __vehicle_desc = {}
+    
     def __init__(self, s, len_out):
+        self.__vehicle_data = {}
         self.__vehicle_desc = dict(zip(g_vehicle_keys, g_vehicle_name))
 
         data = s
@@ -155,9 +157,9 @@ class GbParse0x01:
 
 # 电机数据
 class GbParse0x02:
-    __motor_data = []
-    __motor_desc = {}
+    
     def __init__(self, s, len_out):
+        self.__motor_data = []
         self.__motor_desc = dict(zip(g_motor_keys, g_motor_name))
 
         data = s
@@ -184,10 +186,9 @@ class GbParse0x02:
 
 # 单体电压
 class GbParse0x08:
-    __bms_volt_data = []
-    __bms_volt_desc = {}
-
+    
     def __init__(self, s, len_out):
+        self.__bms_volt_data = []
         self.__bms_volt_desc = dict(zip(g_bms_volt_keys, g_bms_volt_name))
 
         data = s
@@ -205,7 +206,6 @@ class GbParse0x08:
                 volt_list[ start + i] = struct.unpack(">H", data[idx:idx+2])[0]
                 idx += 2
             self.__bms_volt_data[sys_idx]["volt_list"] = volt_list
-
         len_out[0] = idx
     def GetData(self):
         return self.__bms_volt_data
@@ -219,10 +219,9 @@ class GbParse0x08:
 
 # 温度探针
 class GbParse0x09:
-    __bms_temp_data = []
-    __bms_temp_desc = {}
-
+    
     def __init__(self, s, len_out):
+        self.__bms_temp_data = []
         self.__bms_temp_desc = dict(zip(g_bms_temp_keys, g_bms_temp_name))
 
         data = s
@@ -253,9 +252,9 @@ class GbParse0x09:
 
 # 极值数据
 class GbParse0x06:
-    __extreme_data = {}
-    __extreme_desc = {}
+    
     def __init__(self, s, len_out):
+        self.__extreme_data = {}
         self.__extreme_desc = dict(zip(g_extreme_keys, g_extreme_name))
 
         data = s
@@ -322,8 +321,8 @@ class GbMainParse:
             tot_len -= used_len[0]
             self.__block.display()
             #print("\nused_len=", used_len[0], "idx=", idx, "tot_len=", tot_len)
-    
-        
+            
+            
 def main():
     count = 0
     with open(FileName, mode='rb') as fd:

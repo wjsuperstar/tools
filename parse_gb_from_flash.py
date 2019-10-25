@@ -6,6 +6,12 @@ import struct
 
 FileName=r'D:\test\test_py\tbox_data.bin'
 
+g_vehicle_keys = ("vehicle_stat", "charge_stat", "run_mode", "speed", "odo", "tot_volt", "tot_curr", "soc", "dcdc_stat", "gear", "resistance", "accel_pedal", "brake_pedal")
+g_vehicle_name = ('车辆状态', '充电状态', '运行模式', '车速', '累计里程', '总电压', '总电流', 'SOC', 'DCDC', '档位', '绝缘电阻', '加速踏板', '制动踏板')
+
+g_motor_keys = ("index", "status", "ctl_temp", "rev", "tor", "temp", "volt", "curr")
+g_motor_name = ("驱动电机序号", "驱动电机状态", "驱动电控温度", "驱动电机转速", "驱动电机转矩", "驱动电机温度", "电控输入电压", "电控母线电流")
+
 
 # 定位数据
 class GbParse0x05:
@@ -86,32 +92,57 @@ class GbParse0x07:
 
 # 整车数据
 class GbParse0x01:
-    
+    __vehicle_data = {}
+    __vehicle_desc = {}
     def __init__(self, s, len):
+        self.__vehicle_desc = dict(zip(g_vehicle_keys, g_vehicle_name))
+
         data = s
         idx = 0
         #print(data[idx:])
-        (self.__vehicle_stat,
-        self.__charge_stat, 
-        self.__RunMode, 
-        self.__speed, 
-        self.__odo,
-        self.__tot_volt, 
-        self.__tot_curr, 
-        self.__soc,
-        self.__dcdc_stat,
-        self.__gear,
-        self.__InsResistance,
-        self.__accel_pedal,
-        self.__brake_pedal) = struct.unpack(">BBBHIHHBBBHBB", data[idx:idx+20])
+        veh_value = struct.unpack(">BBBHIHHBBBHBB", data[idx:idx+20])
+        self.__vehicle_data = dict(zip(g_vehicle_keys, veh_value))
+
         idx += 20
         len[0] = idx
 
+    def GetVehicleData(self):
+        return self.__vehicle_data
+    def GetVehicleDesci(self):
+        return self.__vehicle_desc
     def display(self):
-        print("整车数据: 车辆状态:%d, 充电状态:%d, 运行模式:%d, 车速:%d, 累计里程:%d, 总电压:%d, 总电流:%d, SOC:%d, DCDC:%d, 档位:%d, 绝缘电阻:%d, 加速踏板:%d, 制动踏板:%d"
-            %(self.__vehicle_stat, self.__charge_stat, self.__RunMode, self.__speed, self.__odo, self.__tot_volt, 
-            self.__tot_curr, self.__soc, self.__dcdc_stat, self.__gear, self.__InsResistance, self.__accel_pedal, self.__brake_pedal))
+        print("整车数据:")
+        for i in g_vehicle_keys:
+            print(self.__vehicle_desc[i], self.__vehicle_data[i], sep=':', end = ', ')
 
+# 电机数据
+class GbParse0x02:
+    __motor_data = []
+    __motor_desc = {}
+    def __init__(self, s, len):
+        self.__motor_desc = dict(zip(g_motor_keys, g_motor_name))
+
+        data = s
+        idx = 0
+        #print(data[idx:])
+        motor_num = struct.unpack(">B", data[idx:idx+1])[0]
+        idx += 1
+        motor_value = []
+        for i in range(motor_num):
+            motor_value = struct.unpack(">BBBHHBHH", data[idx:idx+12])
+            self.__motor_data.append(dict(zip(g_motor_keys, motor_value)))
+            idx += 12
+        
+        len[0] = idx
+    def GetMotorData(self):
+        return self.__motor_data
+    def GetMotorDesci(self):
+        return self.__motor_desc
+    def display(self):
+        for motor_idx in range(len(self.__motor_data)):
+            print("电机%d数据:" % (motor_idx+1))
+            for i in g_motor_keys:
+                print(self.__motor_desc[i], self.__motor_data[motor_idx][i], sep=':', end = ', ')
 
 class GbMainParse:
     # 数据采集时间
@@ -143,9 +174,12 @@ class GbMainParse:
             elif self.__block_id == 0x01:
                 self.__block = GbParse0x01(data[idx:], used_len)
             elif self.__block_id == 0x02:
-                #self.__block = GbParse0x01(data[idx:], used_len)
+                self.__block = GbParse0x02(data[idx:], used_len)
+            elif self.__block_id == 0x08:
+                #self.__block = GbParse0x02(data[idx:], used_len)
                 break
-
+            elif self.__block_id == 0x03:
+                break
             print("used_len=", used_len)
             idx += used_len[0]
             len -= used_len[0]

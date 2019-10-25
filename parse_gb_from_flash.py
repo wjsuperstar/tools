@@ -33,6 +33,14 @@ g_extreme_keys = ("max_volt_sys", "max_volt_idx", "max_volt_val", "min_volt_sys"
 g_extreme_name = ("最高电压电池子系统", "最高电压电池单体代号", "电池单体电压最高值", "最低电压电池子系统", "最低电压电池单体代号", "电池单体电压最低值", 
                   "最高温度子系统", "最高温度探针序号", "最高温度值", "最低温度子系统号", "最低温度探索针序号", "最低温度值")
 
+g_engine_keys = ("status", "crank_rev", "cons_rate")
+g_engine_name = ("发动机状态", "曲轴转速", "燃料消耗率")
+
+g_fuel_bat_keys = ("volt", "curr", "consu_rate", "temp_num", "temp_list", "hydro_temp", 
+                   "hydro_temp_no", "hydro_concent", "hydro_concent_no", "hydor_press", "hydor_press_no", "dcdc_stat")
+g_fuel_bat_name = ("燃料电池电压", "燃料电池电流", "燃料消耗率", "燃料电池温度探针总数", "探针温度值列表", "氢气系统中最高温度", 
+              "氢气系统中最高温度探针代号", "氢气系统中最高浓度", "氢气系统中最高浓度传感器代号", "氢气最高压力", "氢气最高压力传感器代号", "高压DC/DC状态")
+
 # 定位数据
 class GbParse0x05:
     
@@ -213,7 +221,7 @@ class GbParse0x08:
         return self.__bms_volt_desc
     def display(self):
         for no in range(len(self.__bms_volt_data)):
-            print("\n子系统%d单体电压数据:" % (no+1))
+            print("\n子系统单体电压数据(总数%d):" % len(self.__bms_volt_data))
             for i in g_bms_volt_keys:
                 print(self.__bms_volt_desc[i], self.__bms_volt_data[no][i], sep=':', end = ', ')
 
@@ -246,7 +254,7 @@ class GbParse0x09:
         return self.__bms_temp_desc
     def display(self):
         for no in range(len(self.__bms_temp_data)):
-            print("\n子系统%d温度探针数据:" % (no+1))
+            print("\n子系统温度探针数据(总数%d):" % len(self.__bms_temp_data))
             for i in g_bms_temp_keys:
                 print(self.__bms_temp_desc[i], self.__bms_temp_data[no][i], sep=':', end = ', ')
 
@@ -270,9 +278,76 @@ class GbParse0x06:
     def GetDesc(self):
         return self.__extreme_desc
     def display(self):
-        print("极值数据:")
+        print("\n极值数据:")
         for i in g_extreme_keys:
             print(self.__extreme_desc[i], self.__extreme_data[i], sep=':', end = ', ')
+
+# 发动机数据
+class GbParse0x04:
+    
+    def __init__(self, s, len_out):
+        self.__engine_data = {}
+        self.__engine_desc = dict(zip(g_engine_keys, g_engine_name))
+
+        data = s
+        idx = 0
+        #print(data[idx:])
+        tmp_values = struct.unpack(">BHH", data[idx:idx+5])
+        self.__engine_data = dict(zip(g_engine_keys, tmp_values))
+        idx += 5
+        
+        len_out[0] = idx
+
+    def GetData(self):
+        return self.__engine_data
+    def GetDesc(self):
+        return self.__engine_desc
+    def display(self):
+        print("\n发动机数据:")
+        for i in g_engine_keys:
+            print(self.__engine_desc[i], self.__engine_data[i], sep=':', end = ', ')
+
+# 燃料电池数据
+class GbParse0x03:
+    
+    def __init__(self, s, len_out):
+        self.__fuel_bat_data = {}
+        self.__fuel_bat_desc = dict(zip(g_fuel_bat_keys, g_fuel_bat_name))
+
+        data = s
+        idx = 0
+        #print(data[idx:])
+        tmp_values = struct.unpack(">HHHH", data[idx:idx+8])
+        self.__fuel_bat_data = dict(zip(g_fuel_bat_keys, tmp_values))
+        idx += 8
+
+        key_idx = 3
+        temp_num = self.__fuel_bat_data[g_fuel_bat_keys[key_idx]] 
+        key_idx += 1
+        temp_list = []
+        if temp_num > 0:
+            for i in range(temp_num):
+                temp_list.append(struct.unpack(">B", data[idx:idx+1])[0])
+                idx += 1
+        self.__fuel_bat_data[g_fuel_bat_keys[key_idx]] = temp_list
+        key_idx += 1
+
+        tmp_values = struct.unpack(">HBHBHBB", data[idx:idx+10])
+        idx += 10
+        for i in range(len(tmp_values)):
+            self.__fuel_bat_data[g_fuel_bat_keys[key_idx]] = tmp_values[i]
+            key_idx += 1
+
+        len_out[0] = idx
+
+    def GetData(self):
+        return self.__fuel_bat_data
+    def GetDesc(self):
+        return self.__fuel_bat_desc
+    def display(self):
+        print("\n燃料电池数据:")
+        for i in g_fuel_bat_keys:
+            print(self.__fuel_bat_desc[i], self.__fuel_bat_data[i], sep=':', end = ', ')
 
 class GbMainParse:
     # 数据采集时间
@@ -288,7 +363,7 @@ class GbMainParse:
         idx += 6
         tot_len -= 6
         self.__time = str(2000+y)+'-'+str(m)+'-'+str(d)+' '+str(h)+':'+str(min)+':'+str(s)
-        print("\n\n\n数据采集时间:", self.__time)
+        print("数据采集时间:", self.__time)
         
         # 解析各个数据块
         used_len = [0]
@@ -313,27 +388,27 @@ class GbMainParse:
             elif self.__block_id == 0x06:
                 self.__block = GbParse0x06(data[idx:], used_len)
             elif self.__block_id == 0x03:
-                pass
+                self.__block = GbParse0x03(data[idx:], used_len)
             elif self.__block_id == 0x04:
-                pass
+                self.__block = GbParse0x04(data[idx:], used_len)
             
             idx += used_len[0]
             tot_len -= used_len[0]
+            
             self.__block.display()
             #print("\nused_len=", used_len[0], "idx=", idx, "tot_len=", tot_len)
-            
             
 def main():
     count = 0
     with open(FileName, mode='rb') as fd:
-        packet = fd.read(1024)
-        while packet != '':
+        rd_len = 1024
+        packet = fd.read(rd_len)
+        while len(packet) >= rd_len:
             count += 1
             data_len = struct.unpack("<H", packet[10:12])[0] - 28
-            print("\ndata_len=%d, count=%d" % (data_len, count))
+            print("\n\n\n读取第%d条:" % count)
             GbMainParse(packet[28:], data_len)
-            packet = fd.read(1024)
-            #break
+            packet = fd.read(rd_len)
             
 
 if __name__ == '__main__':

@@ -1,24 +1,31 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# auth: WuJian  20191010
+# auth: WuJian  20191024
+# desc: 解析车讯二代flash保存的国标数据文件
 
 import struct
 
 FileName=r'D:\test\test_py\tbox_data.bin'
 
+
+# 以下元组是根据GB32960协议定义，不可更改。
 g_vehicle_keys = ("vehicle_stat", "charge_stat", "run_mode", "speed", "odo", "tot_volt", "tot_curr", "soc", "dcdc_stat", "gear", "resistance", "accel_pedal", "brake_pedal")
 g_vehicle_name = ('车辆状态', '充电状态', '运行模式', '车速', '累计里程', '总电压', '总电流', 'SOC', 'DCDC', '档位', '绝缘电阻', '加速踏板', '制动踏板')
 
 g_motor_keys = ("index", "status", "ctl_temp", "rev", "tor", "temp", "volt", "curr")
 g_motor_name = ("驱动电机序号", "驱动电机状态", "驱动电控温度", "驱动电机转速", "驱动电机转矩", "驱动电机温度", "电控输入电压", "电控母线电流")
 
+g_bms_volt_keys = ("sys_no", "volt", "curr", "tot_num", "start_idx", "now_num", "volt_list")
+g_bms_volt_name = ("可充电储能子系统号", "可充电储能装置电压", "可充电储能装置电流", "单体蓄电池总数", "本帧起始电池序号", "本帧单体电池总数", "单体电池电压值")
+
+g_bms_temp_keys = ("sys_no", "tot_num", "temp_list")
+g_bms_temp_name = ("可充电储能子系统号", "温度探针个数", "温度探针值")
 
 # 定位数据
 class GbParse0x05:
     __locationed = 0
     __lat   = 0
     __longi = 0
-    
     
     #定义构造方法
     def __init__(self, s, len):
@@ -106,9 +113,9 @@ class GbParse0x01:
         idx += 20
         len[0] = idx
 
-    def GetVehicleData(self):
+    def GetData(self):
         return self.__vehicle_data
-    def GetVehicleDesci(self):
+    def GetDesc(self):
         return self.__vehicle_desc
     def display(self):
         print("整车数据:")
@@ -134,9 +141,9 @@ class GbParse0x02:
             idx += 12
         
         len[0] = idx
-    def GetMotorData(self):
+    def GetData(self):
         return self.__motor_data
-    def GetMotorDesci(self):
+    def GetDesc(self):
         return self.__motor_desc
     def display(self):
         for motor_idx in range(len(self.__motor_data)):
@@ -144,13 +151,81 @@ class GbParse0x02:
             for i in g_motor_keys:
                 print(self.__motor_desc[i], self.__motor_data[motor_idx][i], sep=':', end = ', ')
 
+# 单体电压
+class GbParse0x08:
+    __bms_volt_data = []
+    __bms_volt_desc = {}
+
+    def __init__(self, s, len):
+        self.__bms_volt_desc = dict(zip(g_bms_volt_keys, g_bms_volt_name))
+
+        data = s
+        idx = 0
+        #print(data[idx:])
+        sys_num = struct.unpack(">B", data[idx:idx+1])[0]
+        idx += 1
+        for sys_idx in range(sys_num):
+            tmp_values = struct.unpack(">BHHHHB", data[idx:idx+10])
+            self.__bms_volt_data.append(dict(zip(g_bms_volt_keys, tmp_values)))
+            idx += 10
+            volt_list = {}
+            start = self.__bms_volt_data[sys_idx]["start_idx"]
+            for i in range(self.__bms_volt_data[sys_idx]["now_num"]):
+                volt_list[ start + i] = struct.unpack(">H", data[idx:idx+2])[0]
+                idx += 2
+            self.__bms_volt_data[sys_idx]["volt_list"] = volt_list
+
+        len[0] = idx
+    def GetData(self):
+        return self.__bms_volt_data
+    def GetDesc(self):
+        return self.__bms_volt_desc
+    def display(self):
+        for no in range(len(self.__bms_volt_data)):
+            print("\n子系统%d单体电压数据:" % (no+1))
+            for i in g_bms_volt_keys:
+                print(self.__bms_volt_desc[i], self.__bms_volt_data[no][i], sep=':', end = ', ')
+
+# 温度探针
+class GbParse0x09:
+    __bms_temp_data = []
+    __bms_temp_desc = {}
+
+    def __init__(self, s, len):
+        self.__bms_temp_desc = dict(zip(g_bms_temp_keys, g_bms_temp_name))
+
+        data = s
+        idx = 0
+        #print(data[idx:])
+        sys_num = struct.unpack(">B", data[idx:idx+1])[0]
+        idx += 1
+        for sys_idx in range(sys_num):
+            tmp_values = struct.unpack(">BH", data[idx:idx+3])
+            self.__bms_temp_data.append(dict(zip(g_bms_temp_keys, tmp_values)))
+            idx += 3
+            temp_list = {}
+            for i in range(self.__bms_temp_data[sys_idx]["tot_num"]):
+                temp_list[i+1] = struct.unpack(">B", data[idx:idx+1])[0]
+                idx += 1
+            self.__bms_temp_data[sys_idx]["temp_list"] = temp_list
+
+        len[0] = idx
+    def GetData(self):
+        return self.__bms_temp_data
+    def GetDesc(self):
+        return self.__bms_temp_desc
+    def display(self):
+        for no in range(len(self.__bms_temp_data)):
+            print("\n子系统%d温度探针数据:" % (no+1))
+            for i in g_bms_temp_keys:
+                print(self.__bms_temp_desc[i], self.__bms_temp_data[no][i], sep=':', end = ', ')
+
 class GbMainParse:
     # 数据采集时间
     __time = ''
     # 数据块id
     __block_id = 0
     
-
     #定义构造方法
     def __init__(self, s, len):
         data = s
@@ -176,9 +251,12 @@ class GbMainParse:
             elif self.__block_id == 0x02:
                 self.__block = GbParse0x02(data[idx:], used_len)
             elif self.__block_id == 0x08:
-                #self.__block = GbParse0x02(data[idx:], used_len)
-                break
-            elif self.__block_id == 0x03:
+                self.__block = GbParse0x08(data[idx:], used_len)    
+            elif self.__block_id == 0x09:
+                self.__block = GbParse0x09(data[idx:], used_len)
+                
+            elif self.__block_id == 0x06:
+                
                 break
             print("used_len=", used_len)
             idx += used_len[0]

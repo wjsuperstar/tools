@@ -5,7 +5,7 @@
 
 import struct
 
-FileName=r'tbox_data.bin'
+FileName=r'data_npv_chn1.bin'
 
 
 # 以下元组是根据GB32960协议定义，不可更改。
@@ -352,8 +352,6 @@ class GbParse0x03:
 class GbMainParse:
     # 数据采集时间
     __time = ''
-    # 数据块id
-    __block_id = 0
     
     #定义构造方法
     def __init__(self, s, tot_len):
@@ -369,45 +367,62 @@ class GbMainParse:
         used_len = [0]
         while tot_len > 0:
             #print(data[idx:])
-            self.__block_id = struct.unpack("<B", data[idx:idx+1])[0]
+            block_id = struct.unpack("<B", data[idx:idx+1])[0]
+            display_flg = 1
             idx += 1
             tot_len -= 1
-            #print("\n__block_id=%d, idx=%d" % (self.__block_id, idx))
-            if self.__block_id == 0x05:
-                self.__block = GbParse0x05(data[idx:], used_len)
-            elif self.__block_id == 0x07:
-                self.__block = GbParse0x07(data[idx:], used_len)
-            elif self.__block_id == 0x01:
-                self.__block = GbParse0x01(data[idx:], used_len)
-            elif self.__block_id == 0x02:
-                self.__block = GbParse0x02(data[idx:], used_len)
-            elif self.__block_id == 0x08:
-                self.__block = GbParse0x08(data[idx:], used_len)    
-            elif self.__block_id == 0x09:
-                self.__block = GbParse0x09(data[idx:], used_len)
-            elif self.__block_id == 0x06:
-                self.__block = GbParse0x06(data[idx:], used_len)
-            elif self.__block_id == 0x03:
-                self.__block = GbParse0x03(data[idx:], used_len)
-            elif self.__block_id == 0x04:
-                self.__block = GbParse0x04(data[idx:], used_len)
+            #print("\n__block_id=%d, idx=%d" % (block_id, idx))
+            if block_id == 0x05:
+                obj = GbParse0x05(data[idx:], used_len)
+            elif block_id == 0x07:
+                #print("\n", data[idx-1:])
+                obj = GbParse0x07(data[idx:], used_len)
+            elif block_id == 0x01:
+                obj = GbParse0x01(data[idx:], used_len)
+            elif block_id == 0x02:
+                obj = GbParse0x02(data[idx:], used_len)
+            elif block_id == 0x08:
+                obj = GbParse0x08(data[idx:], used_len)    
+            elif block_id == 0x09:
+                obj = GbParse0x09(data[idx:], used_len)
+            elif block_id == 0x06:
+                obj = GbParse0x06(data[idx:], used_len)
+            elif block_id == 0x03:
+                obj = GbParse0x03(data[idx:], used_len)
+            elif block_id == 0x04:
+                obj = GbParse0x04(data[idx:], used_len)
+            elif block_id == 0x90:
+                used_len[0] = 43
+                display_flg = 0
+            elif block_id == 0x80:
+                used_len[0] = 156
+                display_flg = 0
+            elif block_id == 0x81:
+                used_len[0] = 126
+                display_flg = 0
+            else:
+                print("\nParse fail, block id=%d" % block_id)
+                break
             
             idx += used_len[0]
             tot_len -= used_len[0]
-            
-            self.__block.display()
+            if display_flg > 0:
+                obj.display()
             #print("\nused_len=", used_len[0], "idx=", idx, "tot_len=", tot_len)
             
 def main():
     count = 0
     with open(FileName, mode='rb') as fd:
-        rd_len = 1024
-        packet = fd.read(rd_len)
+        rd_len = 1536
+        packet = fd.read(rd_len+16)
+        packet = packet[16:]
         while len(packet) >= rd_len:
             count += 1
-            data_len = struct.unpack("<H", packet[10:12])[0] - 28
+            #print(packet)
+            data_len = struct.unpack("<H", packet[12:14])[0] - 44
+            #print("\n\n\n读取第%d条, 数据实际长度%d:" % (count, data_len))
             print("\n\n\n读取第%d条:" % count)
-            GbMainParse(packet[28:], data_len)
+            GbMainParse(packet[44:], data_len)
             packet = fd.read(rd_len)
             
 

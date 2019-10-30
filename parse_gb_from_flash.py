@@ -349,54 +349,73 @@ class GbParse0x03:
         for i in g_fuel_bat_keys:
             print(self.__fuel_bat_desc[i], self.__fuel_bat_data[i], sep=':', end = ', ')
 
+# 时间
+class GbParseTime:
+    def __init__(self, s, len_out):
+        data = s
+        idx = 0
+        
+        y,m,d,h,min,s = struct.unpack("<BBBBBB", data[idx:idx+6])
+        idx += 6
+        self.__time = str(2000+y)+'-'+str(m)+'-'+str(d)+' '+str(h)+':'+str(min)+':'+str(s)
+        len_out[0] = idx
+
+    def GetData(self):
+        return self.__time
+    def GetDesc(self):
+        pass
+    def display(self):
+        print("\n数据采集时间:", self.__time)
+
 class GbMainParse:
-    # 数据采集时间
-    __time = ''
-    # 数据块id
-    __block_id = 0
-    
+
     #定义构造方法
     def __init__(self, s, tot_len):
         data = s
         idx  = 0
-        y,m,d,h,min,s = struct.unpack("<BBBBBB", data[idx:idx+6])
-        idx += 6
-        tot_len -= 6
-        self.__time = str(2000+y)+'-'+str(m)+'-'+str(d)+' '+str(h)+':'+str(min)+':'+str(s)
-        print("数据采集时间:", self.__time)
+        used_len = [0]
+        self.one_pack = []
+        
+        self.one_pack.append(GbParseTime(data[idx:], used_len))
+        idx += used_len[0]
+        tot_len -= used_len[0]
         
         # 解析各个数据块
-        used_len = [0]
         while tot_len > 0:
             #print(data[idx:])
-            self.__block_id = struct.unpack("<B", data[idx:idx+1])[0]
+            block_id = struct.unpack("<B", data[idx:idx+1])[0]
             idx += 1
             tot_len -= 1
-            #print("\n__block_id=%d, idx=%d" % (self.__block_id, idx))
-            if self.__block_id == 0x05:
-                self.__block = GbParse0x05(data[idx:], used_len)
-            elif self.__block_id == 0x07:
-                self.__block = GbParse0x07(data[idx:], used_len)
-            elif self.__block_id == 0x01:
-                self.__block = GbParse0x01(data[idx:], used_len)
-            elif self.__block_id == 0x02:
-                self.__block = GbParse0x02(data[idx:], used_len)
-            elif self.__block_id == 0x08:
-                self.__block = GbParse0x08(data[idx:], used_len)    
-            elif self.__block_id == 0x09:
-                self.__block = GbParse0x09(data[idx:], used_len)
-            elif self.__block_id == 0x06:
-                self.__block = GbParse0x06(data[idx:], used_len)
-            elif self.__block_id == 0x03:
-                self.__block = GbParse0x03(data[idx:], used_len)
-            elif self.__block_id == 0x04:
-                self.__block = GbParse0x04(data[idx:], used_len)
+            #print("\nblock_id=%d, idx=%d" % (block_id, idx))
+            if block_id == 0x05:
+                self.one_pack.append(GbParse0x05(data[idx:], used_len))
+            elif block_id == 0x07:
+                self.one_pack.append(GbParse0x07(data[idx:], used_len))
+            elif block_id == 0x01:
+                self.one_pack.append(GbParse0x01(data[idx:], used_len))
+            elif block_id == 0x02:
+                self.one_pack.append(GbParse0x02(data[idx:], used_len))
+            elif block_id == 0x08:
+                self.one_pack.append(GbParse0x08(data[idx:], used_len))
+            elif block_id == 0x09:
+                self.one_pack.append(GbParse0x09(data[idx:], used_len))
+            elif block_id == 0x06:
+                self.one_pack.append(GbParse0x06(data[idx:], used_len))
+            elif block_id == 0x03:
+                self.one_pack.append(GbParse0x03(data[idx:], used_len))
+            elif block_id == 0x04:
+                self.one_pack.append(GbParse0x04(data[idx:], used_len))
+            else:
+                print("Unkonw id, block_id=", block_id)
+                break
             
             idx += used_len[0]
             tot_len -= used_len[0]
             
-            self.__block.display()
             #print("\nused_len=", used_len[0], "idx=", idx, "tot_len=", tot_len)
+    def display(self):
+        for i in self.one_pack:
+            i.display()
             
 def main():
     count = 0
@@ -407,7 +426,7 @@ def main():
             count += 1
             data_len = struct.unpack("<H", packet[10:12])[0] - 28
             print("\n\n\n读取第%d条:" % count)
-            GbMainParse(packet[28:], data_len)
+            GbMainParse(packet[28:], data_len).display()
             packet = fd.read(rd_len)
             
 

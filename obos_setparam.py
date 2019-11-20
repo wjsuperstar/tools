@@ -5,12 +5,16 @@ from selenium.webdriver.support.ui import Select
 from time import sleep
 
 # 修改项
-#DevNumList="1910181556"
-DevNumList="1906051199"
+DevNumList="1909260467"
+#DevNumList="1906130556"
 # 需要设置哪些参数
-VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever", "NpvGbTestMode"]
+#VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever", "NpvGbTestMode"]
 #VaildParam=["Vin", "ObosForever", "NpvGbTestMode"]
-#VaildParam=["SshEn", "SshPort", "SshIp", "ObosForever"]
+#VaildParam=["SshEn", "ObosForever"]
+#VaildParam=["PartsCode"]
+
+VaildParam=["SshEn", "SshPort", "SshIp", "ObosForever"]
+
 # 参数列表
 ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "NpvMainPortC1":  ["0x1000001", "Word",   "8111"],
@@ -21,16 +25,17 @@ ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "NpvbakIpC2":     ["0x1010002", "String", "121.196.244.159"],
            "NpvbakPortC2":   ["0x1010003", "Word",   "8111"],
            "Vin":            ["0x3000001", "String", "00000001812120001"],
-           "ObosForever":    ["0x30000B1", "DWord",  "0"],
+           "ObosForever":    ["0x30000B1", "DWord",  "99999"],
            "NpvGbTestMode":  ["0x30000AA", "DWord",  "1"],
            "WakeUpMask":     ["0x300102F", "DWord",  "133121"],
            "CanRecEn":       ["0x3000092", "Byte",   "0"],
            "GpsLogEn":       ["0x3000096", "DWord",  "1"],
            "NpvLogEn":       ["0x300009C", "DWord",  "1"],
            "SshEn":          ["0x30000D9", "DWord",  "1"],
-           "SshPort":        ["0x30000DB", "Word",   "7101"],
+           "SshPort":        ["0x30000DB", "Word",   "7467"],
            "SshIp":          ["0x30000DA", "String", "47.111.129.182"],
            "NpvHistFilePa":  ["0x300001C", "String",  "/media/card/data/queuefile/data_npv_chn"],
+           "PartsCode":      ["0x300F506", "String",  "ZQ01169880"],
         
         }
     

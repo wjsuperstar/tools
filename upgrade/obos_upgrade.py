@@ -6,13 +6,13 @@ from time import sleep
 import os
 
 # 终端号
-#DevNumList="1909121691"
-DevNumList="1906130556"
+#DevNumList="1911110623"
+DevNumList="1911110623"
 
 # 上传目录
 UpDir="wj"
 # 待上传的升级文件名（包含路径）
-FilePathName=r"D:\test\upgrade\EV30\dp02.zip"
+FilePathName=r"D:\test\test_py\upgrade\sany.zip"
 
 DevOpt=1
 
@@ -80,8 +80,8 @@ for i in range(30):
     t = browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[3]/td[2]/font[1]').text
     print("当前任务状态是%s"%t)
     if t == "3":
-        print("Set param Success!")
+        print("upgrade Success!")
         break
     sleep(5)
 
-browser.quit()
+#browser.quit()

@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import Select
 from time import sleep
 
 # 修改项
-DevNumList="1909260467"
+DevNumList="1911080218"
 #DevNumList="1906130556"
 # 需要设置哪些参数
 #VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever", "NpvGbTestMode"]
@@ -15,6 +15,7 @@ DevNumList="1909260467"
 
 VaildParam=["SshEn", "SshPort", "SshIp", "ObosForever"]
 
+# telematics.dfmc.com.cn 15005
 # 参数列表
 ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "NpvMainPortC1":  ["0x1000001", "Word",   "8111"],
@@ -32,7 +33,7 @@ ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
            "GpsLogEn":       ["0x3000096", "DWord",  "1"],
            "NpvLogEn":       ["0x300009C", "DWord",  "1"],
            "SshEn":          ["0x30000D9", "DWord",  "1"],
-           "SshPort":        ["0x30000DB", "Word",   "7467"],
+           "SshPort":        ["0x30000DB", "Word",   "8218"],
            "SshIp":          ["0x30000DA", "String", "47.111.129.182"],
            "NpvHistFilePa":  ["0x300001C", "String",  "/media/card/data/queuefile/data_npv_chn"],
            "PartsCode":      ["0x300F506", "String",  "ZQ01169880"],

@@ -1,12 +1,14 @@
 import re
 import sys
 import json
+from collections import defaultdict
 
 print("使用格式： python xx.py 文件名")
 print("param:", sys.argv[1])
 
 FileName = sys.argv[1]
-ErrorList = []
+ErrorDevidList = []
+ErrorDict=defaultdict(list)
 
 def get_all_dict(data):
     if isinstance(data,list):
@@ -35,11 +37,12 @@ def parse_file():
             js1 = json.loads(data.group(1))
             js2 = json.loads(data.group(2))
             ss1=js2['body'][0]['error']
-            if ss1[0:4] == '[Wd]' or ss1[0:4] == '[Jd]' :
-                print('DevId=', devid, ss1, 'JD=', js1['body']['JD'], 'WD=', js1['body']['WD'])
             
-            #print(ss1)
-            #ErrorList.append(ss1)
+            if ss1[0:4] == '[Wd]' or ss1[0:4] == '[Jd]' :
+                #print('DevId=', devid, ss1, 'JD=', js1['body']['JD'], 'WD=', js1['body']['WD'])
+                ErrorDevidList.append(devid)
+            
+            ErrorDict[devid].append(ss1+' '+js1['body']['JD']+' '+js1['body']['WD'])
             
             #get_all_dict(js1)
             #get_all_dict(js2)
@@ -47,8 +50,11 @@ def parse_file():
             #break;
 if __name__ == '__main__':
     parse_file()
-    '''
-    s1= set(ErrorList)
-    for i in s1:
-        print(i)
-    '''
+    
+    for key, value in ErrorDict.items():
+        if key in ErrorDevidList:
+            for i in value:
+                print('devID:', key, ":", i)
+    
+        
+    

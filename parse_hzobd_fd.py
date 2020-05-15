@@ -20,8 +20,8 @@ DirName =sys.argv[1]
 g_head_keys = ('start_symbol', 'cmd', 'vin',         'soft_ver',     'encrypt',       'data_len')
 g_head_name = ('起始符',  '命令单元', '车辆识别号', '终端软件版本号', '数据加密方式',     '数据单元长度')
 
-g_data0x01_keys = ('start_symbol', 'mil_status', 'dia_support', 'dia_ready',     'vin',           'soft_id',          'cvn',      'iupr',  'dm_count')
-g_data0x01_name = ('OBD诊断协议',  'MIL状态',    '诊断支持状态', '诊断就绪状态', '车辆识别码',   '软件标定识别号', '标定验证码', 'IUPR值', '故障码总数')
+g_data0x01_keys = ('start_symbol', 'mil_status', 'dia_support', 'dia_ready',     'vin',           'soft_id',          'cvn',      'iupr',  'dm_count',    'dm_list')
+g_data0x01_name = ('OBD诊断协议',  'MIL状态',    '诊断支持状态', '诊断就绪状态', '车辆识别码',   '软件标定识别号', '标定验证码', 'IUPR值', '故障码总数', '故障码列表')
 
 g_data0x02_keys = ('veh_speed', 'atmospheric', 'actual_tor', 'friction_tor', 'engine_rev', 'fuel_flow',    'scr_up_nox',      'scr_down_nox',           'urea_tank_level', 'intake_flow', 'scr_up_temp', 'scr_down_temp', 'dpf_pressure', 'coolant_temp', 'oil_tank_level', 'gps_status', 'gps_long', 'gps_lat', 'odo')
 g_data0x02_name = ('车速',      '大气压力',    '实际扭矩',     '摩擦扭矩',   '转速',     '发动机燃料流量', 'SCR上游NOx传感器输出值', 'SCR下游NOx传感器输出值', '尿素箱液位', '进气量', 'SCR入口温度',    'SCR出口温度', 'DPF压差',       '冷却液温度',     '油箱液位',      '定位状态',     '经度',    '纬度', '累计里程')
@@ -52,7 +52,7 @@ class GbParseHead:
         data = s
         idx = 0
         #print(data[idx:])
-        veh_value = struct.unpack(">HB17sBBH", data[idx:idx+24])
+        veh_value = struct.unpack(">2sB17sBBH", data[idx:idx+24])
         self.__head_data = dict(zip(g_head_keys, veh_value))
         idx += 24
         len_out[0] = idx
@@ -64,7 +64,7 @@ class GbParseHead:
     def GetDataLen(self):
         return self.__head_data["data_len"]
     def display(self):
-        print("\n消息头:")
+        print("\n\n消息头:")
         for i in g_head_keys:
             print(self.__head_desc[i], self.__head_data[i], sep=':', end = ', ')
 
@@ -81,7 +81,7 @@ class GbParseSimpleTime:
         len_out[0] = idx
 
     def display(self):
-        print("\n采集时间:", self.__dt.strftime('%Y-%m-%d %H:%M:%S'), "流水号:", self.__serial_no)
+        print("\n采集时间:", self.__dt.strftime('%Y-%m-%d %H:%M:%S'), "流水号:", self.__serial_no, end = ', ')
         
 # OBD信息
 class GbParse0x01:
@@ -95,6 +95,16 @@ class GbParse0x01:
         veh_value = struct.unpack(">BBHH17s18s18s36sB", data[idx:idx+96])
         self.__0x01_data = dict(zip(g_data0x01_keys, veh_value))
         idx += 96
+        
+        # 故障码列表
+        engine_fault_num = self.__0x01_data['dm_count']
+        fault_list = []
+        if engine_fault_num > 0:
+            for i in range(engine_fault_num):
+                fault_list.append(struct.unpack(">I", data[idx:idx+4])[0])
+                idx += 4
+        self.__0x01_data['dm_list'] = fault_list
+        
         len_out[0] = idx
 
     def GetData(self):
@@ -290,7 +300,7 @@ def main():
                         # 忽略不合法的数据
                         #print("invaid line.")
                         continue
-                    break #一行
+                    #break #一行
             #break #一个文件
 if __name__ == '__main__':
     main()

@@ -195,7 +195,9 @@ class GbParse0x81:
             print(self.__0x81_desc[i], self.__0x81_data[i]*self.__0x81_fact[i]+self.__0x81_offset[i], sep=':', end = ', ')
 # 终端信息
 class GbParse0x82:
-    
+    def convert_hex(self, bytes):
+        l = [hex(int(i)) for i in bytes]
+        return " ".join(l)
     def __init__(self, s, len_in, len_out):
         self.__0x82_data = {}
         self.__0x82_desc = dict(zip(g_data0x82_keys, g_data0x82_name))
@@ -204,7 +206,7 @@ class GbParse0x82:
         idx = 0
         while idx < len_in:
             block_len = data[idx+1]
-            self.__0x82_data[data[idx]] = data[idx+2:idx+2+block_len]
+            self.__0x82_data[data[idx]] = self.convert_hex(data[idx+2:idx+2+block_len])
             idx += (block_len + 2)
         len_out[0] = idx
     def GetData(self):

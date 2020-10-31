@@ -413,7 +413,8 @@ class GbMainParse:
 def main():
     count = 0
     with open(FileName, mode='rb') as fd:
-        rd_len = 1536
+        #rd_len = 1536
+        rd_len = 1024
         packet = fd.read(rd_len+16)
         packet = packet[16:]
         while len(packet) >= rd_len:

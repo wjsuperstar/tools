@@ -7,12 +7,12 @@ import os
 
 # 终端号
 #DevNumList="1911110623"
-DevNumList="1911110623"
+DevNumList="1803126677"
 
 # 上传目录
 UpDir="wj"
 # 待上传的升级文件名（包含路径）
-FilePathName=r"D:\test\test_py\upgrade\sany.zip"
+FilePathName=r"D:\test\test_py\upgrade\le01.zip"
 
 DevOpt=1
 

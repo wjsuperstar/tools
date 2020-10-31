@@ -25,3 +25,6 @@
 *.tar
 *.flag
 *.log
+*.7z
+
+upgrade/

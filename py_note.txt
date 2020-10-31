@@ -1,10 +1,20 @@
 
+python字符串与hex相互转换：
+>>> a
+'232302'
+>>> b=bytes.fromhex(a)
+>>> b
+b'##\x02'
+>>> c=b.hex()
+>>> c
+'232302'
+>>> 
+
 
 pip install mysql-python 
 安装时报错：error: Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
 解决方法：（安装必要的依赖）
 apt-get build-dep mysql-python 
-
 
 Linux安装pip
 wget https://bootstrap.pypa.io/get-pip.py   

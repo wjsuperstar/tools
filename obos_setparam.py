@@ -13,12 +13,15 @@ DevNumList=[]
 VaildParam=[]
 # 参数列表
 ParamList={}
+# 登录信息
+LoginInfo={}
 
 with open(JsCfgPath, encoding='utf-8') as fd:
     js = json.load(fd)
     ParamList=js["ParamList"]
     VaildParam=js["VaildParam"]
     DevNumList=js["DevNumList"]
+    LoginInfo=js["LoginInfo"]
 
 # 打开Chrome浏览器
 browser = webdriver.Chrome()
@@ -26,9 +29,9 @@ browser.get("http://www.o-bos.com:50099/login.jsp")
 
 # 登录
 element = browser.find_element_by_id("userName")
-element.send_keys("吴建")
+element.send_keys(LoginInfo['user'])
 element = browser.find_element_by_id("password")
-element.send_keys("qaz1144")
+element.send_keys(LoginInfo['passwd'])
 browser.find_element_by_xpath("//*[@id='login']/tbody/tr[6]/td[2]/input").click()
 
 #进入任务管理
@@ -61,7 +64,7 @@ for para in VaildParam:
     #添加
     browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[7]/td/input').click()
     browser.implicitly_wait(10)
-    print(ParamList[para["item"]]["desc"])
+    print(ParamList[para["item"]]["desc"], para["val"])
 
 sleep(2)
 #提交

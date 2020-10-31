@@ -9,7 +9,7 @@
         "NpvbakIpC2":     {"pid":"0x1010002",  "type":"String",  "desc":"新能源第二通道备份IP"},
         "NpvbakPortC2":   {"pid":"0x1010003",  "type":"Word",    "desc":"新能源第二通道备份PORT"},
         "Vin":            {"pid":"0x3000001",  "type":"String",  "desc":"TBOX VIN"},
-        "ObosForever":    {"pid":"0x30000B1",  "type":"DWord",   "desc":"obos长连接，建议设置999999"},
+        "ObosForever":    {"pid":"0x30000B1",  "type":"DWord",   "desc":"obos长连接，建议设置999999,关闭设置600"},
         "NpvGbTestMode":  {"pid":"0x30000AA",  "type":"DWord",   "desc":"0:非过标模式，1：过标模式"},
         "WakeUpMask":     {"pid":"0x300102F",  "type":"DWord",   "desc":"终端唤醒条件标志，按位表示"},
         "CanRecEn":       {"pid":"0x3000092",  "type":"Byte",    "desc":"老CAN存储插件存储开关"},
@@ -29,19 +29,26 @@
         "ObdIpC1":        {"pid":"0x6000000",  "type":"String",  "desc":"OBD第一通道IP"},
         "ObdPortC1":      {"pid":"0x6000001",  "type":"Word",    "desc":"OBD第一通道PORT"},
         "ObdIpC2":        {"pid":"0x6010000",  "type":"String",  "desc":"OBD第二通道IP"},
-        "ObdPortC2":      {"pid":"0x6010001",  "type":"Word",    "desc":"OBD第二通道PORT"}
-       
+        "ObdPortC2":      {"pid":"0x6010001",  "type":"Word",    "desc":"OBD第二通道PORT"},
+        "ZzObdIpC1":      {"pid":"0x6010001",  "type":"String",  "desc":"郑州OBD第一通道IP"},
+        "ZzObdPortC1":    {"pid":"0x9000000",  "type":"DWord",   "desc":"郑州OBD第一通道PORT"},
+        "Can1Adapt":      {"pid":"0x3001042",  "type":"Word",    "desc":"CAN1自适应：0:不自适应 bit0~15为1(0:250K, 1:500k 2:125k 3:1M 4:100K 5:50K)"},
+        "Can2Adapt":      {"pid":"0x3001043",  "type":"Word",    "desc":"CAN2自适应"},
+        "Can3Adapt":      {"pid":"0x3001044",  "type":"Word",    "desc":"CAN3自适应"}
+
     },
+    "LoginInfo":  {"user":"吴建",  "passwd":"qaz1144"},
     
-    "DevNumList": "1903300540",
-    "VaildParam": [{"item":"SshEn",       "val":"1"}, 
-                   {"item":"SshPort",     "val":"5405"}, 
-                   {"item":"SshIp",       "val":"47.111.129.182"}, 
-                   {"item":"ObosForever", "val":"999999"}
+    "DevNumList": "2010040315",
+    "VaildParam": [{"item":"SshEn",    "val":"1"}, 
+                   {"item":"SshPort",     "val":"40315"}, 
+                   {"item":"SshIp",       "val":"47.111.129.182"}
+                   
                   ],
                   
-    "VaildParamBak": [{"item":"ObdIpC1",       "val":"121.196.244.159"}, 
-                      {"item":"ObdPortC1",     "val":"8111"}, 
-                      {"item":"Vin",           "val":"TESTG600000000002"}
+    "VaildParamOBD": [{"item":"ObdIpC1",       "val":"121.196.244.159"}, 
+                      {"item":"ObdPortC1",  "val":"8111"}, 
+                      {"item":"Vin",        "val":"TESTG600000000003"},
+                      {"item":"ObosForever", "val":"999999"}
                     ]
 }

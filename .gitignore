@@ -27,4 +27,6 @@
 *.log
 *.7z
 
+.svn/
+.idea/
 upgrade/

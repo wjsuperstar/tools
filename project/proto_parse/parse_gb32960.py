@@ -1,24 +1,26 @@
 # -*- coding: UTF-8 -*-
 # auth: WuJian  20201029
 # desc: 解析以字符串形式存储的gb32960协议日志文件
-import sys
+import datetime
 import os
 import re
-import time
-import datetime
-import codecs
 import struct
+import sys
 from ctypes import *
 
 # 以下元组是根据GB32960标准协议定义，不可更改。
 g_gps_keys = ("locationed", "longi", "lat")
 g_gps_name = ("定位状态", "经度", "纬度")
 
-g_fault_keys = ("fault_level", "common_fault", "bms_num", "bms_list", "motor_num", "motor_list", "engine_num", "engine_list", "other_num", "other_list")
+g_fault_keys = (
+    "fault_level", "common_fault", "bms_num", "bms_list", "motor_num", "motor_list", "engine_num", "engine_list",
+    "other_num", "other_list")
 g_fault_name = ("最高报警等级", "通用报警标志", "可充电蓄能装置故障总数", "可充电蓄能装置故障代码列表", "电机故障总数", "电机故障代码列表",
                 "发动机故障总数", "发动机故障列表", "其他故障总数", "其他故障列表")
 
-g_vehicle_keys = ("vehicle_stat", "charge_stat", "run_mode", "speed", "odo", "tot_volt", "tot_curr", "soc", "dcdc_stat", "gear", "resistance", "accel_pedal", "brake_pedal")
+g_vehicle_keys = (
+    "vehicle_stat", "charge_stat", "run_mode", "speed", "odo", "tot_volt", "tot_curr", "soc", "dcdc_stat", "gear",
+    "resistance", "accel_pedal", "brake_pedal")
 g_vehicle_name = ('车辆状态', '充电状态', '运行模式', '车速', '累计里程', '总电压', '总电流', 'SOC', 'DCDC', '档位', '绝缘电阻', '加速踏板', '制动踏板')
 
 g_motor_keys = ("index", "status", "ctl_temp", "rev", "tor", "temp", "volt", "curr")
@@ -43,7 +45,8 @@ g_fuel_bat_keys = ("volt", "curr", "consu_rate", "temp_num", "temp_list", "hydro
 g_fuel_bat_name = ("燃料电池电压", "燃料电池电流", "燃料消耗率", "燃料电池温度探针总数", "探针温度值列表", "氢气系统中最高温度",
                    "氢气系统中最高温度探针代号", "氢气系统中最高浓度", "氢气系统中最高浓度传感器代号", "氢气最高压力", "氢气最高压力传感器代号", "高压DC/DC状态")
 
-g_ack_flg = {1: '成功', 2: '错误', 3: 'VIN重复', 0xfe:'命令'}
+g_ack_flg = {1: '成功', 2: '错误', 3: 'VIN重复', 0xfe: '命令'}
+
 
 # 定位数据
 class GbParse0x05:
@@ -71,6 +74,7 @@ class GbParse0x05:
 
     def as_dict(self):
         return {self.__gps_desc[i]: self.__gps_data[i] for i in g_gps_keys}
+
 
 # 报警数据
 class GbParse0x07:
@@ -141,7 +145,8 @@ class GbParse0x07:
         return self.__fault_desc
 
     def as_dict(self):
-        return { self.__fault_desc[i]: self.__fault_data[i] for i in g_fault_keys}
+        return {self.__fault_desc[i]: self.__fault_data[i] for i in g_fault_keys}
+
 
 # 整车数据
 class GbParse0x01:
@@ -166,7 +171,8 @@ class GbParse0x01:
         return self.__vehicle_desc
 
     def as_dict(self):
-        return { self.__vehicle_desc[i]: self.__vehicle_data[i] for i in g_vehicle_keys}
+        return {self.__vehicle_desc[i]: self.__vehicle_data[i] for i in g_vehicle_keys}
+
 
 # 电机数据
 class GbParse0x02:
@@ -180,7 +186,6 @@ class GbParse0x02:
         # print(data[idx:])
         motor_num = struct.unpack(">B", data[idx:idx + 1])[0]
         idx += 1
-        motor_value = []
         for i in range(motor_num):
             motor_value = struct.unpack(">BBBHHBHH", data[idx:idx + 12])
             self.__motor_data.append(dict(zip(g_motor_keys, motor_value)))
@@ -194,7 +199,8 @@ class GbParse0x02:
         return self.__motor_desc
 
     def as_dict(self):
-        return {self.__motor_desc[i]: self.__motor_data[motor_idx][i] for motor_idx in range(len(self.__motor_data)) for i in g_motor_keys}
+        return {self.__motor_desc[i]: self.__motor_data[motor_idx][i] for motor_idx in range(len(self.__motor_data)) for
+                i in g_motor_keys}
 
 
 # 单体电压
@@ -228,15 +234,9 @@ class GbParse0x08:
         return self.__bms_volt_desc
 
     def as_dict(self):
-        return { self.__bms_volt_desc[i]: self.__bms_volt_data[no][i] for no in range(len(self.__bms_volt_data)) for i in g_bms_volt_keys}
+        return {self.__bms_volt_desc[i]: self.__bms_volt_data[no][i] for no in range(len(self.__bms_volt_data)) for i in
+                g_bms_volt_keys}
 
-    '''
-    def display(self):
-        for no in range(len(self.__bms_volt_data)):
-            print("\n子系统单体电压数据(总数%d):" % len(self.__bms_volt_data))
-            for i in g_bms_volt_keys:
-                print(self.__bms_volt_desc[i], self.__bms_volt_data[no][i], sep=':', end=', ')
-    '''
 
 # 温度探针
 class GbParse0x09:
@@ -269,7 +269,8 @@ class GbParse0x09:
         return self.__bms_temp_desc
 
     def as_dict(self):
-        return {self.__bms_temp_desc[i]: self.__bms_temp_data[no][i] for no in range(len(self.__bms_temp_data)) for i in g_bms_temp_keys}
+        return {self.__bms_temp_desc[i]: self.__bms_temp_data[no][i] for no in range(len(self.__bms_temp_data)) for i in
+                g_bms_temp_keys}
 
     '''
     def display(self):
@@ -278,6 +279,7 @@ class GbParse0x09:
             for i in g_bms_temp_keys:
                 print(self.__bms_temp_desc[i], self.__bms_temp_data[no][i], sep=':', end=', ')
     '''
+
 
 # 极值数据
 class GbParse0x06:
@@ -303,6 +305,7 @@ class GbParse0x06:
     def as_dict(self):
         return {self.__extreme_desc[i]: self.__extreme_data[i] for i in g_extreme_keys}
 
+
 # 发动机数据
 class GbParse0x04:
 
@@ -327,6 +330,7 @@ class GbParse0x04:
 
     def as_dict(self):
         return {self.__engine_desc[i]: self.__engine_data[i] for i in g_engine_keys}
+
 
 # 燃料电池数据
 class GbParse0x03:
@@ -370,26 +374,28 @@ class GbParse0x03:
     def as_dict(self):
         return {self.__fuel_bat_desc[i]: self.__fuel_bat_data[i] for i in g_fuel_bat_keys}
 
+
 # 时间
 class GbParseTime:
     def __init__(self, s, len_out):
         data = s
         idx = 0
 
-        y, m, d, h, min, s = struct.unpack(">BBBBBB", data[idx:idx + 6])
+        y, m, d, h, min, s = struct.unpack(">6B", data[idx:idx + 6])
         idx += 6
         self.__pack_time = datetime.datetime(2000 + y, m, d, h, min, s, 0)
 
         len_out[0] = idx
 
     def get_data(self):
-        return self.__time
+        return self.__pack_time
 
     def get_desc(self):
         pass
 
     def as_dict(self):
         return {"时间": self.__pack_time.strftime('%Y-%m-%d %H:%M:%S')}
+
 
 class GbParseLogin:
     def __init__(self, s):
@@ -400,7 +406,7 @@ class GbParseLogin:
 
         self.__login.update(GbParseTime(data, len_out).as_dict())
         idx += len_out[0]
-        serial, myiccid, cnt, mylen = struct.unpack(">H20s2B", data[idx:idx+24])
+        serial, myiccid, cnt, mylen = struct.unpack(">H20s2B", data[idx:idx + 24])
         idx += 24
         self.__login.update({'流水号': serial})
         self.__login.update({'ICCID': myiccid})
@@ -412,6 +418,7 @@ class GbParseLogin:
 
     def as_dict(self):
         return self.__login
+
 
 class GbParseLogout:
     def __init__(self, s):
@@ -433,7 +440,7 @@ class GbParseLogout:
 class MsgHead(BigEndianStructure):
     _pack_ = 1
     _fields_ = [
-        ('起始符', c_char*2),
+        ('起始符', c_char * 2),
         ('命令标识', c_uint8),
         ('应答标志', c_uint8),
         ('VIN', c_char * 17),
@@ -444,18 +451,22 @@ class MsgHead(BigEndianStructure):
     def as_dict(self):
         return {key[0]: getattr(self, key[0]) for key in self._fields_}
 
+
+def CalcCrc(data):
+    crc = 0
+    for i in data:
+        crc ^= i
+    return crc
+
+
 class MainParseMsg:
     def __init__(self):
         pass
-        #self.__data = data
+        # self.__data = data
 
-    def CalcCrc(self, data):
-        crc = 0
-        for i in data:
-            crc ^= i
-        return crc
     def parse_custom_msg(self, data):
         print('基类，不处理自定义数据')
+
     # 解析实时数据0x02
     def parse_real_msg(self, data):
         package = dict()
@@ -498,9 +509,9 @@ class MainParseMsg:
 
     def parse_main_msg(self, data):
         package = dict()
-        crc = self.CalcCrc(data[2:-1])
+        crc = CalcCrc(data[2:-1])
         if crc == data[-1]:
-            data = data[0:-1]   #去掉校验码
+            data = data[0:-1]  # 去掉校验码
             header = MsgHead()
             memmove(addressof(header), data, sizeof(MsgHead))
             package.update({"消息头": header.as_dict()})
@@ -526,9 +537,10 @@ class MainParseMsg:
             print('check crc error, raw_crc=0x%x, calc_crc=0x%x' % (crc, data[-1]))
         return package
 
+
 def main():
     print("使用格式： python xx.py 目录名(待解析文件放入该目录即可，文件编码确保是UTF8格式)")
-    if len(sys.argv)-1 == 0:
+    if len(sys.argv) - 1 == 0:
         print('命令执行需要参数，见使用格式说明')
         return
     print("解析目录:", sys.argv[1])
@@ -543,15 +555,16 @@ def main():
                         result = re.search(r'\D(2323.*)\D', line)
                         if result:
                             data = result.group(1).strip()
-                            #print(data)
+                            # print(data)
                             obj = MainParseMsg()
                             package = obj.parse_main_msg(bytes.fromhex(data))
                             print(package)
-                            #break
+                            # break
                     except UnicodeDecodeError:
                         print("UnicodeDecodeError")
                         pass
-            #break #一个文件
+            # break #一个文件
+
 
 if __name__ == '__main__':
     main()

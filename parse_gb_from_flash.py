@@ -8,7 +8,7 @@ import struct
 FileName=r'tbox_data.bin'
 
 
-# 以下元组是根据GB32960协议定义，不可更改。
+# 以下元组是根据GB32960标准协议定义，不可更改。
 g_gps_keys = ("locationed", "longi", "lat")
 g_gps_name = ("定位状态", "经度", "纬度")
 

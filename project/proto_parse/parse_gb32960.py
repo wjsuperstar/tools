@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # auth: WuJian  20201029
-# desc: 解析以字符串形式存储的华菱英泰斯特协议日志文件
+# desc: 解析以字符串形式存储的gb32960协议日志文件
 import sys
 import os
 import re
@@ -444,76 +444,88 @@ class MsgHead(BigEndianStructure):
     def as_dict(self):
         return {key[0]: getattr(self, key[0]) for key in self._fields_}
 
-def CalcCrc(data):
-    crc = 0
-    for i in data:
-        crc ^= i
-    return crc
+class MainParseMsg:
+    def __init__(self):
+        pass
+        #self.__data = data
 
-# 解析实时数据0x02
-def ParseRealMsg(data):
-    package = dict()
-    tot_len = len(data)
-    used_len = [0]
-    package.update(GbParseTime(data, used_len).as_dict())
-    idx = used_len[0]
+    def CalcCrc(self, data):
+        crc = 0
+        for i in data:
+            crc ^= i
+        return crc
+    def parse_custom_msg(self, data):
+        print('基类，不处理自定义数据')
+    # 解析实时数据0x02
+    def parse_real_msg(self, data):
+        package = dict()
+        tot_len = len(data)
+        used_len = [0]
+        package.update(GbParseTime(data, used_len).as_dict())
+        idx = used_len[0]
 
-    # 解析各个数据块
-    while idx < tot_len:
-        # print(data[idx:])
-        block_id = struct.unpack("<B", data[idx:idx + 1])[0]
-        idx += 1
-        # print("\nblock_id=%d, idx=%d" % (block_id, idx))
-        if block_id == 0x01:
-            package.update({'整车数据': GbParse0x01(data[idx:], used_len).as_dict()})
-        elif block_id == 0x02:
-            package.update({'驱动电机数据': GbParse0x02(data[idx:], used_len).as_dict()})
-        elif block_id == 0x03:
-            package.update({'燃料电池数据': GbParse0x03(data[idx:], used_len).as_dict()})
-        elif block_id == 0x04:
-            package.update({'发动机数据': GbParse0x04(data[idx:], used_len).as_dict()})
-        elif block_id == 0x05:
-            package.update({'车辆位置': GbParse0x05(data[idx:], used_len).as_dict()})
-        elif block_id == 0x06:
-            package.update({'极值数据': GbParse0x06(data[idx:], used_len).as_dict()})
-        elif block_id == 0x07:
-            package.update({'报警数据': GbParse0x07(data[idx:], used_len).as_dict()})
-        elif block_id == 0x08:
-            package.update({'单体电压': GbParse0x08(data[idx:], used_len).as_dict()})
-        elif block_id == 0x09:
-            package.update({'单体温度': GbParse0x09(data[idx:], used_len).as_dict()})
+        # 解析各个数据块
+        while idx < tot_len:
+            # print(data[idx:])
+            block_id = struct.unpack("<B", data[idx:idx + 1])[0]
+            idx += 1
+            # print("\nblock_id=%d, idx=%d" % (block_id, idx))
+            if block_id == 0x01:
+                package.update({'整车数据': GbParse0x01(data[idx:], used_len).as_dict()})
+            elif block_id == 0x02:
+                package.update({'驱动电机数据': GbParse0x02(data[idx:], used_len).as_dict()})
+            elif block_id == 0x03:
+                package.update({'燃料电池数据': GbParse0x03(data[idx:], used_len).as_dict()})
+            elif block_id == 0x04:
+                package.update({'发动机数据': GbParse0x04(data[idx:], used_len).as_dict()})
+            elif block_id == 0x05:
+                package.update({'车辆位置': GbParse0x05(data[idx:], used_len).as_dict()})
+            elif block_id == 0x06:
+                package.update({'极值数据': GbParse0x06(data[idx:], used_len).as_dict()})
+            elif block_id == 0x07:
+                package.update({'报警数据': GbParse0x07(data[idx:], used_len).as_dict()})
+            elif block_id == 0x08:
+                package.update({'单体电压': GbParse0x08(data[idx:], used_len).as_dict()})
+            elif block_id == 0x09:
+                package.update({'单体温度': GbParse0x09(data[idx:], used_len).as_dict()})
+            else:
+                print("Unkonw id, block_id=", block_id)
+                break
+
+            idx += used_len[0]
+
+        return package
+
+    def parse_main_msg(self, data):
+        package = dict()
+        crc = self.CalcCrc(data[2:-1])
+        if crc == data[-1]:
+            data = data[0:-1]   #去掉校验码
+            header = MsgHead()
+            memmove(addressof(header), data, sizeof(MsgHead))
+            package.update({"消息头": header.as_dict()})
+            idx = sizeof(MsgHead)
+            if header.应答标志 == 0xFE:
+                if header.命令标识 == 0x02:
+                    package.update({'实时数据': self.parse_real_msg(data[idx:])})
+                elif header.命令标识 == 0x03:
+                    package.update({'历史数据': self.parse_real_msg(data[idx:])})
+                elif header.命令标识 == 0x01:
+                    package.update({'登入': GbParseLogin(data[idx:]).as_dict()})
+                elif header.命令标识 == 0x04:
+                    package.update({'登出': GbParseLogout(data[idx:]).as_dict()})
+                elif header.命令标识 == 0x07:
+                    package.update({'心跳': 'null'})
+                elif header.命令标识 == 0x08:
+                    package.update({'校时': 'null'})
+                else:
+                    self.parse_custom_msg(data[idx:])
+            else:
+                package.update({'平台应答': {'应答命令': header.命令标识, '应答结果': g_ack_flg.get(header.应答标志, header.应答标志)}})
         else:
-            print("Unkonw id, block_id=", block_id)
-            break
+            print('check crc error, raw_crc=0x%x, calc_crc=0x%x' % (crc, data[-1]))
+        return package
 
-        idx += used_len[0]
-
-    return package
-
-def ParseMsg(data):
-    package = dict()
-    crc = CalcCrc(data[2:-1])
-    if crc == data[-1]:
-        data = data[0:-1]   #去掉校验码
-        header = MsgHead()
-        memmove(addressof(header), data, sizeof(MsgHead))
-        package.update({"消息头": header.as_dict()})
-        idx = sizeof(MsgHead)
-        if header.应答标志 == 0xFE:
-            if header.命令标识 == 0x02:
-                package.update({'实时数据': ParseRealMsg(data[idx:])})
-            elif header.命令标识 == 0x03:
-                package.update({'历史数据': ParseRealMsg(data[idx:])})
-            elif header.命令标识 == 0x01:
-                package.update({'登入': GbParseLogin(data[idx:]).as_dict()})
-            elif header.命令标识 == 0x04:
-                package.update({'登出': GbParseLogout(data[idx:]).as_dict()})
-
-        else:
-            package.update({'平台应答': {'应答命令': header.命令标识, '应答结果': g_ack_flg.get(header.应答标志, header.应答标志)}})
-    else:
-        print('check crc error, raw_crc=0x%x, calc_crc=0x%x' % (crc, data[-1]))
-    return package
 def main():
     print("使用格式： python xx.py 目录名(待解析文件放入该目录即可，文件编码确保是UTF8格式)")
     if len(sys.argv)-1 == 0:
@@ -532,7 +544,8 @@ def main():
                         if result:
                             data = result.group(1).strip()
                             #print(data)
-                            package = ParseMsg(bytes.fromhex(data))
+                            obj = MainParseMsg()
+                            package = obj.parse_main_msg(bytes.fromhex(data))
                             print(package)
                             #break
                     except UnicodeDecodeError:

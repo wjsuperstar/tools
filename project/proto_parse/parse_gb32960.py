@@ -464,7 +464,7 @@ class MainParseMsg:
         pass
         # self.__data = data
 
-    def parse_custom_msg(self, data):
+    def parse_custom_msg(self, cmd, data):
         print('基类，不处理自定义数据')
 
     # 解析实时数据0x02
@@ -530,7 +530,7 @@ class MainParseMsg:
                 elif header.命令标识 == 0x08:
                     package.update({'校时': 'null'})
                 else:
-                    self.parse_custom_msg(data[idx:])
+                    package.update({'自定义(id:0x%X)' % header.命令标识 : self.parse_custom_msg(header.命令标识, data[idx:])})
             else:
                 package.update({'平台应答': {'应答命令': header.命令标识, '应答结果': g_ack_flg.get(header.应答标志, header.应答标志)}})
         else:

@@ -530,7 +530,7 @@ class MainParseMsg:
                 elif header.命令标识 == 0x08:
                     package.update({'校时': 'null'})
                 else:
-                    package.update({'自定义(id:0x%X)' % header.命令标识 : self.parse_custom_msg(header.命令标识, data[idx:])})
+                    package.update({'自定义数据' : self.parse_custom_msg(header.命令标识, data[idx:])})
             else:
                 package.update({'平台应答': {'应答命令': header.命令标识, '应答结果': g_ack_flg.get(header.应答标志, header.应答标志)}})
         else:

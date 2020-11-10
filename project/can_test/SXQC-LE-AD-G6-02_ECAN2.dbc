@@ -1,0 +1,2429 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+BS_:
+BU_: VCU_V1 MCU SLU DCDC DCAC_S DCAC_B ACCM BTMS BMS EVT_V1
+remark None None None None None None None None None 
+VAL_TABLE_ VCU_VehSts  0 "初始化状态" 3 "整车低压上电状态" 7 "整车高压上电状态" 8 "整车可行驶状态" 15 "无效"  ;
+VAL_TABLE_ VCU_ErrSts  0 "没有故障" 1 "轻微故障" 2 "限功率故障" 3 "限速故障" 4 "停车故障" 15 "无效"  ;
+VAL_TABLE_ VCU_AccPedPos  254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_BrkPedPos  101 "制动有效" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_VehSpd  65534 "异常" 65535 "无效"  ;
+VAL_TABLE_ VCU_StartSts  1 "启动状态" 2 "熄火" 3 "其他状态" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_PwrMode  1 "纯电" 2 "混动" 3 "燃油" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_ChrgSts  1 "停车充电" 2 "行车回馈充电" 3 "未充电" 4 "充电完成" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_DCDCSts  1 "工作" 2 "断开" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ VCU_ShiftLevel  0 "空档" 1 "1档(C挡)" 2 "2档" 3 "3档" 4 "4档" 5 "5档" 6 "6档" 13 "倒档R档" 14 "自动挡D档" 15 "停车档P档"  ;
+VAL_TABLE_ VCU_BrkActive  0 "无制动力" 1 "有制动力"  ;
+VAL_TABLE_ VCU_DrvActive  0 "无驱动力" 1 "有驱动力"  ;
+VAL_TABLE_ VCU_VehShiftLevel  125 "空挡（N）" 223 "倒挡（R）" 250 "爬坡挡（C）" 252 "前进挡（D）" 254 "错误" 255 "无效"  ;
+VAL_TABLE_ VCU_VehShiftMode  0 "无动作" 1 "经济模式" 2 "动力模式" 3 "拖车模式" 15 "无效"  ;
+VAL_TABLE_ VCU_BatPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_DCDC24PwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_DCAC_SPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_DCAC_BPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_PTCContaEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_BatNoChrgEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_ACCMPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_MainContaPEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_MotPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_MotDischrgCmd  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_MotCtlMode  0 "无动作" 1 "转速模式" 2 "转矩模式" 3 "无效"  ;
+VAL_TABLE_ VCU_MotAutoHoldEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_TABLE_ VCU_FixedKeySaveSts  0 "未保存" 1 "保存成功" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_LockFuncActiveSts  0 "锁车功能未激活" 1 "锁车功能已激活" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_SpdLimitSts  0 "车速未限制" 1 "车速已限制" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_LockRespType  0 "锁车应答" 1 "反馈种子" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_CheckReq  0 "未请求握手校验" 1 "请求握手校验" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_CheckResult  0 "握手校验未通过" 1 "握手校验已通过" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ VCU_LockCmdFbk  1 "握手校验" 3 "激活锁车配置功能" 4 "关闭锁车配置功能" 7 "限制车速" 8 "解除限制车速" 15 "无效"  ;
+VAL_TABLE_ VCU_BackLightLevelSet  0 "Level 1" 1 "Level 2" 2 "Level 3" 3 "Level 4"  ;
+VAL_TABLE_ VCU_PositionLightStatus  0 "Inactive" 1 "Active" 2 "Fault" 3 "Invalid"  ;
+VAL_TABLE_ VCU_MaxAlarmLevel  0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 254 "错误" 255 "无效"  ;
+VAL_TABLE_ Veh_Err21  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err22  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err23  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err24  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err25  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err26  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err27  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err28  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err31  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err32  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err33  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err34  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err35  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err36  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err37  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err38  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err41  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err42  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ Veh_Err43  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ SLU_GearReq  125 "空挡（N）" 223 "倒挡（R）" 250 "爬坡挡（C）" 252 "前进挡（D）" 254 "错误" 255 "无效"  ;
+VAL_TABLE_ SLU_TransMode1  0 "E模式" 1 "P模式" 2 "拖车模式" 3 "无效" 15 "错误"  ;
+VAL_TABLE_ MCU_SysSts  0 "初始状态" 3 "低压状态" 7 "高压就绪状态" 8 "工作状态" 10 "快速放电状态" 15 "无效"  ;
+VAL_TABLE_ MCU_ErrSts  0 "没有故障" 1 "轻微故障（无需处理）" 2 "限功率状态" 3 "0扭矩状态" 4 "关管状态" 15 "无效"  ;
+VAL_TABLE_ MCU_MotWorkMode  0 "无动作" 1 "转速模式" 2 "转矩模式" 3 "无效"  ;
+VAL_TABLE_ MCU_PTCContaSts  0 "断开" 1 "闭合" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ MCU_ContaPSts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_TABLE_ MCU_MotWorkSts  1 "耗电" 2 "发电" 3 "关闭状态" 4 "准备状态" 254 "异常" 255 "无效"  ;
+VAL_TABLE_ BMS_SysSts  0 "初始状态" 3 "低压状态（自检完成或高压下电完成，允许高压上电）" 4 "高压接通中" 8 "工作状态" 10 "高压切断中" 15 "无效"  ;
+VAL_TABLE_ BMS_ErrSts  0 "无故障" 1 "一般故障" 2 "严重故障" 15 "无效"  ;
+VAL_TABLE_ BMS_ContaNSts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_TABLE_ BMS_InsErrSts  0 "无绝缘故障" 1 "绝缘故障" 2 "功能失效" 3 "无效"  ;
+VAL_TABLE_ BMS_ChrgSts  0 "无充电机充电" 1 "充电机充电线连接" 2 "准备充电" 3 "充电机充电中" 4 "充电机充电完成" 5 "充电异常" 15 "无效"  ;
+VAL_TABLE_ BMS_ChrgMode  0 "未充电" 1 "直流充电" 2 "交流充电" 3 "其他模式"  ;
+VAL_TABLE_ BMS_ChrgContaP1Sts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_TABLE_ BMS_ChrgContaN1Sts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_TABLE_ BMS_TempDiffAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_HighTempAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_OverVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_UnderVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_SOCLowAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_CellOverVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_CellUnderVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_SOCHighAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_SOCJumpAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_REESSMismatchAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_CellPoorConsistencyAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_InsulationAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_HVILStsAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_OverChargeAlarm  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err31  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err32  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err33  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err34  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err35  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err36  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err37  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err38  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err41  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err42  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err43  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err44  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err45  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err46  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err47  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err48  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err51  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err52  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err53  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err54  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err55  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err56  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err57  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err58  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_Err61  0 "无故障" 1 "有故障"  ;
+VAL_TABLE_ BMS_TMSModeSet  0 "待机模式" 1 "自循环模式" 2 "制冷模式" 3 "制热模式（预留）"  ;
+VAL_TABLE_ BTMS_SysSts  0 "初始状态" 3 "低压电状态" 7 "待机状态" 8 "工作状态" 15 "无效"  ;
+VAL_TABLE_ BTMS_ErrSts  0 "无故障" 1 "轻微故障（降功率运行）" 2 "严重故障（停机）" 15 "无效"  ;
+VAL_TABLE_ BTMS_WorkMode  0 "待机模式" 1 "自循环模式" 2 "制冷模式" 3 "制热模式（预留）"  ;
+VAL_TABLE_ BTMS_RelaySts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_TABLE_ DCDC_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_TABLE_ DCDC_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_TABLE_ DCAC_S_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_TABLE_ DCAC_S_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_TABLE_ DCAC_B_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_TABLE_ DCAC_B_ErrSts  0 "无故障" 1 "轻微故障" 2 "严重故障" 15 "无效"  ;
+VAL_TABLE_ ACCM_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_TABLE_ ACCM_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_TABLE_ EVT_LockReqType  0 "锁车指令" 1 "反馈密钥" 2 "错误" 3 "无效"  ;
+VAL_TABLE_ EVT_LockCmd  1 "握手校验" 3 "激活锁车配置功能" 4 "关闭锁车配置功能" 7 "限制车速" 8 "解除限制车速" 15 "无效"  ;
+VAL_TABLE_ EVT_SpdLimit  0 "限速区间" 125 "限制启动" 254 "错误" 255 "无效"  ;
+VAL_TABLE_ SLU_OC  127 "Not Available"  ;
+VAL_TABLE_ SLU_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ SLU_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ MCU_OC  127 "Not Available"  ;
+VAL_TABLE_ MCU_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ MCU_OC  127 "Not Available"  ;
+VAL_TABLE_ MCU_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ DCDC_OC  127 "Not Available"  ;
+VAL_TABLE_ DCDC_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ DCDC_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ DCAC_B_OC  127 "Not Available"  ;
+VAL_TABLE_ DCAC_B_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ DCAC_B_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ DCAC_S_OC  127 "Not Available"  ;
+VAL_TABLE_ DCAC_S_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ DCAC_S_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ ACCM_OC  127 "Not Available"  ;
+VAL_TABLE_ ACCM_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ ACCM_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ BTMS_OC  127 "Not Available"  ;
+VAL_TABLE_ BTMS_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ BTMS_OC  127 "Not Available"  ;
+VAL_TABLE_ BTMS_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_TABLE_ BMS_OC  127 "Not Available"  ;
+VAL_TABLE_ BMS_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_TABLE_ BMS_OC  127 "Not Available"  ;
+VAL_TABLE_ BMS_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+
+BO_ 285187623 VCU_BROADCAST: 8 VCU_V1
+ SG_ VCU_VehSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ VCU_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ VCU_AccPedPos : 16|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_BrkPedPos : 24|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ VCU_VehSpd : 32|16@1+ (0.1,0) [0|220] "km/h" Vector__XXX
+ SG_ VCU_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 486514471 VCU_VehST: 8 VCU_V1
+ SG_ VCU_StartSts : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ VCU_PwrMode : 8|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ VCU_ChrgSts : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ VCU_DCDCSts : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ VCU_ShiftLevel : 32|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ VCU_BrkActive : 36|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ VCU_DrvActive : 37|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419404327 VCU_ShiftSts: 8 VCU_V1
+ SG_ VCU_VehShiftLevel : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ VCU_VehShiftMode : 24|4@1+ (1,0) [0|15] "bit" Vector__XXX
+
+BO_ 285186855 VCU_HVEnableCtl: 8 VCU_V1
+ SG_ VCU_BatPwrEn : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_DCDC24PwrEn : 2|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_DCAC_SPwrEn : 4|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_DCAC_BPwrEn : 6|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_PTCContaEn : 8|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_BatNoChrgEn : 10|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_ACCMPwrEn : 14|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_MainContaPEn : 22|2@1+ (1,0) [0|3] "bit" Vector__XXX
+
+BO_ 218074407 VCU_MotCtl: 8 VCU_V1
+ SG_ VCU_MotPwrEn : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_MotDischrgCmd : 2|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_MotCtlMode : 4|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_MotAutoHoldEn : 6|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_MotSpdReq : 8|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ VCU_MotTqReq : 24|16@1+ (1,-6000) [-6000|6000] "Nm" Vector__XXX
+ SG_ VCU_RollingCounter : 56|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ VCU_Checksum : 60|4@1+ (1,0) [0|15] "bit" Vector__XXX
+
+BO_ 419401255 VCU_MotDrvLimit: 8 VCU_V1
+ SG_ VCU_MotSpdLimMax : 0|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ VCU_MotSpdLimMin : 16|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ VCU_MotTqLimMax : 32|16@1+ (1,-6000) [-6000|6000] "Nm" Vector__XXX
+ SG_ VCU_MotTqLimMin : 48|16@1+ (1,-6000) [-6000|6000] "Nm" Vector__XXX
+
+BO_ 419406631 VCU_ExtReqCtl: 8 VCU_V1
+ SG_ VCU_ACCMSpdReq : 8|16@1+ (1,0) [0|6000] "rpm" Vector__XXX
+
+BO_ 419233831 VCU_Lock1: 8 VCU_V1
+ SG_ VCU_FixedKeySaveSts : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_LockFuncActiveSts : 2|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_SpdLimitSts : 4|2@1+ (1,0) [0|3] "bit" Vector__XXX
+
+BO_ 419234087 VCU_Lock2: 8 VCU_V1
+ SG_ VCU_LockRespType : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_CheckReq : 2|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_CheckResult : 4|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_LockCmdFbk : 8|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ VCU_LockSeed : 16|48@1+ (1,0) [0|281474976710655] "bit" Vector__XXX
+
+BO_ 419407911 VCU_BackLighCtl: 8 VCU_V1
+ SG_ VCU_BackLightLevelSet : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ VCU_PositionLightStatus : 2|2@1+ (1,0) [0|3] "bit" Vector__XXX
+
+BO_ 486516519 VCU_VehAlarm: 8 VCU_V1
+ SG_ VCU_MaxAlarmLevel : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ Veh_Err21 : 8|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err22 : 9|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err23 : 10|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err24 : 11|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err25 : 12|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err26 : 13|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err27 : 14|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err28 : 15|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err31 : 16|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err32 : 17|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err33 : 18|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err34 : 19|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err35 : 20|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err36 : 21|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err37 : 22|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err38 : 23|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err41 : 24|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err42 : 25|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Veh_Err43 : 26|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ VCU_Odometer : 32|32@1+ (0.1,0) [0|9999999.9] "km" Vector__XXX
+
+BO_ 418053927 VCU_RQST: 3 VCU_V1
+ SG_ VCU_PGNReq : 0|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 201392901 SLU_TC1: 8 SLU
+ SG_ SLU_GearReq : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ SLU_TransMode1 : 24|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ SLU_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 285180034 MCU_SysSts: 8 MCU
+ SG_ MCU_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ MCU_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ MCU_MotWorkMode : 8|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ MCU_PTCContaSts : 10|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ MCU_ContaPSts : 14|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ MCU_MotWorkSts : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_AuxHVContaSts : 24|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ MCU_ACCMContaSts : 26|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ MCU_MotTotalNum : 48|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ MCU_MotIndex : 52|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ MCU_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419398018 MCU_MotSts1: 8 MCU
+ SG_ MCU_DCCurrent : 0|16@1+ (0.1,-1000) [-1000|1000] "A" Vector__XXX
+ SG_ MCU_DCVoltage : 16|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ MCU_ACCurrentRMS : 32|16@1+ (0.1,-1000) [-1000|1000] "A" Vector__XXX
+ SG_ MCU_ACVoltageRMS : 48|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+
+BO_ 218071682 MCU_MotSts2: 8 MCU
+ SG_ MCU_MotSpd : 0|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ MCU_MotTq : 16|16@1+ (1,-6000) [-6000|6000] "Nm" Vector__XXX
+ SG_ MCU_SpdOutputLimit : 32|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ MCU_TqOutputLimit : 48|16@1+ (1,-6000) [-6000|6000] "Nm" Vector__XXX
+
+BO_ 486507394 MCU_Temp: 8 MCU
+ SG_ MCU_MotTemp : 0|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ MCU_ECUTemp : 8|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+
+BO_ 285155316 BMS_SysSts: 8 BMS
+ SG_ BMS_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BMS_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BMS_ContaNSts : 18|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_InsErrSts : 24|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_ChrgSts : 26|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BMS_ChrgMode : 30|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_ChrgContaP1Sts : 32|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_ChrgContaN1Sts : 34|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 285155572 BMS_BatSOCSts: 8 BMS
+ SG_ BMS_Voltage : 0|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ BMS_Current : 16|16@1+ (0.1,-1000) [-1000|1000] "A" Vector__XXX
+ SG_ BMS_SOC : 32|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+
+BO_ 419373556 BMS_VoltInfo1: 8 BMS
+ SG_ BatC_VoltMax : 0|16@1+ (0.001,0) [0|10] "V" Vector__XXX
+ SG_ BatM_IdxMaxVolt : 16|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BatC_IdxMaxVolt : 24|16@1+ (1,0) [0|64225] "bit" Vector__XXX
+
+BO_ 419373812 BMS_VoltInfo2: 8 BMS
+ SG_ BatC_VoltMin : 0|16@1+ (0.001,0) [0|10] "V" Vector__XXX
+ SG_ BatM_IdxMinVolt : 16|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BatC_IdxMinVolt : 24|16@1+ (1,0) [0|64225] "bit" Vector__XXX
+
+BO_ 419374068 BMS_TempInfo: 8 BMS
+ SG_ BatM_TempMax : 0|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BatM_IdxMaxTemp : 8|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BatM_IdxMaxTempSens : 16|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BatM_TempMin : 24|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BatM_IdxMinTemp : 32|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BatM_IdxMinTempSens : 40|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ Bat_TempAvrg : 48|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+
+BO_ 419374324 BMS_PwrLimit: 8 BMS
+ SG_ Bat_DischrgCurMaxAllow : 0|16@1+ (0.1,0) [0|1000] "A" Vector__XXX
+ SG_ Bat_ChrgCurMaxAllow : 16|16@1+ (0.1,-1000) [-1000|0] "A" Vector__XXX
+ SG_ Bat_InstDischrgCurMaxAllow : 32|16@1+ (0.1,0) [0|1000] "A" Vector__XXX
+ SG_ Bat_FbkChrgCurMaxAllow : 48|16@1+ (0.1,-1000) [-1000|0] "A" Vector__XXX
+
+BO_ 419374580 BMS_CR: 8 BMS
+ SG_ Bat_InstantConsume : 0|16@1+ (0.1,0) [0|1000] "Wh" Vector__XXX
+ SG_ Bat_TotalConsume : 16|16@1+ (0.1,0) [0|1000] "Wh" Vector__XXX
+ SG_ Bat_ResP2Gnd : 32|16@1+ (1,0) [0|65535] "KΩ" Vector__XXX
+ SG_ Bat_ResN2Gnd : 48|16@1+ (1,0) [0|65535] "KΩ" Vector__XXX
+
+BO_ 419374836 BMS_AlarmInfo: 8 BMS
+ SG_ BMS_TempDiffAlarm : 0|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_HighTempAlarm : 1|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_OverVoltAlarm : 2|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_UnderVoltAlarm : 3|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_SOCLowAlarm : 4|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_CellOverVoltAlarm : 5|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_CellUnderVoltAlarm : 6|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_SOCHighAlarm : 7|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_SOCJumpAlarm : 8|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_REESSMismatchAlarm : 9|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_CellPoorConsistencyAlarm : 10|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_InsulationAlarm : 11|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_HVILStsAlarm : 12|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_OverChargeAlarm : 13|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err31 : 16|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err32 : 17|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err33 : 18|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err34 : 19|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err35 : 20|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err36 : 21|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err37 : 22|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err38 : 23|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err41 : 24|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err42 : 25|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err43 : 26|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err44 : 27|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err45 : 28|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err46 : 29|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err47 : 30|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err48 : 31|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err51 : 32|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err52 : 33|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err53 : 34|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err54 : 35|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err55 : 36|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err56 : 37|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err57 : 38|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err58 : 39|1@1+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ BMS_Err61 : 14|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 486483956 BMS_SubsysInfo: 8 BMS
+ SG_ BMS_SubSysNum : 0|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BMS_SubSysIdx : 8|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BMS_SubSysCellNum : 32|16@1+ (1,0) [1|65531] "bit" Vector__XXX
+ SG_ BMS_SubSysTempPrbNum : 48|16@1+ (1,0) [1|65531] "bit" Vector__XXX
+
+BO_ 486484212 BMS_CellVolt: 8 BMS
+ SG_ BMS_VoltFrameIdx : 0|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BMS_VoltPackIdx : 8|8@1+ (1,0) [0|250] "bit" Vector__XXX
+ SG_ BMS_CellXVolt : 16|16@1+ (0.001,0) [0|60] "V" Vector__XXX
+ SG_ BMS_CellYVolt : 32|16@1+ (0.001,0) [0|60] "V" Vector__XXX
+ SG_ BMS_CellZVolt : 48|16@1+ (0.001,0) [0|60] "V" Vector__XXX
+
+BO_ 486484468 BMS_TempInfo1: 8 BMS
+ SG_ BMS_TempFrameIdx : 0|8@1+ (1,0) [1|250] "bit" Vector__XXX
+ SG_ BMS_TempPackIdx : 8|8@1+ (1,0) [1|250] "bit" Vector__XXX
+ SG_ BMS_PrbXTemp : 16|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BMS_PrbYTemp : 24|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BMS_PrbZTemp : 32|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BMS_PrbUTemp : 40|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BMS_PrbVTemp : 48|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+ SG_ BMS_PrbWTemp : 56|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+
+BO_ 419375860 BMS_TC: 8 BMS
+ SG_ BMS_TMSModeSet : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BMS_TMSTempSet : 8|8@1+ (1,-40) [-40|210] "℃" Vector__XXX
+
+BO_ 419410064 BTMS_SysST: 8 BTMS
+ SG_ BTMS_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BTMS_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BTMS_WorkMode : 8|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BTMS_RelaySts : 10|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ BTMS_OutWaterTemp : 16|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ BTMS_InWaterTemp : 24|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ BTMS_PwrFbk : 32|16@1+ (0.1,0) [0|100] "kW" Vector__XXX
+ SG_ BTMS_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419367813 DCDC_SysST: 8 DCDC
+ SG_ DCDC_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCDC_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCDC_InVolt : 8|16@1+ (1,0) [0|1000] "V" Vector__XXX
+ SG_ DCDC_InCur : 24|8@1+ (0.1,0) [0|25] "A" Vector__XXX
+ SG_ DCDC_OutVolt : 32|8@1+ (0.4,0) [0|100] "V" Vector__XXX
+ SG_ DCDC_OutCur : 40|8@1+ (1,0) [0|255] "A" Vector__XXX
+ SG_ DCDC_Temp : 48|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ DCDC_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419368074 DCAC_S_SysST: 8 DCAC_S
+ SG_ DCAC_S_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCAC_S_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCAC_S_MotSpd : 8|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ DCAC_S_MotTemp : 24|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ DCAC_S_ECUTemp : 32|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ DCAC_S_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419368330 DCAC_S_PwrST: 8 DCAC_S
+ SG_ DCAC_S_InVolt : 0|16@1+ (1,0) [0|1000] "V" Vector__XXX
+ SG_ DCAC_S_InCur : 16|8@1+ (0.1,0) [0|25] "A" Vector__XXX
+ SG_ DCAC_S_OutVoltRMS : 24|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ DCAC_S_OutCurRMS : 40|8@1+ (1,0) [0|255] "A" Vector__XXX
+
+BO_ 419368587 DCAC_B_SysST: 8 DCAC_B
+ SG_ DCAC_B_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCAC_B_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ DCAC_B_MotSpd : 8|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ DCAC_B_MotTemp : 24|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ DCAC_B_ECUTemp : 32|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ DCAC_B_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419368843 DCAC_B_PwrST: 8 DCAC_B
+ SG_ DCAC_B_InVolt : 0|16@1+ (1,0) [0|1000] "V" Vector__XXX
+ SG_ DCAC_B_InCur : 16|8@1+ (0.1,0) [0|25] "A" Vector__XXX
+ SG_ DCAC_B_OutVoltRMS : 24|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ DCAC_B_OutCurRMS : 40|8@1+ (1,0) [0|255] "A" Vector__XXX
+
+BO_ 419369018 ACCM_SysST: 8 ACCM
+ SG_ ACCM_SysSts : 0|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ ACCM_ErrSts : 4|4@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ ACCM_MotSpd : 8|16@1+ (1,-15000) [-15000|15000] "rpm" Vector__XXX
+ SG_ ACCM_MotTemp : 24|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ ACCM_ECUTemp : 32|8@1+ (1,-40) [-40|210] "°C" Vector__XXX
+ SG_ ACCM_Life : 56|8@1+ (1,0) [0|255] "bit" Vector__XXX
+
+BO_ 419369274 ACCM_PwrST: 8 ACCM
+ SG_ ACCM_InVolt : 0|16@1+ (1,0) [0|1000] "V" Vector__XXX
+ SG_ ACCM_InCur : 16|8@1+ (0.1,0) [0|25] "A" Vector__XXX
+ SG_ ACCM_OutVoltRMS : 24|8@1+ (0.4,0) [0|100] "V" Vector__XXX
+ SG_ ACCM_OutCurRMS : 32|8@1+ (1,0) [0|255] "A" Vector__XXX
+
+BO_ 419358443 EVT_TD: 8 EVT_V1
+ SG_ EVT_Seconds : 0|8@1+ (0.25,0) [0|59.75] "s" Vector__XXX
+ SG_ EVT_Minutes : 8|8@1+ (1,0) [0|59] "min" Vector__XXX
+ SG_ EVT_Hours : 16|8@1+ (1,0) [0|23] "h" Vector__XXX
+ SG_ EVT_Month : 24|8@1+ (1,0) [0|12] "Month" Vector__XXX
+ SG_ EVT_Day : 32|8@1+ (0.25,0) [0|31.25] "Day" Vector__XXX
+ SG_ EVT_Year : 40|8@1+ (1,1985) [1985|2235] "Year" Vector__XXX
+ SG_ EVT_LocalMinuteOffset : 48|8@1+ (1,0) [0|59] "min" Vector__XXX
+ SG_ EVT_LocalHourOffset : 56|8@1+ (1,-125) [-125|125] "h" Vector__XXX
+
+BO_ 419299563 EVT_Lock1: 8 EVT_V1
+ SG_ EVT_FixedKey : 32|32@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 419299819 EVT_Lock2: 8 EVT_V1
+ SG_ EVT_LockReqType : 0|2@1+ (1,0) [0|3] "bit" Vector__XXX
+ SG_ EVT_LockCmd : 8|4@1+ (1,0) [0|15] "bit" Vector__XXX
+
+BO_ 419300075 EVT_Lock3: 8 EVT_V1
+ SG_ EVT_SpdLimit : 0|8@1+ (1,0) [0|255] "km/h" Vector__XXX
+ SG_ EVT_PercentTrqLimit : 8|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+
+BO_ 419351045 SLU_DM1: 8 SLU
+ SG_ SLU_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ SLU_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ SLU_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ SLU_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ SLU_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ SLU_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418184965 SLU_BAM: 8 SLU
+ SG_ SLU_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ SLU_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ SLU_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ SLU_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119429 SLU_TP_DT: 8 SLU
+ SG_ SLU_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ SLU_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351170 MCU_DM1: 8 MCU
+ SG_ MCU_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ MCU_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ MCU_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ MCU_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419351426 MCU_DM2: 8 MCU
+ SG_ MCU_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_SecondByteOfSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_FMI : 32|5@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ MCU_3MostBitOfSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ MCU_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ MCU_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185090 MCU_BAM: 8 MCU
+ SG_ MCU_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ MCU_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ MCU_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ MCU_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119554 MCU_TP_DT: 8 MCU
+ SG_ MCU_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ MCU_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351173 DCDC_DM1: 8 DCDC
+ SG_ DCDC_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCDC_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCDC_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ DCDC_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ DCDC_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ DCDC_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185093 DCDC_BAM: 8 DCDC
+ SG_ DCDC_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCDC_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ DCDC_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ DCDC_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119557 DCDC_TP_DT: 8 DCDC
+ SG_ DCDC_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ DCDC_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351179 DCAC_B_DM1: 8 DCAC_B
+ SG_ DCAC_B_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_B_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_B_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ DCAC_B_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ DCAC_B_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ DCAC_B_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185099 DCAC_B_BAM: 8 DCAC_B
+ SG_ DCAC_B_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_B_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ DCAC_B_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ DCAC_B_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119563 DCAC_B_TP_DT: 8 DCAC_B
+ SG_ DCAC_B_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ DCAC_B_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351178 DCAC_S_DM1: 8 DCAC_S
+ SG_ DCAC_S_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_S_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_S_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ DCAC_S_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ DCAC_S_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ DCAC_S_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185098 DCAC_S_BAM: 8 DCAC_S
+ SG_ DCAC_S_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ DCAC_S_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ DCAC_S_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ DCAC_S_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119562 DCAC_S_TP_DT: 8 DCAC_S
+ SG_ DCAC_S_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ DCAC_S_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351098 ACCM_DM1: 8 ACCM
+ SG_ ACCM_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ ACCM_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ ACCM_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ ACCM_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ ACCM_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ ACCM_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185018 ACCM_BAM: 8 ACCM
+ SG_ ACCM_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ ACCM_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ ACCM_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ ACCM_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119482 ACCM_TP_DT: 8 ACCM
+ SG_ ACCM_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ ACCM_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351184 BTMS_DM1: 8 BTMS
+ SG_ BTMS_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ BTMS_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BTMS_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BTMS_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419351440 BTMS_DM2: 8 BTMS
+ SG_ BTMS_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_SecondByteOfSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_FMI : 32|5@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BTMS_3MostBitOfSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BTMS_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BTMS_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419351952 BTMS_DM4: 8 BTMS
+ SG_ BTMS_FreezeFrameLength : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_LeastByteofSPN : 8|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_SecondByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ FMI : 24|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ BTMS_3MostBitsofSPN : 29|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BTMS_OC : 32|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BTMS_CM : 39|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185104 BTMS_BAM: 8 BTMS
+ SG_ BTMS_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BTMS_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ BTMS_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ BTMS_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+BO_ 418119568 BTMS_TP_DT: 8 BTMS
+ SG_ BTMS_SequenceNumber : 0|8@1+ (1,1) [1|255] "bit" Vector__XXX
+ SG_ BTMS_Data : 8|56@1+ (1,0) [0|70650219154374655] "bit" Vector__XXX
+
+BO_ 419351284 BMS_DM1: 8 BMS
+ SG_ BMS_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_SecondByteofSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_FMI : 32|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ BMS_3MostBitofSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BMS_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BMS_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419351540 BMS_DM2: 8 BMS
+ SG_ BMS_LeastByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_SecondByteOfSPN : 24|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_FMI : 32|5@1+ (1,0) [0|15] "bit" Vector__XXX
+ SG_ BMS_3MostBitOfSPN : 37|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BMS_OC : 40|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BMS_CM : 47|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 419352052 BMS_DM4: 8 BMS
+ SG_ BMS_FreezeFrameLength : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_LeastByteofSPN : 8|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_SecondByteofSPN : 16|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_FMI : 24|5@1+ (1,0) [0|31] "bit" Vector__XXX
+ SG_ BMS_3MostBitsofSPN : 29|3@1+ (1,0) [0|7] "bit" Vector__XXX
+ SG_ BMS_OC : 32|7@1+ (1,0) [0|127] "bit" Vector__XXX
+ SG_ BMS_CM : 39|1@1+ (1,0) [0|1] "bit" Vector__XXX
+
+BO_ 418185204 BMS_BAM: 8 BMS
+ SG_ BMS_CtrlByte : 0|8@1+ (1,0) [0|255] "bit" Vector__XXX
+ SG_ BMS_TotalMesageSize : 8|16@1+ (1,0) [9|1785] "Byte" Vector__XXX
+ SG_ BMS_TotalNumber : 24|8@1+ (1,0) [2|255] "Packet" Vector__XXX
+ SG_ BMS_PGN : 40|24@1+ (1,0) [0|131071] "bit" Vector__XXX
+
+CM_ BO_ 285187623 "VCUBroadcastInformation
+VCU广播信息";
+CM_ SG_ 285187623 VCU_VehSts "VehicleStatus
+整车运行状态";
+CM_ SG_ 285187623 VCU_ErrSts "VehicleErrorStatus
+整车故障状态";
+CM_ SG_ 285187623 VCU_AccPedPos "AccelerationPedalPosition
+加速踏板开度";
+CM_ SG_ 285187623 VCU_BrkPedPos "BrakePedalPosition
+制动踏板开度";
+CM_ SG_ 285187623 VCU_VehSpd "VehicleSpeed
+整车车速";
+CM_ SG_ 285187623 VCU_Life "VCULifeSignal
+生命值信号";
+
+CM_ BO_ 486514471 "VehicleStatus
+车辆状态";
+CM_ SG_ 486514471 VCU_StartSts "VehicleStartStatus
+车辆启动状态";
+CM_ SG_ 486514471 VCU_PwrMode "VehiclePowerMode
+运行模式";
+CM_ SG_ 486514471 VCU_ChrgSts "VehicleChargeStatus
+充电状态";
+CM_ SG_ 486514471 VCU_DCDCSts "VehicleDCDCStatus
+DC-DC状态";
+CM_ SG_ 486514471 VCU_ShiftLevel "VehicleShiftLevel
+整车挡位";
+CM_ SG_ 486514471 VCU_BrkActive "BrakeActiveStatus
+制动力状态";
+CM_ SG_ 486514471 VCU_DrvActive "DriveActiveStatus
+驱动力状态";
+
+CM_ BO_ 419404327 "ShiftLevelStatus
+整车档位状态";
+CM_ SG_ 419404327 VCU_VehShiftLevel "VehicleShiftLevel
+整车挡位";
+CM_ SG_ 419404327 VCU_VehShiftMode "VehicleShiftMode
+档位模式";
+
+CM_ BO_ 285186855 "HVEnableControl
+高压使能控制";
+CM_ SG_ 285186855 VCU_BatPwrEn "BatteryPowerEnable
+动力电池高压使能";
+CM_ SG_ 285186855 VCU_DCDC24PwrEn "24VDCDCPowerEnable
+24VDCDC使能";
+CM_ SG_ 285186855 VCU_DCAC_SPwrEn "DCAC_SPowerEnable
+电动助力转向系统使能";
+CM_ SG_ 285186855 VCU_DCAC_BPwrEn "DCAC_BPowerEnable
+电动助力制动系统使能";
+CM_ SG_ 285186855 VCU_PTCContaEn "PTCContactorEnable
+PTC接触器使能";
+CM_ SG_ 285186855 VCU_BatNoChrgEn "BatteryNoChargingEnable
+动力电池禁止充电使能";
+CM_ SG_ 285186855 VCU_ACCMPwrEn "ACCMPowerEnable
+空调压缩机使能";
+CM_ SG_ 285186855 VCU_MainContaPEn "MainContactor-PositiveEnable
+集成控制器高压接触器使能（MCU）";
+
+CM_ BO_ 218074407 "MotorDriveControl
+电机驱动控制";
+CM_ SG_ 218074407 VCU_MotPwrEn "MotorPowerEnable
+电机使能";
+CM_ SG_ 218074407 VCU_MotDischrgCmd "MotorDischargeCommand
+电机快速放电指令";
+CM_ SG_ 218074407 VCU_MotCtlMode "MotorControlMode
+电机控制模式";
+CM_ SG_ 218074407 VCU_MotAutoHoldEn "MotorAutoHoldCommand
+电机防溜坡指令";
+CM_ SG_ 218074407 VCU_MotSpdReq "MotorSpeedRequest
+电机转速请求";
+CM_ SG_ 218074407 VCU_MotTqReq "MotorTorqueRequest
+电机扭矩请求";
+CM_ SG_ 218074407 VCU_RollingCounter "RollingCounter
+循环计数器";
+CM_ SG_ 218074407 VCU_Checksum "Checksum
+校验值";
+
+CM_ BO_ 419401255 "MotorDriveLimit
+电机驱动限制";
+CM_ SG_ 419401255 VCU_MotSpdLimMax "MotorSpeedLimitMax
+电机转速上限值";
+CM_ SG_ 419401255 VCU_MotSpdLimMin "MotorSpeedLimitMin
+电机转速下限值";
+CM_ SG_ 419401255 VCU_MotTqLimMax "MotorTorqueLimitMax
+电机扭矩上限值";
+CM_ SG_ 419401255 VCU_MotTqLimMin "MotorTorqueLimitMin
+电机扭矩下限值";
+
+CM_ BO_ 419406631 "ExternalRequestControl
+外部请求控制";
+CM_ SG_ 419406631 VCU_ACCMSpdReq "ACCMSpeedRequest
+压缩机转速请求";
+
+CM_ BO_ 419233831 "VehicleLockMessage1
+锁车信息1";
+CM_ SG_ 419233831 VCU_FixedKeySaveSts "FixedKeySaveStatus
+固定密钥保存状态";
+CM_ SG_ 419233831 VCU_LockFuncActiveSts "LockFunctionActiveStatus
+锁车功能激活状态";
+CM_ SG_ 419233831 VCU_SpdLimitSts "SpeedLimitStatus
+车速限制状态";
+
+CM_ BO_ 419234087 "VehicleLockMessage2
+锁车信息2";
+CM_ SG_ 419234087 VCU_LockRespType "LockResponseType
+锁车应答类型";
+CM_ SG_ 419234087 VCU_CheckReq "CheckRequest
+握手校验请求";
+CM_ SG_ 419234087 VCU_CheckResult "CheckResult
+握手校验结果";
+CM_ SG_ 419234087 VCU_LockCmdFbk "LockCommandFeedback
+锁车指令反馈";
+CM_ SG_ 419234087 VCU_LockSeed "LockSeed
+锁车种子";
+
+CM_ BO_ 419407911 "BackLighControl
+背光控制";
+CM_ SG_ 419407911 VCU_BackLightLevelSet "BackLightLevelSet
+背光等级";
+CM_ SG_ 419407911 VCU_PositionLightStatus "PositionLightStatus
+位置灯状态";
+
+CM_ BO_ 486516519 "VehicleAlarmInformation
+整车报警数据";
+CM_ SG_ 486516519 VCU_MaxAlarmLevel "MaxAlarmLevel
+整车最高故障等级";
+CM_ SG_ 486516519 Veh_Err21 "温度差异报警";
+CM_ SG_ 486516519 Veh_Err22 "B电池高温报警";
+CM_ SG_ 486516519 Veh_Err23 "总电压过压报警";
+CM_ SG_ 486516519 Veh_Err24 "总电压欠压报警";
+CM_ SG_ 486516519 Veh_Err25 "SOC低报警";
+CM_ SG_ 486516519 Veh_Err26 "单体电池过压报警";
+CM_ SG_ 486516519 Veh_Err27 "单体电池欠压报警";
+CM_ SG_ 486516519 Veh_Err28 "SOC过高报警";
+CM_ SG_ 486516519 Veh_Err31 "SOC跳变报警";
+CM_ SG_ 486516519 Veh_Err32 "电池系统不匹配报警";
+CM_ SG_ 486516519 Veh_Err33 "电池单体一致性差报警";
+CM_ SG_ 486516519 Veh_Err34 "绝缘报警";
+CM_ SG_ 486516519 Veh_Err35 "DC-DC温度报警";
+CM_ SG_ 486516519 Veh_Err36 "制动系统报警";
+CM_ SG_ 486516519 Veh_Err37 "DC-DC状态报警";
+CM_ SG_ 486516519 Veh_Err38 "驱动电机控制器温度报警";
+CM_ SG_ 486516519 Veh_Err41 "高压互锁状态报警";
+CM_ SG_ 486516519 Veh_Err42 "驱动电机温度报警";
+CM_ SG_ 486516519 Veh_Err43 "电池过充报警";
+CM_ SG_ 486516519 VCU_Odometer "Odometer
+车辆累计运行里程";
+
+CM_ BO_ 418053927 "Request";
+CM_ SG_ 418053927 VCU_PGNReq "PGN of Requested InformationPGN";
+
+CM_ BO_ 201392901 "TransmissionControl1
+变速器控制1";
+CM_ SG_ 201392901 SLU_GearReq "RequestGear
+请求档位";
+CM_ SG_ 201392901 SLU_TransMode1 "TransmissionMode1
+模式切换";
+CM_ SG_ 201392901 SLU_Life "SLULifeSignal
+档位器生命信号";
+
+CM_ BO_ 285180034 "MCUSystemStatus
+MCU状态信息";
+CM_ SG_ 285180034 MCU_SysSts "MCUSystemStatus
+电机控制系统运行状态";
+CM_ SG_ 285180034 MCU_ErrSts "MCUErrorStatus
+电机控制系统故障状态";
+CM_ SG_ 285180034 MCU_MotWorkMode "MotorWorkMode
+电机工作模式";
+CM_ SG_ 285180034 MCU_PTCContaSts "PTCContactStatus
+PTC接触器状态";
+CM_ SG_ 285180034 MCU_ContaPSts "MCUContactStatusofPositive
+主正接触器状态";
+CM_ SG_ 285180034 MCU_MotWorkSts "MotorWorkStatus
+电机运行状态";
+CM_ SG_ 285180034 MCU_AuxHVContaSts "AuxiliaryHVContactStatus
+辅机高压接触器状态";
+CM_ SG_ 285180034 MCU_ACCMContaSts "ACCMContactStatus
+空调压缩机高压接触器状态";
+CM_ SG_ 285180034 MCU_MotTotalNum "MotorTotalNumber
+驱动电机总个数";
+CM_ SG_ 285180034 MCU_MotIndex "MotorIndex
+驱动电机序列号";
+CM_ SG_ 285180034 MCU_Life "MCULifeSignal
+电机控制系统生命信号";
+
+CM_ BO_ 419398018 "MotorStatus1
+MCU反馈电机状态信息1";
+CM_ SG_ 419398018 MCU_DCCurrent "MotorDCCurrent
+电机控制器直流侧电流";
+CM_ SG_ 419398018 MCU_DCVoltage "MotorDCVoltage
+电机控制器直流侧电压";
+CM_ SG_ 419398018 MCU_ACCurrentRMS "MotorACCurrentRMS
+电机控制器交流侧电流有效值";
+CM_ SG_ 419398018 MCU_ACVoltageRMS "MotorACVoltageRMS
+电机控制器交流侧电压有效值";
+
+CM_ BO_ 218071682 "MotorStatus2
+MCU反馈电机状态信息2";
+CM_ SG_ 218071682 MCU_MotSpd "MotorSpeed
+电机转速";
+CM_ SG_ 218071682 MCU_MotTq "MotorTorque
+电机扭矩";
+CM_ SG_ 218071682 MCU_SpdOutputLimit "MotorSpeedOutputLimit
+电机输出转速限制";
+CM_ SG_ 218071682 MCU_TqOutputLimit "MotorTorqueOutputLimit
+电机输出扭矩限制";
+
+CM_ BO_ 486507394 "MotorTemperatureInformation
+电驱温度信息";
+CM_ SG_ 486507394 MCU_MotTemp "MotorTemperature
+电机温度";
+CM_ SG_ 486507394 MCU_ECUTemp "ECUTemperature
+电机控制器温度";
+
+CM_ BO_ 285155316 "BatteryManagementSystemStatus
+BMS系统状态";
+CM_ SG_ 285155316 BMS_SysSts "BMSSystemStatus
+电池管理系统工作状态";
+CM_ SG_ 285155316 BMS_ErrSts "BMSErrorLevel
+电池管理系统故障状态";
+CM_ SG_ 285155316 BMS_ContaNSts "BatteryContactStatusofNegative
+动力电池负极放电接触器状态";
+CM_ SG_ 285155316 BMS_InsErrSts "BatteryInsulationErrorStatus
+动力电池绝缘故障状态";
+CM_ SG_ 285155316 BMS_ChrgSts "BMSChargeStatus
+BMS充电状态";
+CM_ SG_ 285155316 BMS_ChrgMode "BatteryChrageMode
+动力电池充电模式";
+CM_ SG_ 285155316 BMS_ChrgContaP1Sts "BatteryContactStatusofChargePositive1
+动力电池充电正1接触器状态";
+CM_ SG_ 285155316 BMS_ChrgContaN1Sts "BatteryContactStatusofChargeNegative1
+动力电池充电负1接触器状态";
+CM_ SG_ 285155316 BMS_Life "BMSLifeSignal
+BMS生命信号";
+
+CM_ BO_ 285155572 "BatterySOCStatus
+电池SOC状态";
+CM_ SG_ 285155572 BMS_Voltage "BatteryVoltage
+动力电池电压";
+CM_ SG_ 285155572 BMS_Current "BatteryCurrent
+动力电池电流";
+CM_ SG_ 285155572 BMS_SOC "BatterySOC
+动力电池SOC";
+
+CM_ BO_ 419373556 "BatteryVoltageInformation1
+电池单体电压数据1";
+CM_ SG_ 419373556 BatC_VoltMax "BatteryCellVoltageMaximum
+动力电池单体最高电压";
+CM_ SG_ 419373556 BatM_IdxMaxVolt "BatteryModuleIndexMaximumVoltage
+动力电池最高电压单体模块号";
+CM_ SG_ 419373556 BatC_IdxMaxVolt "BatteryCellIndexMaximumVoltage
+动力电池最高电压单体号";
+
+CM_ BO_ 419373812 "BatteryVoltageInformation2
+电池单体电压数据2";
+CM_ SG_ 419373812 BatC_VoltMin "BatteryCellVoltagetMinimum
+动力电池单体最低电压";
+CM_ SG_ 419373812 BatM_IdxMinVolt "BatteryModuleIndexMinimumVoltage
+动力电池最低电压单体模块号";
+CM_ SG_ 419373812 BatC_IdxMinVolt "BatteryCellIndexMinimumVoltage
+动力电池最低电压单体号";
+
+CM_ BO_ 419374068 "BatteryExtremeTemperatureInformation
+电池温度极值数据";
+CM_ SG_ 419374068 BatM_TempMax "BatteryModuleTemperatureMaximum
+动力电池模块最高温度";
+CM_ SG_ 419374068 BatM_IdxMaxTemp "BatteryModuleIndexMaximumTemperature
+动力电池最高温度模块号";
+CM_ SG_ 419374068 BatM_IdxMaxTempSens "BatteryModuleIndexMaximumTemperatureSensor
+动力电池模块最高温度探针序号";
+CM_ SG_ 419374068 BatM_TempMin "BatteryModuleTemperatureMinimum
+动力电池模块最低温度";
+CM_ SG_ 419374068 BatM_IdxMinTemp "BatteryModuleIndexMinimumTemperature
+动力电池最低温度模块号";
+CM_ SG_ 419374068 BatM_IdxMinTempSens "BatteryModuleIndexMinimumTemperatureSensor
+动力电池模块最低温度探针序号";
+CM_ SG_ 419374068 Bat_TempAvrg "BatteryTemperatureAverage
+动力电池平均温度";
+
+CM_ BO_ 419374324 "BatteryPowerLimit
+电池充放电电流限值";
+CM_ SG_ 419374324 Bat_DischrgCurMaxAllow "BatteryDischargeCurrentMaximumAllow
+动力电池允许最大放电电流";
+CM_ SG_ 419374324 Bat_ChrgCurMaxAllow "BatteryChargeCurrentMaximumAllow
+动力电池停车允许最大充电电流";
+CM_ SG_ 419374324 Bat_InstDischrgCurMaxAllow "BatteryInstantDischargeCurrentMaximumAllow
+动力电池允许最大瞬时放电电流";
+CM_ SG_ 419374324 Bat_FbkChrgCurMaxAllow "BatteryFeedbackChargeCurrentMaximumAllow
+动力电池允许最大瞬时充电电流";
+
+CM_ BO_ 419374580 "BatteryConsume&Resistance
+电池能耗及绝缘数据";
+CM_ SG_ 419374580 Bat_InstantConsume "BatteryInstantConsume
+动力电池瞬时能耗";
+CM_ SG_ 419374580 Bat_TotalConsume "BatteryTotalConsume
+动力电池总能量能耗";
+CM_ SG_ 419374580 Bat_ResP2Gnd "BatteryResistancePositivetoGround
+动力电池正端对地电阻";
+CM_ SG_ 419374580 Bat_ResN2Gnd "BatteryResistanceNegativetoGround
+动力电池负端对地电阻";
+
+CM_ BO_ 419374836 "BatteryAlarmInformation
+电池报警信息";
+CM_ SG_ 419374836 BMS_TempDiffAlarm "温度差异报警";
+CM_ SG_ 419374836 BMS_HighTempAlarm "电池高温报警";
+CM_ SG_ 419374836 BMS_OverVoltAlarm "总电压过压报警";
+CM_ SG_ 419374836 BMS_UnderVoltAlarm "总电压欠压报警";
+CM_ SG_ 419374836 BMS_SOCLowAlarm "SOC低报警";
+CM_ SG_ 419374836 BMS_CellOverVoltAlarm "单体电池过压报警";
+CM_ SG_ 419374836 BMS_CellUnderVoltAlarm "单体电池欠压报警";
+CM_ SG_ 419374836 BMS_SOCHighAlarm "SOC过高报警";
+CM_ SG_ 419374836 BMS_SOCJumpAlarm "SOC跳变报警";
+CM_ SG_ 419374836 BMS_REESSMismatchAlarm "可充电储能系统不匹配报警";
+CM_ SG_ 419374836 BMS_CellPoorConsistencyAlarm "电池单体一致性差报警";
+CM_ SG_ 419374836 BMS_InsulationAlarm "绝缘报警";
+CM_ SG_ 419374836 BMS_HVILStsAlarm "高压互锁状态报警";
+CM_ SG_ 419374836 BMS_OverChargeAlarm "电池过充报警";
+CM_ SG_ 419374836 BMS_Err31 "电芯过放故障";
+CM_ SG_ 419374836 BMS_Err32 "电芯低温报警";
+CM_ SG_ 419374836 BMS_Err33 "电池包火灾报警";
+CM_ SG_ 419374836 BMS_Err34 "脉冲放电电流超限报警";
+CM_ SG_ 419374836 BMS_Err35 "脉冲回充电流超限报警";
+CM_ SG_ 419374836 BMS_Err36 "电流传感器故障";
+CM_ SG_ 419374836 BMS_Err37 "BMS低压供电电压异常报警";
+CM_ SG_ 419374836 BMS_Err38 "SOC差异过大报警";
+CM_ SG_ 419374836 BMS_Err41 "加热膜加热回路故障";
+CM_ SG_ 419374836 BMS_Err42 "电池包自保护故障";
+CM_ SG_ 419374836 BMS_Err43 "ACAN通讯故障";
+CM_ SG_ 419374836 BMS_Err44 "BMS内部通信故障";
+CM_ SG_ 419374836 BMS_Err45 "加热膜或TMS接触器故障无法闭合报警";
+CM_ SG_ 419374836 BMS_Err46 "加热膜或TMS接触器故障无法断开报警";
+CM_ SG_ 419374836 BMS_Err47 "主负接触器无法闭合故障报警";
+CM_ SG_ 419374836 BMS_Err48 "主负接触器无法断开故障报警";
+CM_ SG_ 419374836 BMS_Err51 "直流充电A正接触器无法闭合故障报警";
+CM_ SG_ 419374836 BMS_Err52 "直流充电A正接触器无法断开故障报警";
+CM_ SG_ 419374836 BMS_Err53 "直流充电A负接触器无法闭合故障报警";
+CM_ SG_ 419374836 BMS_Err54 "直流充电A负接触器无法断开故障报警";
+CM_ SG_ 419374836 BMS_Err55 "插枪连接信号异常";
+CM_ SG_ 419374836 BMS_Err56 "充电时放电电流过大";
+CM_ SG_ 419374836 BMS_Err57 "充电电流超限报警";
+CM_ SG_ 419374836 BMS_Err58 "充电插座NTC故障";
+CM_ SG_ 419374836 BMS_Err61 "充电插座过温报警";
+
+CM_ BO_ 486483956 "BatterySub-systemInformation
+电池子系统相关数据";
+CM_ SG_ 486483956 BMS_SubSysNum "BatterySub-SystemNumber
+可充电储能子系统个数";
+CM_ SG_ 486483956 BMS_SubSysIdx "BatterySub-SystemIndex
+可充电储能子系统号";
+CM_ SG_ 486483956 BMS_SubSysCellNum "BatterySub-SystemCellNumber
+子系统电池单体总数";
+CM_ SG_ 486483956 BMS_SubSysTempPrbNum "BatterySub-SystemTemperatureProbeNumber
+子系统温度探针总数";
+
+CM_ BO_ 486484212 "BatteryCellVoltageInformation
+电池单体电压数据";
+CM_ SG_ 486484212 BMS_VoltFrameIdx "BatteryFrameIndex
+帧序号";
+CM_ SG_ 486484212 BMS_VoltPackIdx "BatteryPackageIndex
+电池包编号";
+CM_ SG_ 486484212 BMS_CellXVolt "BatteryCellXVolt
+第X个单体的电压";
+CM_ SG_ 486484212 BMS_CellYVolt "BatteryCellYVolt
+第Y个单体的电压";
+CM_ SG_ 486484212 BMS_CellZVolt "BatteryCellZVolt
+第Z个单体的电压";
+
+CM_ BO_ 486484468 "BatteryMeasureTemperatureInformation
+电池温度测量数据";
+CM_ SG_ 486484468 BMS_TempFrameIdx "BatteryFrameIndex
+帧序号";
+CM_ SG_ 486484468 BMS_TempPackIdx "BatteryPackageIndex
+电池包编号";
+CM_ SG_ 486484468 BMS_PrbXTemp "BatteryProbeXTemperature
+第X个探针的温度";
+CM_ SG_ 486484468 BMS_PrbYTemp "BatteryProbeYTemperature
+第Y个探针的温度";
+CM_ SG_ 486484468 BMS_PrbZTemp "BatteryProbeZTemperature
+第Z个探针的温度";
+CM_ SG_ 486484468 BMS_PrbUTemp "BatteryProbeUTemperature
+第U个探针的温度";
+CM_ SG_ 486484468 BMS_PrbVTemp "Battery_ProbeVTemperature
+第V个探针的温度";
+CM_ SG_ 486484468 BMS_PrbWTemp "BatteryProbeWTemperature
+第W个探针的温度";
+
+CM_ BO_ 419375860 "BatteryTemperatureControl
+电池冷却控制";
+CM_ SG_ 419375860 BMS_TMSModeSet "TMSModeSet
+电池冷却系统模式设定";
+CM_ SG_ 419375860 BMS_TMSTempSet "TMSTemperatureSet
+电池需求冷却液温度";
+
+CM_ BO_ 419410064 "BTMSSystemStatus
+电池温度管理系统状态";
+CM_ SG_ 419410064 BTMS_SysSts "BTMSSystemStatus
+BTMS系统工作状态";
+CM_ SG_ 419410064 BTMS_ErrSts "BTMSErrorStatus
+BTMS故障状态";
+CM_ SG_ 419410064 BTMS_WorkMode "BTMSWorkMode
+BTMS工作模式";
+CM_ SG_ 419410064 BTMS_RelaySts "BTMSRelayStatus
+BTMS主继电器状态";
+CM_ SG_ 419410064 BTMS_OutWaterTemp "BTMSOutWaterTemperature
+BTMS出水口温度（机组到电池）";
+CM_ SG_ 419410064 BTMS_InWaterTemp "BTMSInWaterTemperature
+BTMS进水口温度（电池到机组）";
+CM_ SG_ 419410064 BTMS_PwrFbk "BTMSPowerFeedback
+BTMS功率反馈";
+CM_ SG_ 419410064 BTMS_Life "BTMSLifeSignal
+BTMS生命信号";
+
+CM_ BO_ 419367813 "DCDCSystemStatus
+DCDC状态";
+CM_ SG_ 419367813 DCDC_SysSts "DCDCSystemStatus
+DCDC工作状态";
+CM_ SG_ 419367813 DCDC_ErrSts "DCDCErrorStatus
+DCDC故障状态";
+CM_ SG_ 419367813 DCDC_InVolt "DCDCInputVoltage
+DCDC输入电压";
+CM_ SG_ 419367813 DCDC_InCur "DCDCInputCurrent
+DCDC输入电流";
+CM_ SG_ 419367813 DCDC_OutVolt "DCDCOutputVoltage
+DCDC输出电压";
+CM_ SG_ 419367813 DCDC_OutCur "DCDCOutputCurrent
+DCDC输出电流";
+CM_ SG_ 419367813 DCDC_Temp "DCDCTemperature
+DCDC温度";
+CM_ SG_ 419367813 DCDC_Life "DCDCLifeSignal
+DCDC生命信号";
+
+CM_ BO_ 419368074 "DCAC_SSystemStatus
+DCAC_S状态";
+CM_ SG_ 419368074 DCAC_S_SysSts "DCAC_SSystemStatus
+DCAC_S工作状态";
+CM_ SG_ 419368074 DCAC_S_ErrSts "DCAC_SErrorStatus
+DCAC_S故障状态";
+CM_ SG_ 419368074 DCAC_S_MotSpd "SteeringMotorSpeed
+转向电机转速";
+CM_ SG_ 419368074 DCAC_S_MotTemp "SteeringMotorTemperature
+转向电机温度";
+CM_ SG_ 419368074 DCAC_S_ECUTemp "DCAC_SECUTemperature
+转向控制器温度";
+CM_ SG_ 419368074 DCAC_S_Life "DCAC_SLifeSignal
+DCAC_S生命信号";
+
+CM_ BO_ 419368330 "DCAC_SPowerStatus
+DCAC_S电流电压状态";
+CM_ SG_ 419368330 DCAC_S_InVolt "DCAC_SInputVoltage
+DCAC_S输入电压";
+CM_ SG_ 419368330 DCAC_S_InCur "DCAC_SInputCurrent
+DCAC_S输入电流";
+CM_ SG_ 419368330 DCAC_S_OutVoltRMS "DCAC_SOutputVoltageRMS
+DCAC_S输出电压有效值";
+CM_ SG_ 419368330 DCAC_S_OutCurRMS "DCAC_SOutputCurrentRMS
+DCAC_S输出电流有效值";
+
+CM_ BO_ 419368587 "DCAC_BSystemStatus
+DCAC_B状态";
+CM_ SG_ 419368587 DCAC_B_SysSts "DCAC_BSystemStatus
+DCAC_B工作状态";
+CM_ SG_ 419368587 DCAC_B_ErrSts "DCAC_BErrorStatus
+DCAC_B故障状态";
+CM_ SG_ 419368587 DCAC_B_MotSpd "BrakeMotorSpeed
+制动泵电机转速";
+CM_ SG_ 419368587 DCAC_B_MotTemp "BrakeMotorTemperature
+制动泵电机温度";
+CM_ SG_ 419368587 DCAC_B_ECUTemp "DCAC_BECUTemperature
+制动泵电机控制器温度";
+CM_ SG_ 419368587 DCAC_B_Life "DCAC_BLifeSignal
+DCAC_B生命信号";
+
+CM_ BO_ 419368843 "DCAC_BPowerStatus
+DCAC_B电流电压状态";
+CM_ SG_ 419368843 DCAC_B_InVolt "DCAC_BInputVoltage
+DCAC_B输入电压";
+CM_ SG_ 419368843 DCAC_B_InCur "DCAC_BInputCurrent
+DCAC_B输入电流";
+CM_ SG_ 419368843 DCAC_B_OutVoltRMS "DCAC_BOutputVoltageRMS
+DCAC_B输出电压有效值";
+CM_ SG_ 419368843 DCAC_B_OutCurRMS "DCAC_BOutputCurrentRMS
+DCAC_B输出电流有效值";
+
+CM_ BO_ 419369018 "ACCMSystemStatus
+压缩机系统状态";
+CM_ SG_ 419369018 ACCM_SysSts "ACCMSystemStatus
+ACCM工作状态";
+CM_ SG_ 419369018 ACCM_ErrSts "ACCMErrorStatus
+ACCM故障状态";
+CM_ SG_ 419369018 ACCM_MotSpd "ACCMMotSpeed
+压缩机转速";
+CM_ SG_ 419369018 ACCM_MotTemp "ACCMMotorTemperature
+压缩机温度";
+CM_ SG_ 419369018 ACCM_ECUTemp "ACCMECUTemperature
+压缩机控制器温度";
+CM_ SG_ 419369018 ACCM_Life "ACCMLifeSignal
+ACCM生命信号";
+
+CM_ BO_ 419369274 "ACCMPowerStatus
+压缩机电流电压状态";
+CM_ SG_ 419369274 ACCM_InVolt "ACCMInputVoltage
+ACCM输入电压";
+CM_ SG_ 419369274 ACCM_InCur "ACCMInputCurrent
+ACCM输入电流";
+CM_ SG_ 419369274 ACCM_OutVoltRMS "ACCMOutputVoltageRMS
+ACCM输出电压有效值";
+CM_ SG_ 419369274 ACCM_OutCurRMS "ACCMOutputCurrentRMS
+ACCM输出电流有效值";
+
+CM_ BO_ 419358443 "Time & Date
+时间日期";
+CM_ SG_ 419358443 EVT_Seconds "Seconds秒";
+CM_ SG_ 419358443 EVT_Minutes "Minutes分";
+CM_ SG_ 419358443 EVT_Hours "Hours小时";
+CM_ SG_ 419358443 EVT_Month "Month月";
+CM_ SG_ 419358443 EVT_Day "Day天";
+CM_ SG_ 419358443 EVT_Year "Year年";
+CM_ SG_ 419358443 EVT_LocalMinuteOffset "LocalMinuteOffset
+本地分钟偏移";
+CM_ SG_ 419358443 EVT_LocalHourOffset "LocalHourOffset
+本地小时偏移";
+
+CM_ BO_ 419299563 "LockInformation1";
+CM_ SG_ 419299563 EVT_FixedKey "FixedKey
+固定密钥";
+
+CM_ BO_ 419299819 "LockInformation2";
+CM_ SG_ 419299819 EVT_LockReqType "LockRequestType
+锁车请求类型";
+CM_ SG_ 419299819 EVT_LockCmd "LockCommand
+锁车指令";
+
+CM_ BO_ 419300075 "LockInformation3";
+CM_ SG_ 419300075 EVT_SpdLimit "SpeedLimit
+车速限制值";
+CM_ SG_ 419300075 EVT_PercentTrqLimit "PercentTorqueLimit
+扭矩百分比限制值";
+
+CM_ BO_ 419351045 "Diagnostic Message 1";
+CM_ SG_ 419351045 SLU_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351045 SLU_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351045 SLU_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351045 SLU_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351045 SLU_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351045 SLU_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418184965 "Broadcast Message";
+CM_ SG_ 418184965 SLU_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418184965 SLU_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418184965 SLU_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418184965 SLU_PGN "PGN";
+
+CM_ BO_ 418119429 "Data Transfer";
+CM_ SG_ 418119429 SLU_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119429 SLU_Data "Message Data
+数据";
+
+CM_ BO_ 419351170 "Diagnostic Message 1";
+CM_ SG_ 419351170 MCU_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351170 MCU_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351170 MCU_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351170 MCU_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351170 MCU_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351170 MCU_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 419351426 "Diagnostic Message 2";
+CM_ SG_ 419351426 MCU_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351426 MCU_SecondByteOfSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351426 MCU_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351426 MCU_3MostBitOfSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351426 MCU_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351426 MCU_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185090 "Broadcast Message";
+CM_ SG_ 418185090 MCU_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185090 MCU_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185090 MCU_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185090 MCU_PGN "PGN";
+
+CM_ BO_ 418119554 "Data Transfer";
+CM_ SG_ 418119554 MCU_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119554 MCU_Data "Message Data
+数据";
+
+CM_ BO_ 419351173 "Diagnostic Message 1";
+CM_ SG_ 419351173 DCDC_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351173 DCDC_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351173 DCDC_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351173 DCDC_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351173 DCDC_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351173 DCDC_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185093 "Broadcast Message";
+CM_ SG_ 418185093 DCDC_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185093 DCDC_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185093 DCDC_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185093 DCDC_PGN "PGN";
+
+CM_ BO_ 418119557 "Data Transfer";
+CM_ SG_ 418119557 DCDC_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119557 DCDC_Data "Message Data
+数据";
+
+CM_ BO_ 419351179 "Diagnostic Message 1";
+CM_ SG_ 419351179 DCAC_B_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351179 DCAC_B_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351179 DCAC_B_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351179 DCAC_B_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351179 DCAC_B_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351179 DCAC_B_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185099 "Broadcast Message";
+CM_ SG_ 418185099 DCAC_B_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185099 DCAC_B_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185099 DCAC_B_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185099 DCAC_B_PGN "PGN";
+
+CM_ BO_ 418119563 "Data Transfer";
+CM_ SG_ 418119563 DCAC_B_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119563 DCAC_B_Data "Message Data
+数据";
+
+CM_ BO_ 419351178 "Diagnostic Message 1";
+CM_ SG_ 419351178 DCAC_S_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351178 DCAC_S_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351178 DCAC_S_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351178 DCAC_S_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351178 DCAC_S_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351178 DCAC_S_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185098 "Broadcast Message";
+CM_ SG_ 418185098 DCAC_S_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185098 DCAC_S_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185098 DCAC_S_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185098 DCAC_S_PGN "PGN";
+
+CM_ BO_ 418119562 "Data Transfer";
+CM_ SG_ 418119562 DCAC_S_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119562 DCAC_S_Data "Message Data
+数据";
+
+CM_ BO_ 419351098 "Diagnostic Message 1";
+CM_ SG_ 419351098 ACCM_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351098 ACCM_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351098 ACCM_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351098 ACCM_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351098 ACCM_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351098 ACCM_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185018 "Broadcast Message";
+CM_ SG_ 418185018 ACCM_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185018 ACCM_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185018 ACCM_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185018 ACCM_PGN "PGN";
+
+CM_ BO_ 418119482 "Data Transfer";
+CM_ SG_ 418119482 ACCM_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119482 ACCM_Data "Message Data
+数据";
+
+CM_ BO_ 419351184 "Diagnostic Message 1";
+CM_ SG_ 419351184 BTMS_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351184 BTMS_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351184 BTMS_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351184 BTMS_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351184 BTMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351184 BTMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 419351440 "Diagnostic Message 2";
+CM_ SG_ 419351440 BTMS_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351440 BTMS_SecondByteOfSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351440 BTMS_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351440 BTMS_3MostBitOfSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351440 BTMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351440 BTMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 419351952 "Diagnostic Message 4";
+CM_ SG_ 419351952 BTMS_FreezeFrameLength "Freeze Frame Length
+冻结帧长度";
+CM_ SG_ 419351952 BTMS_LeastByteofSPN "Least Significant Byte of SPN
+SPN低字节";
+CM_ SG_ 419351952 BTMS_SecondByteofSPN "Second Byte of SPN
+SPN中间字节";
+CM_ SG_ 419351952 FMI "FMI故障模式标识";
+CM_ SG_ 419351952 BTMS_3MostBitsofSPN "3 Most Significant Bit of SPN
+SPN高三位";
+CM_ SG_ 419351952 BTMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351952 BTMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185104 "Broadcast Message";
+CM_ SG_ 418185104 BTMS_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185104 BTMS_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185104 BTMS_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185104 BTMS_PGN "PGN";
+
+CM_ BO_ 418119568 "Data Transfer";
+CM_ SG_ 418119568 BTMS_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119568 BTMS_Data "Message Data
+数据";
+
+CM_ BO_ 419351284 "Diagnostic Message 1";
+CM_ SG_ 419351284 BMS_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351284 BMS_SecondByteofSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351284 BMS_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351284 BMS_3MostBitofSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351284 BMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351284 BMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 419351540 "Diagnostic Message 2";
+CM_ SG_ 419351540 BMS_LeastByteofSPN "Least Byte of SPN
+SPN低8位";
+CM_ SG_ 419351540 BMS_SecondByteOfSPN "Second Byte Of SPN
+SPN中间8位";
+CM_ SG_ 419351540 BMS_FMI "Failure Mode Identifier
+故障模式标识";
+CM_ SG_ 419351540 BMS_3MostBitOfSPN "3 Most Significant Bit Of SPN
+SPN高三位";
+CM_ SG_ 419351540 BMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419351540 BMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 419352052 "Diagnostic Message 4";
+CM_ SG_ 419352052 BMS_FreezeFrameLength "Freeze Frame Length
+冻结帧长度";
+CM_ SG_ 419352052 BMS_LeastByteofSPN "Least Significant Byte of SPN
+SPN低字节";
+CM_ SG_ 419352052 BMS_SecondByteofSPN "Second Byte of SPN
+SPN中间字节";
+CM_ SG_ 419352052 BMS_FMI "FMI故障模式标识";
+CM_ SG_ 419352052 BMS_3MostBitsofSPN "3 Most Significant Bit of SPN
+SPN高三位";
+CM_ SG_ 419352052 BMS_OC "Occurence Count
+发生次数";
+CM_ SG_ 419352052 BMS_CM "SPN Conversion Method
+SPN转化方式";
+
+CM_ BO_ 418185204 "Broadcast Message";
+CM_ SG_ 418185204 BMS_CtrlByte "Control Byte
+控制字节";
+CM_ SG_ 418185204 BMS_TotalMesageSize "Total Message Size
+总数据字节";
+CM_ SG_ 418185204 BMS_TotalNumber "Total Number
+总数据报数量";
+CM_ SG_ 418185204 BMS_PGN "PGN";
+
+CM_ BO_ 418119668 "Data Transfer";
+CM_ SG_ 418119668 BMS_SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119668 BMS_Data "Message Data
+数据";
+CM_ SG_ 418119668 SequenceNumber "Sequence Number
+数据报序号";
+CM_ SG_ 418119668 Data "Message Data
+数据";
+BA_DEF_ BU_  "ILUsed" ENUM  "Yes";
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Periodic","OnChange","OnWrite","IfActive","OnChangeWithRepetition","OnWriteWithRepetition","IfActiveWithRepetition","NoSigSendType","Event","Cycle";
+BA_DEF_ SG_  "DateType" ENUM "Signed","Unsigned","IEEE Float","IEEE Double";
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 1000;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ SG_  "GenSigInitialValue" HEX 0 100000;
+BA_DEF_ BU_  "NmStationAddress" INT 0 255;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Periodic","Event","IfActive","CE","CA","On request","Cycle","On Change","OnChangeWithRepetition";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 3600000;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_ SG_  "SystemSignalLongSymbol" STRING ;
+BA_DEF_ BU_  "NmJ1939SystemInstance" INT 0 15;
+BA_DEF_ BU_  "NmJ1939System" INT 0 127;
+BA_DEF_ BU_  "NmJ1939ManufacturerCode" INT 0 2047;
+BA_DEF_ BU_  "NmJ1939IndustryGroup" INT 0 7;
+BA_DEF_ BU_  "NmJ1939IdentityNumber" INT 0 2097151;
+BA_DEF_ BU_  "NmJ1939FunctionInstance" INT 0 7;
+BA_DEF_ BU_  "NmJ1939Function" INT 0 255;
+BA_DEF_ BU_  "NmJ1939ECUInstance" INT 0 3;
+BA_DEF_ BU_  "NmJ1939AAC" INT 0 1;
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_DEF_  "ILUsed" "Yes";
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "DateType" "Signed";
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "NodeLayerModules" "CANoeILNLVector";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "GenSigInitialValue" 0;
+BA_DEF_DEF_  "NmStationAddress" 254;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "DBName" "CANNet";
+BA_DEF_DEF_  "NmJ1939SystemInstance" 0;
+BA_DEF_DEF_  "NmJ1939System" 0;
+BA_DEF_DEF_  "NmJ1939ManufacturerCode" 0;
+BA_DEF_DEF_  "NmJ1939IndustryGroup" 0;
+BA_DEF_DEF_  "NmJ1939IdentityNumber" 0;
+BA_DEF_DEF_  "NmJ1939FunctionInstance" 0;
+BA_DEF_DEF_  "NmJ1939Function" 0;
+BA_DEF_DEF_  "NmJ1939ECUInstance" 0;
+BA_DEF_DEF_  "NmJ1939AAC" 0;
+BA_DEF_DEF_  "ProtocolType" "J1939";
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+
+BA_ "GenMsgSendType" BO_ 285187623 0;
+BA_ "GenMsgCycleTime" BO_ 285187623 200;
+BA_ "VFrameFormat" BO_ 285187623 3;
+BA_ "GenMsgSendType" BO_ 486514471 0;
+BA_ "GenMsgCycleTime" BO_ 486514471 1000;
+BA_ "VFrameFormat" BO_ 486514471 3;
+BA_ "GenMsgSendType" BO_ 419404327 0;
+BA_ "GenMsgCycleTime" BO_ 419404327 100;
+BA_ "VFrameFormat" BO_ 419404327 3;
+BA_ "GenMsgSendType" BO_ 285186855 0;
+BA_ "GenMsgCycleTime" BO_ 285186855 50;
+BA_ "VFrameFormat" BO_ 285186855 3;
+BA_ "GenMsgSendType" BO_ 218074407 0;
+BA_ "GenMsgCycleTime" BO_ 218074407 10;
+BA_ "VFrameFormat" BO_ 218074407 3;
+BA_ "GenMsgSendType" BO_ 419401255 0;
+BA_ "GenMsgCycleTime" BO_ 419401255 100;
+BA_ "VFrameFormat" BO_ 419401255 3;
+BA_ "GenMsgSendType" BO_ 419406631 0;
+BA_ "GenMsgCycleTime" BO_ 419406631 100;
+BA_ "VFrameFormat" BO_ 419406631 3;
+BA_ "GenMsgSendType" BO_ 419233831 0;
+BA_ "GenMsgCycleTime" BO_ 419233831 500;
+BA_ "VFrameFormat" BO_ 419233831 3;
+BA_ "GenMsgSendType" BO_ 419234087 2;
+BA_ "VFrameFormat" BO_ 419234087 3;
+BA_ "GenMsgSendType" BO_ 419407911 3;
+BA_ "VFrameFormat" BO_ 419407911 3;
+BA_ "GenMsgSendType" BO_ 486516519 0;
+BA_ "GenMsgCycleTime" BO_ 486516519 1000;
+BA_ "VFrameFormat" BO_ 486516519 3;
+BA_ "GenMsgSendType" BO_ 418053927 5;
+BA_ "VFrameFormat" BO_ 418053927 3;
+BA_ "GenMsgSendType" BO_ 201392901 0;
+BA_ "GenMsgCycleTime" BO_ 201392901 50;
+BA_ "VFrameFormat" BO_ 201392901 3;
+BA_ "GenMsgSendType" BO_ 285180034 0;
+BA_ "GenMsgCycleTime" BO_ 285180034 50;
+BA_ "VFrameFormat" BO_ 285180034 3;
+BA_ "GenMsgSendType" BO_ 419398018 0;
+BA_ "GenMsgCycleTime" BO_ 419398018 50;
+BA_ "VFrameFormat" BO_ 419398018 3;
+BA_ "GenMsgSendType" BO_ 218071682 0;
+BA_ "GenMsgCycleTime" BO_ 218071682 10;
+BA_ "VFrameFormat" BO_ 218071682 3;
+BA_ "GenMsgSendType" BO_ 486507394 0;
+BA_ "GenMsgCycleTime" BO_ 486507394 1000;
+BA_ "VFrameFormat" BO_ 486507394 3;
+BA_ "GenMsgSendType" BO_ 285155316 0;
+BA_ "GenMsgCycleTime" BO_ 285155316 50;
+BA_ "VFrameFormat" BO_ 285155316 3;
+BA_ "GenMsgSendType" BO_ 285155572 0;
+BA_ "GenMsgCycleTime" BO_ 285155572 100;
+BA_ "VFrameFormat" BO_ 285155572 3;
+BA_ "GenMsgSendType" BO_ 419373556 0;
+BA_ "GenMsgCycleTime" BO_ 419373556 200;
+BA_ "VFrameFormat" BO_ 419373556 3;
+BA_ "GenMsgSendType" BO_ 419373812 0;
+BA_ "GenMsgCycleTime" BO_ 419373812 200;
+BA_ "VFrameFormat" BO_ 419373812 3;
+BA_ "GenMsgSendType" BO_ 419374068 0;
+BA_ "GenMsgCycleTime" BO_ 419374068 500;
+BA_ "VFrameFormat" BO_ 419374068 3;
+BA_ "GenMsgSendType" BO_ 419374324 0;
+BA_ "GenMsgCycleTime" BO_ 419374324 100;
+BA_ "VFrameFormat" BO_ 419374324 3;
+BA_ "GenMsgSendType" BO_ 419374580 0;
+BA_ "GenMsgCycleTime" BO_ 419374580 200;
+BA_ "VFrameFormat" BO_ 419374580 3;
+BA_ "GenMsgSendType" BO_ 419374836 0;
+BA_ "GenMsgCycleTime" BO_ 419374836 1000;
+BA_ "VFrameFormat" BO_ 419374836 3;
+BA_ "GenMsgSendType" BO_ 486483956 0;
+BA_ "GenMsgCycleTime" BO_ 486483956 1000;
+BA_ "VFrameFormat" BO_ 486483956 3;
+BA_ "GenMsgSendType" BO_ 486484212 0;
+BA_ "GenMsgCycleTime" BO_ 486484212 100;
+BA_ "VFrameFormat" BO_ 486484212 3;
+BA_ "GenMsgSendType" BO_ 486484468 0;
+BA_ "GenMsgCycleTime" BO_ 486484468 100;
+BA_ "VFrameFormat" BO_ 486484468 3;
+BA_ "GenMsgSendType" BO_ 419375860 0;
+BA_ "GenMsgCycleTime" BO_ 419375860 200;
+BA_ "VFrameFormat" BO_ 419375860 3;
+BA_ "GenMsgSendType" BO_ 419410064 0;
+BA_ "GenMsgCycleTime" BO_ 419410064 200;
+BA_ "VFrameFormat" BO_ 419410064 3;
+BA_ "GenMsgSendType" BO_ 419367813 0;
+BA_ "GenMsgCycleTime" BO_ 419367813 200;
+BA_ "VFrameFormat" BO_ 419367813 3;
+BA_ "GenMsgSendType" BO_ 419368074 0;
+BA_ "GenMsgCycleTime" BO_ 419368074 100;
+BA_ "VFrameFormat" BO_ 419368074 3;
+BA_ "GenMsgSendType" BO_ 419368330 0;
+BA_ "GenMsgCycleTime" BO_ 419368330 200;
+BA_ "VFrameFormat" BO_ 419368330 3;
+BA_ "GenMsgSendType" BO_ 419368587 0;
+BA_ "GenMsgCycleTime" BO_ 419368587 100;
+BA_ "VFrameFormat" BO_ 419368587 3;
+BA_ "GenMsgSendType" BO_ 419368843 0;
+BA_ "GenMsgCycleTime" BO_ 419368843 200;
+BA_ "VFrameFormat" BO_ 419368843 3;
+BA_ "GenMsgSendType" BO_ 419369018 0;
+BA_ "GenMsgCycleTime" BO_ 419369018 100;
+BA_ "VFrameFormat" BO_ 419369018 3;
+BA_ "GenMsgSendType" BO_ 419369274 0;
+BA_ "GenMsgCycleTime" BO_ 419369274 200;
+BA_ "VFrameFormat" BO_ 419369274 3;
+BA_ "GenMsgSendType" BO_ 419358443 0;
+BA_ "GenMsgCycleTime" BO_ 419358443 1000;
+BA_ "VFrameFormat" BO_ 419358443 3;
+BA_ "GenMsgSendType" BO_ 419299563 2;
+BA_ "VFrameFormat" BO_ 419299563 3;
+BA_ "GenMsgSendType" BO_ 419299819 2;
+BA_ "VFrameFormat" BO_ 419299819 3;
+BA_ "GenMsgSendType" BO_ 419300075 2;
+BA_ "VFrameFormat" BO_ 419300075 3;
+BA_ "GenMsgSendType" BO_ 419351045 2;
+BA_ "VFrameFormat" BO_ 419351045 3;
+BA_ "GenMsgSendType" BO_ 418184965 5;
+BA_ "VFrameFormat" BO_ 418184965 3;
+BA_ "GenMsgSendType" BO_ 418119429 5;
+BA_ "VFrameFormat" BO_ 418119429 3;
+BA_ "GenMsgSendType" BO_ 419351170 2;
+BA_ "VFrameFormat" BO_ 419351170 3;
+BA_ "GenMsgSendType" BO_ 419351426 5;
+BA_ "VFrameFormat" BO_ 419351426 3;
+BA_ "GenMsgSendType" BO_ 418185090 5;
+BA_ "VFrameFormat" BO_ 418185090 3;
+BA_ "GenMsgSendType" BO_ 418119554 5;
+BA_ "VFrameFormat" BO_ 418119554 3;
+BA_ "GenMsgSendType" BO_ 419351173 2;
+BA_ "VFrameFormat" BO_ 419351173 3;
+BA_ "GenMsgSendType" BO_ 418185093 5;
+BA_ "VFrameFormat" BO_ 418185093 3;
+BA_ "GenMsgSendType" BO_ 418119557 5;
+BA_ "VFrameFormat" BO_ 418119557 3;
+BA_ "GenMsgSendType" BO_ 419351179 2;
+BA_ "VFrameFormat" BO_ 419351179 3;
+BA_ "GenMsgSendType" BO_ 418185099 5;
+BA_ "VFrameFormat" BO_ 418185099 3;
+BA_ "GenMsgSendType" BO_ 418119563 5;
+BA_ "VFrameFormat" BO_ 418119563 3;
+BA_ "GenMsgSendType" BO_ 419351178 2;
+BA_ "VFrameFormat" BO_ 419351178 3;
+BA_ "GenMsgSendType" BO_ 418185098 5;
+BA_ "VFrameFormat" BO_ 418185098 3;
+BA_ "GenMsgSendType" BO_ 418119562 5;
+BA_ "VFrameFormat" BO_ 418119562 3;
+BA_ "GenMsgSendType" BO_ 419351098 2;
+BA_ "VFrameFormat" BO_ 419351098 3;
+BA_ "GenMsgSendType" BO_ 418185018 5;
+BA_ "VFrameFormat" BO_ 418185018 3;
+BA_ "GenMsgSendType" BO_ 418119482 5;
+BA_ "VFrameFormat" BO_ 418119482 3;
+BA_ "GenMsgSendType" BO_ 419351184 2;
+BA_ "VFrameFormat" BO_ 419351184 3;
+BA_ "GenMsgSendType" BO_ 419351440 5;
+BA_ "VFrameFormat" BO_ 419351440 3;
+BA_ "GenMsgSendType" BO_ 419351952 5;
+BA_ "VFrameFormat" BO_ 419351952 3;
+BA_ "GenMsgSendType" BO_ 418185104 5;
+BA_ "VFrameFormat" BO_ 418185104 3;
+BA_ "GenMsgSendType" BO_ 418119568 5;
+BA_ "VFrameFormat" BO_ 418119568 3;
+BA_ "GenMsgSendType" BO_ 419351284 2;
+BA_ "VFrameFormat" BO_ 419351284 3;
+BA_ "GenMsgSendType" BO_ 419351540 5;
+BA_ "VFrameFormat" BO_ 419351540 3;
+BA_ "GenMsgSendType" BO_ 419352052 5;
+BA_ "VFrameFormat" BO_ 419352052 3;
+BA_ "GenMsgSendType" BO_ 418185204 5;
+BA_ "VFrameFormat" BO_ 418185204 3;
+BA_ "GenMsgSendType" BO_ 418119668 5;
+BA_ "VFrameFormat" BO_ 418119668 3;
+BA_ "GenSigSendType" SG_ 285187623 VCU_VehSts 0;
+BA_ "GenSigSendType" SG_ 285187623 VCU_ErrSts 0;
+BA_ "GenSigSendType" SG_ 285187623 VCU_AccPedPos 0;
+BA_ "GenSigSendType" SG_ 285187623 VCU_BrkPedPos 0;
+BA_ "GenSigSendType" SG_ 285187623 VCU_VehSpd 0;
+BA_ "GenSigSendType" SG_ 285187623 VCU_Life 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_StartSts 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_PwrMode 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_ChrgSts 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_DCDCSts 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_ShiftLevel 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_BrkActive 0;
+BA_ "GenSigSendType" SG_ 486514471 VCU_DrvActive 0;
+BA_ "GenSigSendType" SG_ 419404327 VCU_VehShiftLevel 0;
+BA_ "GenSigSendType" SG_ 419404327 VCU_VehShiftMode 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_BatPwrEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_DCDC24PwrEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_DCAC_SPwrEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_DCAC_BPwrEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_PTCContaEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_BatNoChrgEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_ACCMPwrEn 0;
+BA_ "GenSigSendType" SG_ 285186855 VCU_MainContaPEn 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotPwrEn 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotDischrgCmd 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotCtlMode 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotAutoHoldEn 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotSpdReq 0;
+BA_ "GenSigSendType" SG_ 218074407 VCU_MotTqReq 0;
+BA_ "SPN" SG_ 218074407 VCU_RollingCounter 3189;
+BA_ "GenSigSendType" SG_ 218074407 VCU_RollingCounter 0;
+BA_ "SPN" SG_ 218074407 VCU_Checksum 3188;
+BA_ "GenSigSendType" SG_ 218074407 VCU_Checksum 0;
+BA_ "GenSigSendType" SG_ 419401255 VCU_MotSpdLimMax 0;
+BA_ "GenSigSendType" SG_ 419401255 VCU_MotSpdLimMin 0;
+BA_ "GenSigSendType" SG_ 419401255 VCU_MotTqLimMax 0;
+BA_ "GenSigSendType" SG_ 419401255 VCU_MotTqLimMin 0;
+BA_ "GenSigSendType" SG_ 419406631 VCU_ACCMSpdReq 0;
+BA_ "GenSigSendType" SG_ 419233831 VCU_FixedKeySaveSts 0;
+BA_ "GenSigSendType" SG_ 419233831 VCU_LockFuncActiveSts 0;
+BA_ "GenSigSendType" SG_ 419233831 VCU_SpdLimitSts 0;
+BA_ "GenSigSendType" SG_ 419234087 VCU_LockRespType 3;
+BA_ "GenSigSendType" SG_ 419234087 VCU_CheckReq 3;
+BA_ "GenSigSendType" SG_ 419234087 VCU_CheckResult 3;
+BA_ "GenSigSendType" SG_ 419234087 VCU_LockCmdFbk 3;
+BA_ "GenSigSendType" SG_ 419234087 VCU_LockSeed 3;
+BA_ "GenSigSendType" SG_ 419407911 VCU_BackLightLevelSet 4;
+BA_ "GenSigSendType" SG_ 419407911 VCU_PositionLightStatus 0;
+BA_ "GenSigSendType" SG_ 486516519 VCU_MaxAlarmLevel 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err21 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err22 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err23 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err24 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err25 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err26 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err27 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err28 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err31 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err32 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err33 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err34 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err35 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err36 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err37 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err38 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err41 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err42 0;
+BA_ "GenSigSendType" SG_ 486516519 Veh_Err43 0;
+BA_ "GenSigSendType" SG_ 486516519 VCU_Odometer 0;
+BA_ "SPN" SG_ 418053927 VCU_PGNReq 2540;
+BA_ "GenSigSendType" SG_ 418053927 VCU_PGNReq 1;
+BA_ "GenSigSendType" SG_ 201392901 SLU_GearReq 0;
+BA_ "GenSigSendType" SG_ 201392901 SLU_TransMode1 0;
+BA_ "GenSigSendType" SG_ 201392901 SLU_Life 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_SysSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_ErrSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_MotWorkMode 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_PTCContaSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_ContaPSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_MotWorkSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_AuxHVContaSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_ACCMContaSts 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_MotTotalNum 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_MotIndex 0;
+BA_ "GenSigSendType" SG_ 285180034 MCU_Life 0;
+BA_ "GenSigSendType" SG_ 419398018 MCU_DCCurrent 0;
+BA_ "GenSigSendType" SG_ 419398018 MCU_DCVoltage 0;
+BA_ "GenSigSendType" SG_ 419398018 MCU_ACCurrentRMS 0;
+BA_ "GenSigSendType" SG_ 419398018 MCU_ACVoltageRMS 0;
+BA_ "GenSigSendType" SG_ 218071682 MCU_MotSpd 0;
+BA_ "GenSigSendType" SG_ 218071682 MCU_MotTq 0;
+BA_ "GenSigSendType" SG_ 218071682 MCU_SpdOutputLimit 0;
+BA_ "GenSigSendType" SG_ 218071682 MCU_TqOutputLimit 0;
+BA_ "GenSigSendType" SG_ 486507394 MCU_MotTemp 0;
+BA_ "GenSigSendType" SG_ 486507394 MCU_ECUTemp 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_SysSts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ErrSts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ContaNSts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_InsErrSts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ChrgSts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ChrgMode 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ChrgContaP1Sts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_ChrgContaN1Sts 0;
+BA_ "GenSigSendType" SG_ 285155316 BMS_Life 0;
+BA_ "GenSigSendType" SG_ 285155572 BMS_Voltage 0;
+BA_ "GenSigSendType" SG_ 285155572 BMS_Current 0;
+BA_ "GenSigSendType" SG_ 285155572 BMS_SOC 0;
+BA_ "GenSigSendType" SG_ 419373556 BatC_VoltMax 0;
+BA_ "GenSigSendType" SG_ 419373556 BatM_IdxMaxVolt 0;
+BA_ "GenSigSendType" SG_ 419373556 BatC_IdxMaxVolt 0;
+BA_ "GenSigSendType" SG_ 419373812 BatC_VoltMin 0;
+BA_ "GenSigSendType" SG_ 419373812 BatM_IdxMinVolt 0;
+BA_ "GenSigSendType" SG_ 419373812 BatC_IdxMinVolt 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_TempMax 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_IdxMaxTemp 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_IdxMaxTempSens 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_TempMin 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_IdxMinTemp 0;
+BA_ "GenSigSendType" SG_ 419374068 BatM_IdxMinTempSens 0;
+BA_ "GenSigSendType" SG_ 419374068 Bat_TempAvrg 0;
+BA_ "GenSigSendType" SG_ 419374324 Bat_DischrgCurMaxAllow 0;
+BA_ "GenSigSendType" SG_ 419374324 Bat_ChrgCurMaxAllow 0;
+BA_ "GenSigSendType" SG_ 419374324 Bat_InstDischrgCurMaxAllow 0;
+BA_ "GenSigSendType" SG_ 419374324 Bat_FbkChrgCurMaxAllow 0;
+BA_ "GenSigSendType" SG_ 419374580 Bat_InstantConsume 0;
+BA_ "GenSigSendType" SG_ 419374580 Bat_TotalConsume 0;
+BA_ "GenSigSendType" SG_ 419374580 Bat_ResP2Gnd 0;
+BA_ "GenSigSendType" SG_ 419374580 Bat_ResN2Gnd 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_TempDiffAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_HighTempAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_OverVoltAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_UnderVoltAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_SOCLowAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_CellOverVoltAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_CellUnderVoltAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_SOCHighAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_SOCJumpAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_REESSMismatchAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_CellPoorConsistencyAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_InsulationAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_HVILStsAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_OverChargeAlarm 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err31 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err32 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err33 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err34 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err35 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err36 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err37 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err38 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err41 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err42 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err43 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err44 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err45 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err46 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err47 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err48 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err51 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err52 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err53 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err54 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err55 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err56 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err57 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err58 0;
+BA_ "GenSigSendType" SG_ 419374836 BMS_Err61 0;
+BA_ "GenSigSendType" SG_ 486483956 BMS_SubSysNum 0;
+BA_ "GenSigSendType" SG_ 486483956 BMS_SubSysIdx 0;
+BA_ "GenSigSendType" SG_ 486483956 BMS_SubSysCellNum 0;
+BA_ "GenSigSendType" SG_ 486483956 BMS_SubSysTempPrbNum 0;
+BA_ "GenSigSendType" SG_ 486484212 BMS_VoltFrameIdx 0;
+BA_ "GenSigSendType" SG_ 486484212 BMS_VoltPackIdx 0;
+BA_ "GenSigSendType" SG_ 486484212 BMS_CellXVolt 0;
+BA_ "GenSigSendType" SG_ 486484212 BMS_CellYVolt 0;
+BA_ "GenSigSendType" SG_ 486484212 BMS_CellZVolt 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_TempFrameIdx 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_TempPackIdx 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbXTemp 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbYTemp 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbZTemp 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbUTemp 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbVTemp 0;
+BA_ "GenSigSendType" SG_ 486484468 BMS_PrbWTemp 0;
+BA_ "GenSigSendType" SG_ 419375860 BMS_TMSModeSet 0;
+BA_ "GenSigSendType" SG_ 419375860 BMS_TMSTempSet 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_SysSts 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_ErrSts 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_WorkMode 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_RelaySts 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_OutWaterTemp 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_InWaterTemp 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_PwrFbk 0;
+BA_ "GenSigSendType" SG_ 419410064 BTMS_Life 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_SysSts 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_ErrSts 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_InVolt 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_InCur 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_OutVolt 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_OutCur 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_Temp 0;
+BA_ "GenSigSendType" SG_ 419367813 DCDC_Life 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_SysSts 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_ErrSts 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_MotSpd 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_MotTemp 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_ECUTemp 0;
+BA_ "GenSigSendType" SG_ 419368074 DCAC_S_Life 0;
+BA_ "GenSigSendType" SG_ 419368330 DCAC_S_InVolt 0;
+BA_ "GenSigSendType" SG_ 419368330 DCAC_S_InCur 0;
+BA_ "GenSigSendType" SG_ 419368330 DCAC_S_OutVoltRMS 0;
+BA_ "GenSigSendType" SG_ 419368330 DCAC_S_OutCurRMS 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_SysSts 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_ErrSts 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_MotSpd 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_MotTemp 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_ECUTemp 0;
+BA_ "GenSigSendType" SG_ 419368587 DCAC_B_Life 0;
+BA_ "GenSigSendType" SG_ 419368843 DCAC_B_InVolt 0;
+BA_ "GenSigSendType" SG_ 419368843 DCAC_B_InCur 0;
+BA_ "GenSigSendType" SG_ 419368843 DCAC_B_OutVoltRMS 0;
+BA_ "GenSigSendType" SG_ 419368843 DCAC_B_OutCurRMS 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_SysSts 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_ErrSts 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_MotSpd 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_MotTemp 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_ECUTemp 0;
+BA_ "GenSigSendType" SG_ 419369018 ACCM_Life 0;
+BA_ "GenSigSendType" SG_ 419369274 ACCM_InVolt 0;
+BA_ "GenSigSendType" SG_ 419369274 ACCM_InCur 0;
+BA_ "GenSigSendType" SG_ 419369274 ACCM_OutVoltRMS 0;
+BA_ "GenSigSendType" SG_ 419369274 ACCM_OutCurRMS 0;
+BA_ "SPN" SG_ 419358443 EVT_Seconds 959;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Seconds 0;
+BA_ "SPN" SG_ 419358443 EVT_Minutes 960;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Minutes 0;
+BA_ "SPN" SG_ 419358443 EVT_Hours 961;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Hours 0;
+BA_ "SPN" SG_ 419358443 EVT_Month 963;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Month 0;
+BA_ "SPN" SG_ 419358443 EVT_Day 962;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Day 0;
+BA_ "SPN" SG_ 419358443 EVT_Year 964;
+BA_ "GenSigSendType" SG_ 419358443 EVT_Year 0;
+BA_ "SPN" SG_ 419358443 EVT_LocalMinuteOffset 1601;
+BA_ "GenSigSendType" SG_ 419358443 EVT_LocalMinuteOffset 0;
+BA_ "SPN" SG_ 419358443 EVT_LocalHourOffset 1602;
+BA_ "GenSigSendType" SG_ 419358443 EVT_LocalHourOffset 0;
+BA_ "GenSigSendType" SG_ 419299563 EVT_FixedKey 3;
+BA_ "GenSigSendType" SG_ 419299819 EVT_LockReqType 3;
+BA_ "GenSigSendType" SG_ 419299819 EVT_LockCmd 3;
+BA_ "GenSigSendType" SG_ 419300075 EVT_SpdLimit 3;
+BA_ "GenSigSendType" SG_ 419300075 EVT_PercentTrqLimit 3;
+BA_ "SPN" SG_ 419351045 SLU_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351045 SLU_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351045 SLU_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351045 SLU_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351045 SLU_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351045 SLU_FMI 0;
+BA_ "SPN" SG_ 419351045 SLU_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351045 SLU_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351045 SLU_OC 1216;
+BA_ "GenSigSendType" SG_ 419351045 SLU_OC 0;
+BA_ "SPN" SG_ 419351045 SLU_CM 1706;
+BA_ "GenSigSendType" SG_ 419351045 SLU_CM 0;
+BA_ "SPN" SG_ 418184965 SLU_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418184965 SLU_CtrlByte 1;
+BA_ "SPN" SG_ 418184965 SLU_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418184965 SLU_TotalMesageSize 1;
+BA_ "SPN" SG_ 418184965 SLU_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418184965 SLU_TotalNumber 1;
+BA_ "SPN" SG_ 418184965 SLU_PGN 2569;
+BA_ "GenSigSendType" SG_ 418184965 SLU_PGN 1;
+BA_ "SPN" SG_ 418119429 SLU_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119429 SLU_SequenceNumber 1;
+BA_ "SPN" SG_ 418119429 SLU_Data 2573;
+BA_ "GenSigSendType" SG_ 418119429 SLU_Data 1;
+BA_ "SPN" SG_ 419351170 MCU_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351170 MCU_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351170 MCU_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351170 MCU_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351170 MCU_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351170 MCU_FMI 0;
+BA_ "SPN" SG_ 419351170 MCU_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351170 MCU_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351170 MCU_OC 1216;
+BA_ "GenSigSendType" SG_ 419351170 MCU_OC 0;
+BA_ "SPN" SG_ 419351170 MCU_CM 1706;
+BA_ "GenSigSendType" SG_ 419351170 MCU_CM 0;
+BA_ "SPN" SG_ 419351426 MCU_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351426 MCU_LeastByteofSPN 1;
+BA_ "SPN" SG_ 419351426 MCU_SecondByteOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351426 MCU_SecondByteOfSPN 1;
+BA_ "SPN" SG_ 419351426 MCU_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351426 MCU_FMI 1;
+BA_ "SPN" SG_ 419351426 MCU_3MostBitOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351426 MCU_3MostBitOfSPN 1;
+BA_ "SPN" SG_ 419351426 MCU_OC 1216;
+BA_ "GenSigSendType" SG_ 419351426 MCU_OC 1;
+BA_ "SPN" SG_ 419351426 MCU_CM 1706;
+BA_ "GenSigSendType" SG_ 419351426 MCU_CM 1;
+BA_ "SPN" SG_ 418185090 MCU_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185090 MCU_CtrlByte 1;
+BA_ "SPN" SG_ 418185090 MCU_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185090 MCU_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185090 MCU_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185090 MCU_TotalNumber 1;
+BA_ "SPN" SG_ 418185090 MCU_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185090 MCU_PGN 1;
+BA_ "SPN" SG_ 418119554 MCU_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119554 MCU_SequenceNumber 1;
+BA_ "SPN" SG_ 418119554 MCU_Data 2573;
+BA_ "GenSigSendType" SG_ 418119554 MCU_Data 1;
+BA_ "SPN" SG_ 419351173 DCDC_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351173 DCDC_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351173 DCDC_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_FMI 0;
+BA_ "SPN" SG_ 419351173 DCDC_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351173 DCDC_OC 1216;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_OC 0;
+BA_ "SPN" SG_ 419351173 DCDC_CM 1706;
+BA_ "GenSigSendType" SG_ 419351173 DCDC_CM 0;
+BA_ "SPN" SG_ 418185093 DCDC_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185093 DCDC_CtrlByte 1;
+BA_ "SPN" SG_ 418185093 DCDC_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185093 DCDC_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185093 DCDC_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185093 DCDC_TotalNumber 1;
+BA_ "SPN" SG_ 418185093 DCDC_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185093 DCDC_PGN 1;
+BA_ "SPN" SG_ 418119557 DCDC_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119557 DCDC_SequenceNumber 1;
+BA_ "SPN" SG_ 418119557 DCDC_Data 2573;
+BA_ "GenSigSendType" SG_ 418119557 DCDC_Data 1;
+BA_ "SPN" SG_ 419351179 DCAC_B_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351179 DCAC_B_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351179 DCAC_B_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_FMI 0;
+BA_ "SPN" SG_ 419351179 DCAC_B_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351179 DCAC_B_OC 1216;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_OC 0;
+BA_ "SPN" SG_ 419351179 DCAC_B_CM 1706;
+BA_ "GenSigSendType" SG_ 419351179 DCAC_B_CM 0;
+BA_ "SPN" SG_ 418185099 DCAC_B_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185099 DCAC_B_CtrlByte 1;
+BA_ "SPN" SG_ 418185099 DCAC_B_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185099 DCAC_B_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185099 DCAC_B_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185099 DCAC_B_TotalNumber 1;
+BA_ "SPN" SG_ 418185099 DCAC_B_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185099 DCAC_B_PGN 1;
+BA_ "SPN" SG_ 418119563 DCAC_B_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119563 DCAC_B_SequenceNumber 1;
+BA_ "SPN" SG_ 418119563 DCAC_B_Data 2573;
+BA_ "GenSigSendType" SG_ 418119563 DCAC_B_Data 1;
+BA_ "SPN" SG_ 419351178 DCAC_S_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351178 DCAC_S_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351178 DCAC_S_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_FMI 0;
+BA_ "SPN" SG_ 419351178 DCAC_S_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351178 DCAC_S_OC 1216;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_OC 0;
+BA_ "SPN" SG_ 419351178 DCAC_S_CM 1706;
+BA_ "GenSigSendType" SG_ 419351178 DCAC_S_CM 0;
+BA_ "SPN" SG_ 418185098 DCAC_S_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185098 DCAC_S_CtrlByte 1;
+BA_ "SPN" SG_ 418185098 DCAC_S_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185098 DCAC_S_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185098 DCAC_S_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185098 DCAC_S_TotalNumber 1;
+BA_ "SPN" SG_ 418185098 DCAC_S_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185098 DCAC_S_PGN 1;
+BA_ "SPN" SG_ 418119562 DCAC_S_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119562 DCAC_S_SequenceNumber 1;
+BA_ "SPN" SG_ 418119562 DCAC_S_Data 2573;
+BA_ "GenSigSendType" SG_ 418119562 DCAC_S_Data 1;
+BA_ "SPN" SG_ 419351098 ACCM_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351098 ACCM_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351098 ACCM_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_FMI 0;
+BA_ "SPN" SG_ 419351098 ACCM_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351098 ACCM_OC 1216;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_OC 0;
+BA_ "SPN" SG_ 419351098 ACCM_CM 1706;
+BA_ "GenSigSendType" SG_ 419351098 ACCM_CM 0;
+BA_ "SPN" SG_ 418185018 ACCM_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185018 ACCM_CtrlByte 1;
+BA_ "SPN" SG_ 418185018 ACCM_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185018 ACCM_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185018 ACCM_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185018 ACCM_TotalNumber 1;
+BA_ "SPN" SG_ 418185018 ACCM_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185018 ACCM_PGN 1;
+BA_ "SPN" SG_ 418119482 ACCM_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119482 ACCM_SequenceNumber 1;
+BA_ "SPN" SG_ 418119482 ACCM_Data 2573;
+BA_ "GenSigSendType" SG_ 418119482 ACCM_Data 1;
+BA_ "SPN" SG_ 419351184 BTMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351184 BTMS_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351184 BTMS_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_FMI 0;
+BA_ "SPN" SG_ 419351184 BTMS_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351184 BTMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_OC 0;
+BA_ "SPN" SG_ 419351184 BTMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419351184 BTMS_CM 0;
+BA_ "SPN" SG_ 419351440 BTMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_LeastByteofSPN 1;
+BA_ "SPN" SG_ 419351440 BTMS_SecondByteOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_SecondByteOfSPN 1;
+BA_ "SPN" SG_ 419351440 BTMS_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_FMI 1;
+BA_ "SPN" SG_ 419351440 BTMS_3MostBitOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_3MostBitOfSPN 1;
+BA_ "SPN" SG_ 419351440 BTMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_OC 1;
+BA_ "SPN" SG_ 419351440 BTMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419351440 BTMS_CM 1;
+BA_ "SPN" SG_ 419351952 BTMS_FreezeFrameLength 1217;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_FreezeFrameLength 1;
+BA_ "SPN" SG_ 419351952 BTMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_LeastByteofSPN 1;
+BA_ "SPN" SG_ 419351952 BTMS_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_SecondByteofSPN 1;
+BA_ "SPN" SG_ 419351952 FMI 1215;
+BA_ "GenSigSendType" SG_ 419351952 FMI 1;
+BA_ "SPN" SG_ 419351952 BTMS_3MostBitsofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_3MostBitsofSPN 1;
+BA_ "SPN" SG_ 419351952 BTMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_OC 1;
+BA_ "SPN" SG_ 419351952 BTMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419351952 BTMS_CM 1;
+BA_ "SPN" SG_ 418185104 BTMS_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185104 BTMS_CtrlByte 1;
+BA_ "SPN" SG_ 418185104 BTMS_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185104 BTMS_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185104 BTMS_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185104 BTMS_TotalNumber 1;
+BA_ "SPN" SG_ 418185104 BTMS_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185104 BTMS_PGN 1;
+BA_ "SPN" SG_ 418119568 BTMS_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119568 BTMS_SequenceNumber 1;
+BA_ "SPN" SG_ 418119568 BTMS_Data 2573;
+BA_ "GenSigSendType" SG_ 418119568 BTMS_Data 1;
+BA_ "SPN" SG_ 419351284 BMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351284 BMS_LeastByteofSPN 0;
+BA_ "SPN" SG_ 419351284 BMS_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351284 BMS_SecondByteofSPN 0;
+BA_ "SPN" SG_ 419351284 BMS_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351284 BMS_FMI 0;
+BA_ "SPN" SG_ 419351284 BMS_3MostBitofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351284 BMS_3MostBitofSPN 0;
+BA_ "SPN" SG_ 419351284 BMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419351284 BMS_OC 0;
+BA_ "SPN" SG_ 419351284 BMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419351284 BMS_CM 0;
+BA_ "SPN" SG_ 419351540 BMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419351540 BMS_LeastByteofSPN 1;
+BA_ "SPN" SG_ 419351540 BMS_SecondByteOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351540 BMS_SecondByteOfSPN 1;
+BA_ "SPN" SG_ 419351540 BMS_FMI 1215;
+BA_ "GenSigSendType" SG_ 419351540 BMS_FMI 1;
+BA_ "SPN" SG_ 419351540 BMS_3MostBitOfSPN 1214;
+BA_ "GenSigSendType" SG_ 419351540 BMS_3MostBitOfSPN 1;
+BA_ "SPN" SG_ 419351540 BMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419351540 BMS_OC 1;
+BA_ "SPN" SG_ 419351540 BMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419351540 BMS_CM 1;
+BA_ "SPN" SG_ 419352052 BMS_FreezeFrameLength 1217;
+BA_ "GenSigSendType" SG_ 419352052 BMS_FreezeFrameLength 1;
+BA_ "SPN" SG_ 419352052 BMS_LeastByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419352052 BMS_LeastByteofSPN 1;
+BA_ "SPN" SG_ 419352052 BMS_SecondByteofSPN 1214;
+BA_ "GenSigSendType" SG_ 419352052 BMS_SecondByteofSPN 1;
+BA_ "SPN" SG_ 419352052 BMS_FMI 1215;
+BA_ "GenSigSendType" SG_ 419352052 BMS_FMI 1;
+BA_ "SPN" SG_ 419352052 BMS_3MostBitsofSPN 1214;
+BA_ "GenSigSendType" SG_ 419352052 BMS_3MostBitsofSPN 1;
+BA_ "SPN" SG_ 419352052 BMS_OC 1216;
+BA_ "GenSigSendType" SG_ 419352052 BMS_OC 1;
+BA_ "SPN" SG_ 419352052 BMS_CM 1706;
+BA_ "GenSigSendType" SG_ 419352052 BMS_CM 1;
+BA_ "SPN" SG_ 418185204 BMS_CtrlByte 2556;
+BA_ "GenSigSendType" SG_ 418185204 BMS_CtrlByte 1;
+BA_ "SPN" SG_ 418185204 BMS_TotalMesageSize 2567;
+BA_ "GenSigSendType" SG_ 418185204 BMS_TotalMesageSize 1;
+BA_ "SPN" SG_ 418185204 BMS_TotalNumber 2568;
+BA_ "GenSigSendType" SG_ 418185204 BMS_TotalNumber 1;
+BA_ "SPN" SG_ 418185204 BMS_PGN 2569;
+BA_ "GenSigSendType" SG_ 418185204 BMS_PGN 1;
+BA_ "SPN" SG_ 418119668 BMS_SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119668 BMS_SequenceNumber 1;
+BA_ "SPN" SG_ 418119668 BMS_Data 2573;
+BA_ "GenSigSendType" SG_ 418119668 BMS_Data 1;
+BA_ "SPN" SG_ 418119668 SequenceNumber 2572;
+BA_ "GenSigSendType" SG_ 418119668 SequenceNumber 1;
+BA_ "SPN" SG_ 418119668 Data 2573;
+BA_ "GenSigSendType" SG_ 418119668 Data 1;
+VAL_ 285187623 VCU_VehSts  0 "初始化状态" 3 "整车低压上电状态" 7 "整车高压上电状态" 8 "整车可行驶状态" 15 "无效"  ;
+VAL_ 285187623 VCU_ErrSts  0 "没有故障" 1 "轻微故障" 2 "限功率故障" 3 "限速故障" 4 "停车故障" 15 "无效"  ;
+VAL_ 285187623 VCU_AccPedPos  254 "异常" 255 "无效"  ;
+VAL_ 285187623 VCU_BrkPedPos  101 "制动有效" 254 "异常" 255 "无效"  ;
+VAL_ 285187623 VCU_VehSpd  65534 "异常" 65535 "无效"  ;
+VAL_ 486514471 VCU_StartSts  1 "启动状态" 2 "熄火" 3 "其他状态" 254 "异常" 255 "无效"  ;
+VAL_ 486514471 VCU_PwrMode  1 "纯电" 2 "混动" 3 "燃油" 254 "异常" 255 "无效"  ;
+VAL_ 486514471 VCU_ChrgSts  1 "停车充电" 2 "行车回馈充电" 3 "未充电" 4 "充电完成" 254 "异常" 255 "无效"  ;
+VAL_ 486514471 VCU_DCDCSts  1 "工作" 2 "断开" 254 "异常" 255 "无效"  ;
+VAL_ 486514471 VCU_ShiftLevel  0 "空档" 1 "1档(C挡)" 2 "2档" 3 "3档" 4 "4档" 5 "5档" 6 "6档" 13 "倒档R档" 14 "自动挡D档" 15 "停车档P档"  ;
+VAL_ 486514471 VCU_BrkActive  0 "无制动力" 1 "有制动力"  ;
+VAL_ 486514471 VCU_DrvActive  0 "无驱动力" 1 "有驱动力"  ;
+VAL_ 419404327 VCU_VehShiftLevel  125 "空挡（N）" 223 "倒挡（R）" 250 "爬坡挡（C）" 252 "前进挡（D）" 254 "错误" 255 "无效"  ;
+VAL_ 419404327 VCU_VehShiftMode  0 "无动作" 1 "经济模式" 2 "动力模式" 3 "拖车模式" 15 "无效"  ;
+VAL_ 285186855 VCU_BatPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_DCDC24PwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_DCAC_SPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_DCAC_BPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_PTCContaEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_BatNoChrgEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_ACCMPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 285186855 VCU_MainContaPEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 218074407 VCU_MotPwrEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 218074407 VCU_MotDischrgCmd  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 218074407 VCU_MotCtlMode  0 "无动作" 1 "转速模式" 2 "转矩模式" 3 "无效"  ;
+VAL_ 218074407 VCU_MotAutoHoldEn  0 "关闭" 1 "使能" 2 "预留" 3 "无效"  ;
+VAL_ 419233831 VCU_FixedKeySaveSts  0 "未保存" 1 "保存成功" 2 "错误" 3 "无效"  ;
+VAL_ 419233831 VCU_LockFuncActiveSts  0 "锁车功能未激活" 1 "锁车功能已激活" 2 "错误" 3 "无效"  ;
+VAL_ 419233831 VCU_SpdLimitSts  0 "车速未限制" 1 "车速已限制" 2 "错误" 3 "无效"  ;
+VAL_ 419234087 VCU_LockRespType  0 "锁车应答" 1 "反馈种子" 2 "错误" 3 "无效"  ;
+VAL_ 419234087 VCU_CheckReq  0 "未请求握手校验" 1 "请求握手校验" 2 "错误" 3 "无效"  ;
+VAL_ 419234087 VCU_CheckResult  0 "握手校验未通过" 1 "握手校验已通过" 2 "错误" 3 "无效"  ;
+VAL_ 419234087 VCU_LockCmdFbk  1 "握手校验" 3 "激活锁车配置功能" 4 "关闭锁车配置功能" 7 "限制车速" 8 "解除限制车速" 15 "无效"  ;
+VAL_ 419407911 VCU_BackLightLevelSet  0 "Level 1" 1 "Level 2" 2 "Level 3" 3 "Level 4"  ;
+VAL_ 419407911 VCU_PositionLightStatus  0 "Inactive" 1 "Active" 2 "Fault" 3 "Invalid"  ;
+VAL_ 486516519 VCU_MaxAlarmLevel  0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 254 "错误" 255 "无效"  ;
+VAL_ 486516519 Veh_Err21  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err22  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err23  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err24  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err25  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err26  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err27  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err28  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err31  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err32  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err33  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err34  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err35  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err36  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err37  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err38  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err41  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err42  0 "无故障" 1 "有故障"  ;
+VAL_ 486516519 Veh_Err43  0 "无故障" 1 "有故障"  ;
+VAL_ 201392901 SLU_GearReq  125 "空挡（N）" 223 "倒挡（R）" 250 "爬坡挡（C）" 252 "前进挡（D）" 254 "错误" 255 "无效"  ;
+VAL_ 201392901 SLU_TransMode1  0 "E模式" 1 "P模式" 2 "拖车模式" 3 "无效" 15 "错误"  ;
+VAL_ 285180034 MCU_SysSts  0 "初始状态" 3 "低压状态" 7 "高压就绪状态" 8 "工作状态" 10 "快速放电状态" 15 "无效"  ;
+VAL_ 285180034 MCU_ErrSts  0 "没有故障" 1 "轻微故障（无需处理）" 2 "限功率状态" 3 "0扭矩状态" 4 "关管状态" 15 "无效"  ;
+VAL_ 285180034 MCU_MotWorkMode  0 "无动作" 1 "转速模式" 2 "转矩模式" 3 "无效"  ;
+VAL_ 285180034 MCU_PTCContaSts  0 "断开" 1 "闭合" 2 "错误" 3 "无效"  ;
+VAL_ 285180034 MCU_ContaPSts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_ 285180034 MCU_MotWorkSts  1 "耗电" 2 "发电" 3 "关闭状态" 4 "准备状态" 254 "异常" 255 "无效"  ;
+VAL_ 285155316 BMS_SysSts  0 "初始状态" 3 "低压状态（自检完成或高压下电完成，允许高压上电）" 4 "高压接通中" 8 "工作状态" 10 "高压切断中" 15 "无效"  ;
+VAL_ 285155316 BMS_ErrSts  0 "无故障" 1 "一般故障" 2 "严重故障" 15 "无效"  ;
+VAL_ 285155316 BMS_ContaNSts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_ 285155316 BMS_InsErrSts  0 "无绝缘故障" 1 "绝缘故障" 2 "功能失效" 3 "无效"  ;
+VAL_ 285155316 BMS_ChrgSts  0 "无充电机充电" 1 "充电机充电线连接" 2 "准备充电" 3 "充电机充电中" 4 "充电机充电完成" 5 "充电异常" 15 "无效"  ;
+VAL_ 285155316 BMS_ChrgMode  0 "未充电" 1 "直流充电" 2 "交流充电" 3 "其他模式"  ;
+VAL_ 285155316 BMS_ChrgContaP1Sts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_ 285155316 BMS_ChrgContaN1Sts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_ 419374836 BMS_TempDiffAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_HighTempAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_OverVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_UnderVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_SOCLowAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_CellOverVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_CellUnderVoltAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_SOCHighAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_SOCJumpAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_REESSMismatchAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_CellPoorConsistencyAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_InsulationAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_HVILStsAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_OverChargeAlarm  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err31  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err32  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err33  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err34  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err35  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err36  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err37  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err38  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err41  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err42  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err43  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err44  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err45  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err46  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err47  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err48  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err51  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err52  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err53  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err54  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err55  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err56  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err57  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err58  0 "无故障" 1 "有故障"  ;
+VAL_ 419374836 BMS_Err61  0 "无故障" 1 "有故障"  ;
+VAL_ 419375860 BMS_TMSModeSet  0 "待机模式" 1 "自循环模式" 2 "制冷模式" 3 "制热模式（预留）"  ;
+VAL_ 419410064 BTMS_SysSts  0 "初始状态" 3 "低压电状态" 7 "待机状态" 8 "工作状态" 15 "无效"  ;
+VAL_ 419410064 BTMS_ErrSts  0 "无故障" 1 "轻微故障（降功率运行）" 2 "严重故障（停机）" 15 "无效"  ;
+VAL_ 419410064 BTMS_WorkMode  0 "待机模式" 1 "自循环模式" 2 "制冷模式" 3 "制热模式（预留）"  ;
+VAL_ 419410064 BTMS_RelaySts  0 "断开" 1 "闭合" 2 "故障" 3 "无效"  ;
+VAL_ 419367813 DCDC_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_ 419367813 DCDC_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_ 419368074 DCAC_S_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_ 419368074 DCAC_S_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_ 419368587 DCAC_B_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_ 419368587 DCAC_B_ErrSts  0 "无故障" 1 "轻微故障" 2 "严重故障" 15 "无效"  ;
+VAL_ 419369018 ACCM_SysSts  0 "初始状态" 3 "低压电状态" 7 "高压电状态" 8 "工作状态" 15 "无效"  ;
+VAL_ 419369018 ACCM_ErrSts  0 "无故障" 1 "轻微故障（不处理）" 2 "严重故障（使能关闭）" 15 "无效"  ;
+VAL_ 419299819 EVT_LockReqType  0 "锁车指令" 1 "反馈密钥" 2 "错误" 3 "无效"  ;
+VAL_ 419299819 EVT_LockCmd  1 "握手校验" 3 "激活锁车配置功能" 4 "关闭锁车配置功能" 7 "限制车速" 8 "解除限制车速" 15 "无效"  ;
+VAL_ 419300075 EVT_SpdLimit  0 "限速区间" 125 "限制启动" 254 "错误" 255 "无效"  ;
+VAL_ 419351045 SLU_OC  127 "Not Available"  ;
+VAL_ 419351045 SLU_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 418184965 SLU_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351170 MCU_OC  127 "Not Available"  ;
+VAL_ 419351170 MCU_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 419351426 MCU_OC  127 "Not Available"  ;
+VAL_ 418185090 MCU_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351173 DCDC_OC  127 "Not Available"  ;
+VAL_ 419351173 DCDC_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 418185093 DCDC_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351179 DCAC_B_OC  127 "Not Available"  ;
+VAL_ 419351179 DCAC_B_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 418185099 DCAC_B_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351178 DCAC_S_OC  127 "Not Available"  ;
+VAL_ 419351178 DCAC_S_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 418185098 DCAC_S_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351098 ACCM_OC  127 "Not Available"  ;
+VAL_ 419351098 ACCM_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 418185018 ACCM_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351184 BTMS_OC  127 "Not Available"  ;
+VAL_ 419351184 BTMS_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 419351440 BTMS_OC  127 "Not Available"  ;
+VAL_ 418185104 BTMS_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;
+VAL_ 419351284 BMS_OC  127 "Not Available"  ;
+VAL_ 419351284 BMS_CM  0 "Version 4" 1 "Version 1/2/3"  ;
+VAL_ 419351540 BMS_OC  127 "Not Available"  ;
+VAL_ 418185204 BMS_PGN  65226 "DM1" 65227 "DM2" 65229 "DM4"  ;

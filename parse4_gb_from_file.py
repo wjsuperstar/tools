@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 # auth: WuJian  20191024
-# desc: 解析车讯二代flash保存的国标数据文件
+# desc: 解析hqt401离线存储的新能源国标数据文件
 
 import struct
 

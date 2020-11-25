@@ -347,7 +347,7 @@ def parse_cmd_param():
         elif opt in ("-d", "--dir"):
             a = arg
         elif opt in ("-a", "--action"):
-            b = arg
+            b = int(arg)
     if a is None:
         display_help()
         sys.exit(-1)

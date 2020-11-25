@@ -509,6 +509,8 @@ class MainParseMsg:
 
     def parse_main_msg(self, data):
         package = dict()
+        if len(data) < 24 :
+            return package
         crc = CalcCrc(data[2:-1])
         if crc == data[-1]:
             data = data[0:-1]  # 去掉校验码

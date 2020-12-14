@@ -534,7 +534,7 @@ class MainParseMsg:
                 else:
                     package.update({'自定义数据' : self.parse_custom_msg(header.命令标识, data[idx:])})
             else:
-                package.update({'平台应答': {'应答命令': header.命令标识, '应答结果': g_ack_flg.get(header.应答标志, header.应答标志)}})
+                package.update({'自定义数据': self.parse_custom_msg(header.命令标识, data[idx:])})
         else:
             print('check crc error, raw_crc=0x%x, calc_crc=0x%x' % (crc, data[-1]))
         return package

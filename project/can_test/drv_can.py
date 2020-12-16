@@ -59,8 +59,8 @@ class ZlgCanDev:
         if not self.__opened:
             self.__canLib = windll.LoadLibrary('ControlCAN.dll')
             ret = self.__canLib.VCI_OpenDevice(self.__chn, 0, 0)
-            print("open dev ret=", ret)
-            print("chn=%d, baud=%d" % (self.__chn, self.__baud))
+            print("open dev, ret =", ret)
+            #print("chn=%d, baud=%d" % (self.__chn, self.__baud))
             self.__canLib.VCI_InitCAN(self.__chn, 0, 0, pointer(self.__vic))
             self.__canLib.VCI_StartCAN(self.__chn, 0, 0)
             self.__canLib.VCI_ClearBuffer(self.__chn, 0, 0)
@@ -85,6 +85,7 @@ class ZlgCanDev:
                 self.__vco.Data[i]    = data[i]
             self.__vco.SendType= send_type
             #返回实际发送成功的帧数
+            #print('id=', hex(id), 'data=', data)
             ret =  self.__canLib.VCI_Transmit(self.__chn, 0, 0, pointer(self.__vco), 1)
         return ret
     # 返回元组(帧个数，帧id，帧内容)
@@ -93,8 +94,8 @@ class ZlgCanDev:
         data = []
         ret  = self.__canLib.VCI_Receive(self.__chn, 0, 0, pointer(self.__vco_rcv), 1, 500)
         if ret > 0:
-            id = hex(self.__vco_rcv.ID)
-            data = [hex(i) for i in list(self.__vco_rcv.Data)]
+            id = self.__vco_rcv.ID
+            data = list(self.__vco_rcv.Data)
         return (ret, id, data)
 
 def main():

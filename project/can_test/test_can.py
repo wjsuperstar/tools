@@ -58,18 +58,20 @@ def main():
         print('--------------------->发送次数:', i)
         random.seed(seed)
         for message in db.messages:
-            #print(message)
-            # min(int(sig.minimum), 2^sig.length), min(int(sig.maximum), 2^sig.length)
-            send_data = {sig.name: random.randint(int(sig.minimum), int(sig.maximum)) for sig in message.signals}
-            print(send_data)
-            if i == 0:
-                as_cfg.update(send_data)
-            data=message.encode(send_data)
-            msg = can.Message(arbitration_id=message.frame_id, data=data)
-            bus.send(msg)
-            time.sleep(0.01)
+            #print(message.length)
+            if message.length <= 8:
+                # min(int(sig.minimum), 2^sig.length), min(int(sig.maximum), 2^sig.length)
+                send_data = {sig.name: random.randint(int(sig.minimum), int(sig.maximum)) for sig in message.signals}
+                print(send_data)
+                if i == 0:
+                    as_cfg.update(send_data)
+                    # print(as_cfg)
+                    store(as_cfg)
+                data=message.encode(send_data)
+                msg = can.Message(arbitration_id=message.frame_id, data=data)
+                bus.send(msg)
+                time.sleep(0.01)
         time.sleep(1)
-    #print(as_cfg)
-    store(as_cfg)
+
 if __name__ == '__main__':
     main()

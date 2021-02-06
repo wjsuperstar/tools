@@ -1,0 +1,54 @@
+{
+    "ParamList":{
+        "NpvMainIpC1":    {"pid":"0x1000000",  "type":"String",  "desc":"新能源第一通道主IP"},
+        "NpvMainPortC1":  {"pid":"0x1000001",  "type":"Word",    "desc":"新能源第一通道主PORT"},
+        "NpvbakIpC1":     {"pid":"0x1000002",  "type":"String",  "desc":"新能源第一通道备份IP"},
+        "NpvbakPortC1":   {"pid":"0x1000003",  "type":"Word",    "desc":"新能源第一通道备份IP"},
+        "NpvMainIpC2":    {"pid":"0x1010000",  "type":"String",  "desc":"新能源第二通道主IP"},
+        "NpvMainPortC2":  {"pid":"0x1010001",  "type":"Word",    "desc":"新能源第二通道主PORT"},
+        "NpvbakIpC2":     {"pid":"0x1010002",  "type":"String",  "desc":"新能源第二通道备份IP"},
+        "NpvbakPortC2":   {"pid":"0x1010003",  "type":"Word",    "desc":"新能源第二通道备份PORT"},
+        "Vin":            {"pid":"0x3000001",  "type":"String",  "desc":"TBOX VIN"},
+        "ObosForever":    {"pid":"0x30000B1",  "type":"DWord",   "desc":"obos长连接，建议设置999999,关闭设置600"},
+        "NpvGbTestMode":  {"pid":"0x30000AA",  "type":"DWord",   "desc":"0:非过标模式，1：过标模式"},
+        "WakeUpMask":     {"pid":"0x300102F",  "type":"DWord",   "desc":"终端唤醒条件标志，按位表示"},
+        "CanRecEn":       {"pid":"0x3000092",  "type":"Byte",    "desc":"老CAN存储插件存储开关"},
+        "GpsLogEn":       {"pid":"0x3000096",  "type":"DWord",   "desc":"GPS程序日志开关"},
+        "NpvLogEn":       {"pid":"0x300009C",  "type":"DWord",   "desc":"Npv32960程序日志开关"},
+        "SshEn":          {"pid":"0x30000D9",  "type":"DWord",   "desc":"反向登录开关，1打开，0关闭"},
+        "SshPort":        {"pid":"0x30000DB",  "type":"Word",    "desc":"反向代理端口：建议用1024以上的端口"},
+        "SshIp":          {"pid":"0x30000DA",  "type":"String",  "desc":"反向登录IP地址：47.111.129.182"},
+        "NpvHistFilePa":  {"pid":"0x300001C",  "type":"String",  "desc":"新能源历史文件路径，如：/media/card/data/queuefile/data_npv_chn"},
+        "PartsCode":      {"pid":"0x300F506",  "type":"String",  "desc":"零部件编号，如：ZQ01169880"},
+        "MqttIp":         {"pid":"0x8000000",  "type":"String",  "desc":"Mqtt网关IP，如：218.108.34.115"},
+        "MqttPort":       {"pid":"0x8000001",  "type":"Word",    "desc":"Mqtt网关端口，如：1883"},
+        "PhoneNum":       {"pid":"0x3000013",  "type":"BCD",     "desc":"手机号，如：015618909680"},
+        "CanBaud1":       {"pid":"0x3000002",  "type":"DWord",   "desc":"CAN1波特率， 如：500K：500000"},
+        "CanBaud2":       {"pid":"0x3000003",  "type":"DWord",   "desc":"CAN2波特率， 如：250K：250000"},
+        "CanBaud3":       {"pid":"0x3000004",  "type":"DWord",   "desc":"CAN3波特率， 如：250K：250000"},
+        "ObdIpC1":        {"pid":"0x6000000",  "type":"String",  "desc":"OBD第一通道IP"},
+        "ObdPortC1":      {"pid":"0x6000001",  "type":"Word",    "desc":"OBD第一通道PORT"},
+        "ObdIpC2":        {"pid":"0x6010000",  "type":"String",  "desc":"OBD第二通道IP"},
+        "ObdPortC2":      {"pid":"0x6010001",  "type":"Word",    "desc":"OBD第二通道PORT"},
+        "ZzObdIpC1":      {"pid":"0x6010001",  "type":"String",  "desc":"郑州OBD第一通道IP"},
+        "ZzObdPortC1":    {"pid":"0x9000000",  "type":"DWord",   "desc":"郑州OBD第一通道PORT"},
+        "Can1Adapt":      {"pid":"0x3001042",  "type":"Word",    "desc":"CAN1自适应：0:不自适应 bit0~15为1(0:250K, 1:500k 2:125k 3:1M 4:100K 5:50K)"},
+        "Can2Adapt":      {"pid":"0x3001043",  "type":"Word",    "desc":"CAN2自适应"},
+        "Can3Adapt":      {"pid":"0x3001044",  "type":"Word",    "desc":"CAN3自适应"}
+
+    },
+    "LoginInfo":  {"user":"吴建",  "passwd":"qaz1144"},
+    
+    "DevNumList": "2010040315",
+    "VaildParam": [{"item":"SshEn",    "val":"1"}, 
+                   {"item":"SshPort",     "val":"40315"}, 
+                   {"item":"SshIp",       "val":"47.111.129.182"}
+                   
+                  ],
+                  
+    "VaildParamOBD": [{"item":"ObdIpC1",       "val":"121.196.244.159"}, 
+                      {"item":"ObdPortC1",  "val":"8111"}, 
+                      {"item":"Vin",        "val":"TESTG600000000003"},
+                      {"item":"ObosForever", "val":"999999"}
+                    ]
+}

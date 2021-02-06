@@ -17,6 +17,9 @@ DirName =sys.argv[1]
 ParseFlg=sys.argv[2]
 
 # 以下元组是根据GB32960协议定义，不可更改。
+g_head_keys = ('start_symbol', 'cmd', 'vin',         'soft_ver',     'encrypt',       'data_len')
+g_head_name = ('起始符',  '命令单元', '车辆识别号', '终端软件版本号', '数据加密方式',     '数据单元长度')
+
 g_gps_keys = ("locationed", "longi", "lat")
 g_gps_name = ("定位状态", "经度", "纬度")
 
@@ -357,16 +360,41 @@ class GbParse0x03:
         for i in g_fuel_bat_keys:
             print(self.__fuel_bat_desc[i], self.__fuel_bat_data[i], sep=':', end = ', ')
 
+# 消息头
+class GbParseHead:
+    
+    def __init__(self, s, len_out):
+        self.__head_data = {}
+        self.__head_desc = dict(zip(g_head_keys, g_head_name))
 
+        data = s
+        idx = 0
+        #print(data[idx:])
+        veh_value = struct.unpack(">2sB17sBBH", data[idx:idx+24])
+        self.__head_data = dict(zip(g_head_keys, veh_value))
+        idx += 24
+        len_out[0] = idx
+
+    def GetData(self):
+        return self.__head_data
+    def GetDesc(self):
+        return self.__head_desc
+    def GetDataLen(self):
+        return self.__head_data["data_len"]
+    def display(self):
+        print("\n\n消息头:")
+        for i in g_head_keys:
+            print(self.__head_desc[i], self.__head_data[i], sep=':', end = ', ')
+            
 class GbMainParse:
     
     __time_sec = 0
     #定义构造方法
     def __init__(self, s, tot_len, flg):
-        data = s
-        tot_len -= 2    #去掉校验码
-        data_unit_len = tot_len
-        idx = 4
+               
+        hex_stream = bytes.fromhex(data[4:tot_len-2]);#跳过2323，去掉校验码
+        hex_stream_len=len(hex_stream)
+        idx = 0
         # 消息id
         self.__cmd = int(data[idx:idx+2], 16)
         idx += 4
@@ -404,54 +432,39 @@ class GbMainParse:
             #print(self.__dt.strftime('%Y-%m-%d %H:%M:%S'))
             self.__time_sec = time.mktime(self.__dt.timetuple())
             
-            if flg == "1":
-                # 将字符串转为bytes
-                hex_stream = b''
-                while idx < tot_len:
-                    hex_stream += struct.pack(">B", int(data[idx:idx+2], 16))
-                    idx += 2
-                hex_stream_len=len(hex_stream)
-                #print("hex_stream_len=%d" % hex_stream_len)
-                #print(hex_stream)
-                # 解析各个数据块
-                idx = 0
-                used_len = [0]
-                self.one_pack = []
-                while hex_stream_len > 0:
-                    
-                    block_id = struct.unpack("<B", hex_stream[idx:idx+1])[0]
-                    idx += 1
-                    hex_stream_len -= 1
-                    #print("\nblock_id=%d, idx=%d" % (block_id, idx))
-                    if block_id == 0x05:
-                        self.one_pack.append(GbParse0x05(hex_stream[idx:], used_len))
-                    elif block_id == 0x07:
-                        self.one_pack.append(GbParse0x07(hex_stream[idx:], used_len))
-                    elif block_id == 0x01:
-                        self.one_pack.append(GbParse0x01(hex_stream[idx:], used_len))
-                    elif block_id == 0x02:
-                        self.one_pack.append(GbParse0x02(hex_stream[idx:], used_len))
-                    elif block_id == 0x08:
-                        self.one_pack.append(GbParse0x08(hex_stream[idx:], used_len))
-                    elif block_id == 0x09:
-                        self.one_pack.append(GbParse0x09(hex_stream[idx:], used_len))
-                    elif block_id == 0x06:
-                        self.one_pack.append(GbParse0x06(hex_stream[idx:], used_len))
-                    elif block_id == 0x03:
-                        self.one_pack.append(GbParse0x03(hex_stream[idx:], used_len))
-                    elif block_id == 0x04:
-                        self.one_pack.append(GbParse0x04(hex_stream[idx:], used_len))
-                    else:
-                        print("Unkonw id, block_id=", block_id)
-                        break
-                    
-                    idx += used_len[0]
-                    hex_stream_len -= used_len[0]
-                    
-                    #print("\nused_len=", used_len[0], "idx=", idx, "hex_stream_len=", hex_stream_len)
-                    #break
-        else:
-            print("data len error, len by parse=%d, in param len=%d" % self.__data_len, data_unit_len)
+            # 解析各个数据块
+            idx = 0
+            used_len = [0]
+            self.one_pack = []
+            while hex_stream_len > 0:
+                block_id = struct.unpack("<B", hex_stream[idx:idx+1])[0]
+                idx += 1
+                hex_stream_len -= 1
+                #print("\nblock_id=%d, idx=%d" % (block_id, idx))
+                if block_id == 0x01:
+                    self.one_pack.append(GbParse0x01(hex_stream[idx:], used_len))
+                elif block_id == 0x02:
+                    self.one_pack.append(GbParse0x02(hex_stream[idx:], used_len))
+                elif block_id == 0x03:
+                    self.one_pack.append(GbParse0x03(hex_stream[idx:], used_len))
+                elif block_id == 0x04:
+                    self.one_pack.append(GbParse0x04(hex_stream[idx:], used_len))
+                elif block_id == 0x05:
+                    self.one_pack.append(GbParse0x05(hex_stream[idx:], used_len))
+                elif block_id == 0x06:
+                    self.one_pack.append(GbParse0x06(hex_stream[idx:], used_len))
+                elif block_id == 0x07:
+                    self.one_pack.append(GbParse0x07(hex_stream[idx:], used_len))
+                elif block_id == 0x08:
+                    self.one_pack.append(GbParse0x08(hex_stream[idx:], used_len))
+                elif block_id == 0x09:
+                    self.one_pack.append(GbParse0x09(hex_stream[idx:], used_len))
+                else:
+                    print("Unkonw id, block_id=", block_id)
+                    break
+                
+                idx += used_len[0]
+                hex_stream_len -= used_len[0]
 
     def display(self):
         for i in self.one_pack:
@@ -470,8 +483,9 @@ def main():
             with open(file_name) as fd:
                 for line in fd:
                     try:
-                        data = re.search( r'(2323.*)', line).group(1)
-                        obj = GbMainParse(data, len(data), ParseFlg)
+                        data = re.search( r'(23230[23].*)', line).group(1)
+                        data = data.strip()
+                        obj = GbMainParse(data, len(data))
                         if ParseFlg == '1':
                             obj.display()
                         elif ParseFlg == '2':

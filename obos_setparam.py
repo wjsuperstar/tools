@@ -3,43 +3,25 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from time import sleep
+import json
 
-# 修改项
-DevNumList="1911080218"
-#DevNumList="1906130556"
+#json配置文件路径
+JsCfgPath="obos_settings.json"
+#终端号
+DevNumList=[]
 # 需要设置哪些参数
-#VaildParam=["NpvMainIpC1", "NpvMainPortC1", "Vin", "ObosForever", "NpvGbTestMode"]
-#VaildParam=["Vin", "ObosForever", "NpvGbTestMode"]
-#VaildParam=["SshEn", "ObosForever"]
-#VaildParam=["PartsCode"]
-
-VaildParam=["SshEn", "SshPort", "SshIp", "ObosForever"]
-
-# telematics.dfmc.com.cn 15005
+VaildParam=[]
 # 参数列表
-ParamList={"NpvMainIpC1":    ["0x1000000", "String", "121.196.244.159"],
-           "NpvMainPortC1":  ["0x1000001", "Word",   "8111"],
-           "NpvbakIpC1":     ["0x1000002", "String", "121.196.244.159"],
-           "NpvbakPortC1":   ["0x1000003", "Word",   "8111"],
-           "NpvMainIpC2":    ["0x1010000", "String", "121.196.244.159"],
-           "NpvMainPortC2":  ["0x1010001", "Word",   "8111"],
-           "NpvbakIpC2":     ["0x1010002", "String", "121.196.244.159"],
-           "NpvbakPortC2":   ["0x1010003", "Word",   "8111"],
-           "Vin":            ["0x3000001", "String", "00000001812120001"],
-           "ObosForever":    ["0x30000B1", "DWord",  "99999"],
-           "NpvGbTestMode":  ["0x30000AA", "DWord",  "1"],
-           "WakeUpMask":     ["0x300102F", "DWord",  "133121"],
-           "CanRecEn":       ["0x3000092", "Byte",   "0"],
-           "GpsLogEn":       ["0x3000096", "DWord",  "1"],
-           "NpvLogEn":       ["0x300009C", "DWord",  "1"],
-           "SshEn":          ["0x30000D9", "DWord",  "1"],
-           "SshPort":        ["0x30000DB", "Word",   "8218"],
-           "SshIp":          ["0x30000DA", "String", "47.111.129.182"],
-           "NpvHistFilePa":  ["0x300001C", "String",  "/media/card/data/queuefile/data_npv_chn"],
-           "PartsCode":      ["0x300F506", "String",  "ZQ01169880"],
-        
-        }
-    
+ParamList={}
+# 登录信息
+LoginInfo={}
+
+with open(JsCfgPath, encoding='utf-8') as fd:
+    js = json.load(fd)
+    ParamList=js["ParamList"]
+    VaildParam=js["VaildParam"]
+    DevNumList=js["DevNumList"]
+    LoginInfo=js["LoginInfo"]
 
 # 打开Chrome浏览器
 browser = webdriver.Chrome()
@@ -47,9 +29,9 @@ browser.get("http://www.o-bos.com:50099/login.jsp")
 
 # 登录
 element = browser.find_element_by_id("userName")
-element.send_keys("吴建")
+element.send_keys(LoginInfo['user'])
 element = browser.find_element_by_id("password")
-element.send_keys("qaz1144")
+element.send_keys(LoginInfo['passwd'])
 browser.find_element_by_xpath("//*[@id='login']/tbody/tr[6]/td[2]/input").click()
 
 #进入任务管理
@@ -70,18 +52,19 @@ browser.switch_to.default_content()
 browser.switch_to.frame("tdMainPage")
 browser.find_element_by_name("terminalID").send_keys(DevNumList)
 
-for i in range(len(VaildParam)):
+for para in VaildParam:
     sleep(1)
     #填充参数ID
-    browser.find_element_by_name("paramType").send_keys(ParamList[VaildParam[i]][0])
+    browser.find_element_by_name("paramType").send_keys(ParamList[para["item"]]["pid"])
     #填充参数类型
     s1 = Select(browser.find_element_by_name("paramFormat"))  # 实例化Select
-    s1.select_by_value(ParamList[VaildParam[i]][1])
+    s1.select_by_value(ParamList[para["item"]]["type"])
     #填充参数值
-    browser.find_element_by_name("paramValue").send_keys(ParamList[VaildParam[i]][2])
+    browser.find_element_by_name("paramValue").send_keys(para["val"])
     #添加
     browser.find_element_by_xpath('//*[@id="Tbl"]/thead/tr[7]/td/input').click()
     browser.implicitly_wait(10)
+    print(ParamList[para["item"]]["desc"], para["val"])
 
 sleep(2)
 #提交

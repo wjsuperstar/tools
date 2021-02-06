@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+'''
 """
 猜数字游戏
 计算机出一个1~100之间的随机数由人来猜
@@ -57,5 +58,28 @@ for factor in range(x, 0, -1):
         print('%d和%d的最大公约数是%d' % (x, y, factor))
         print('%d和%d的最小公倍数是%d' % (x, y, x * y // factor))
         break
+
+'''
+
+class Person:
+    def __init__(self, name='Person'):
+        self.name = name
+    
+class Puple(Person):
+    pass
+    
+class Puple2(Person):
+    def __init__(self, age):
+        self.age = age
         
-        
+class Puple3(Person):
+    def __init__(self, name='Person', age=12):
+        self.age = age
+        super().__init__()
+
+
+pp = Puple()
+pp2 = Puple2(10)
+pp3 = Puple3('Puple3', 10)
+
+

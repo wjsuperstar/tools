@@ -25,3 +25,11 @@
 *.tar
 *.flag
 *.log
+*.7z
+*.dbc
+*.bat
+
+.svn/
+.idea/
+upgrade/
+__pycache__/

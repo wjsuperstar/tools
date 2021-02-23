@@ -23,7 +23,7 @@ class TSqleVcu():
         self._fixed_key_status   = 0
         self._lock_active_status = 0
         self._speed_limit_status = 0
-        self._shake_status = kSqSsSendSeed
+        self._shake_status = kSqSsIdle
         self._lock_cmd = 0
         self._lock_cmd_param = 0
         self._seed = []
@@ -73,7 +73,8 @@ class TSqleVcu():
                     print(time.strftime('%Y-%m-%d %H:%M:%S'), '固定密钥报文 ', hex(can_id), [hex(i) for i in data])
                     self._fixed_key_status = 1
                     self._cfg.update({'fixed_key_status': self._fixed_key_status})
-                    self._shake_status = kSqSsSendSeed
+                    if self._lock_active_status == 1:
+                        self._shake_status = kSqSsSendSeed
                     print('保存配置1.')
                     self.store(self._cfg)
                 elif can_id == 0x18FE01EB:  # 锁车和解锁id
@@ -112,7 +113,7 @@ class TSqleVcu():
                         print('保存配置2.')
                         self.store(self._cfg)
                 elif can_id == 0x18FE02EB:  # 车速/转速限制
-                    print(time.strftime('%Y-%m-%d %H:%M:%S'), '下发车速报文 ', hex(can_id), [hex(i) for i in data])
+                    print(time.strftime('%Y-%m-%d %H:%M:%S'), ' 下发车速报文 ', hex(can_id), [hex(i) for i in data])
                     self._lock_cmd_param = data[0]
                     print('车速:', self._lock_cmd_param)
     def start(self):
@@ -122,6 +123,8 @@ class TSqleVcu():
             self._fixed_key_status   = self._cfg['fixed_key_status']
             self._lock_active_status = self._cfg['lock_active_status']
             self._speed_limit_status = self._cfg['speed_limit_status']
+        if self._lock_active_status == 1:
+            self._shake_status = kSqSsSendSeed
         self._f_can.open()
         self._receive_handler = threading.Thread(target=self.handle_recv, args=(self._f_can,))
         self._receive_handler.start()

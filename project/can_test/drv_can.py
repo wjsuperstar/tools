@@ -59,7 +59,10 @@ class ZlgCanDev:
         if not self.__opened:
             self.__canLib = windll.LoadLibrary('ControlCAN.dll')
             ret = self.__canLib.VCI_OpenDevice(self.__chn, 0, 0)
-            print("open dev, ret =", ret)
+            if ret == 1:
+                print("open can dev success.")
+            else:
+                print("open can dev fail.")
             #print("chn=%d, baud=%d" % (self.__chn, self.__baud))
             self.__canLib.VCI_InitCAN(self.__chn, 0, 0, pointer(self.__vic))
             self.__canLib.VCI_StartCAN(self.__chn, 0, 0)

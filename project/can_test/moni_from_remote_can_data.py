@@ -10,7 +10,7 @@ import sys
 print("使用格式： python xx.py 目录名 解析标志")
 print("解析目录:", sys.argv[1])
 DirName =sys.argv[1]
-dc = ZlgCanDev()
+dc = ZlgCanDev(baud = BAUD_250K)
 line_no = 0
 
 def parse_txt(line):

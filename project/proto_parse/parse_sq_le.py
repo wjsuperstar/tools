@@ -4,6 +4,7 @@ import sys, getopt
 import struct
 import parse_gb32960
 import json
+from parse_sq_zc45t import *
 
 def load_json(file_name):
     try:
@@ -26,10 +27,10 @@ class SqParse0x80:
                 idx += 4
                 data_id = str(data_id)
                 if factor_offset:
-                    self.__data.update({data_id: '%d, %d' % (
+                    self.__data.update({data_id: '%d, %f' % (
                     time_offset, val * factor_offset[data_id][0] + factor_offset[data_id][1])})
                 else:
-                    self.__data.update({data_id: '%d, %d' % (time_offset, val)})
+                    self.__data.update({data_id: '%d, %f' % (time_offset, val)})
         len_out[0] = idx
 
     def as_dict(self):
@@ -131,13 +132,13 @@ class SqParse0x88:
         return self.__data
 
 class SqParseMsg(parse_gb32960.MainParseMsg):
-    def __init__(self, analyse):
+    def __init__(self):
         super().__init__()
         self._cfg = load_json('parse_cfg.json')
 
     def parse_custom_msg(self, cmd, data):
         package = dict()
-        if cmd == 0xEF:
+        if cmd == 0xEF or cmd == 0xF0:
             idx = 0
             tot_len = len(data)
             used_len = [0]
@@ -151,7 +152,7 @@ class SqParseMsg(parse_gb32960.MainParseMsg):
                     factor_offset = self._cfg[hex(block_id)]
                 except KeyError:
                     factor_offset = None
-                # print("\nblock_id=%d, idx=%d" % (block_id, idx))
+                #print(block_id, data[idx:].hex())
                 if block_id == 0x80:
                     package.update({'四状态枚举量': SqParse0x80(data[idx:], used_len, factor_offset).as_dict()})
                 elif block_id == 0x81:
@@ -175,8 +176,10 @@ class SqParseMsg(parse_gb32960.MainParseMsg):
                     break
 
                 idx += used_len[0]
-
-            return package
+        elif cmd == 0xFB:
+                obj = Parse45tCustomMsg()
+                package = obj.parse(data)
+        return package
 
 def analyse_data(package):
     result = True
@@ -240,8 +243,8 @@ def main():
                             result = re.search(r'\D(2323.*)\D', line)
                             if result:
                                 data = result.group(1).strip()
-                                #print(data)
-                                obj = SqParseMsg(analyse)
+                                print(data)
+                                obj = SqParseMsg()
                                 package = obj.parse_main_msg(bytes.fromhex(data))
                                 if analyse == 0:
                                     print(package)

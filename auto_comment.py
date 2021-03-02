@@ -9,7 +9,7 @@ from time import sleep
 #############以下内容为用户配置项#################
 ## 你的RDM用户名和密码：
 RdmUser="wujian"
-RdmPasswd="123456"
+RdmPasswd="Wujian123"
 ## 评论内容
 CommentText="待处理"
 ## RDM网址

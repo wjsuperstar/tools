@@ -1,5 +1,22 @@
 {
     "四状态枚举量" : {
+    "3"  : "MotMode",              
+    "15" : "PTCSHVEnable",         
+    "20" : "MotErrLevel",          
+    "21" : "BatErrLevel",          
+    "39" : "HVTo24ErrLevel",       
+    "26" : "EHDSErrLevel",         
+    "27" : "EHBSErrLevel",         
+    "28" : "IUErrLevel",           
+    "29" : "VMSErrLeve",           
+    "30" : "AuxiPowerSwitchStatus",
+    "31" : "WaterPumpRelayStatus", 
+    "32" : "Ignition_ON",          
+    "34" : "PTOEngaged",           
+    "35" : "AC_StartState",        
+    "36" : "PTC_StartState",       
+    "48" : "ExhaustBrake",         
+    
     "101" : "VCU_BatPwrEn" ,          
     "102" : "VCU_DCDC24PwrEn" ,       
     "103" : "VCU_DCAC_SPwrEn" ,       
@@ -87,6 +104,7 @@
     },
     
     "八状态枚举量" : {
+    "1" : "ChargerChargingStatus",
     "101" : "VCU_PDUPosition",
     "102" : "VCU_CCSts",
     "103" : "EPB_WorkingMode",
@@ -101,6 +119,10 @@
     },
     
     "十六状态枚举量" : {
+    "1": "MotStatus", 
+    "2": "BatStatus", 
+    "4": "FCEStatus", 
+    "6": "VMSStatus", 
     "101"  : "VCU_VehSts" ,     
     "102"  : "VCU_ErrSts" ,     
     "103"  : "VCU_ShiftLevel", 
@@ -129,6 +151,23 @@
     },
 
     "八位模拟数据" : {
+    "65" : "HVTo24VolOut",         
+    "66" : "HVTo24CurOut",         
+    "67" : "HVTo24InvTem",         
+    "12" : "EHDSBusCurin",         
+    "13" : "EHDSMotTem",           
+    "14" : "EHDSInvTem",           
+    "15" : "EHBSBusCurin",         
+    "64" : "EHBSMotTem",           
+    "17" : "EHBSInvTem",           
+    "8"  : "FCECoolingWaterTem",   
+    "36" : "FuelCellMinVolCellNum",
+    "18" : "FanSpeedPercent",      
+    "22" : "FanVolin",             
+    "23" : "FanCurin",             
+    "19" : "WatertankInsakeTem",   
+    "20" : "WatertankouttakeTem",  
+    
     "101" : "VCU_AccPedPos" ,       
     "102" : "VCU_BrkPedPos" ,       
     "103" : "VCU_StartSts" ,        
@@ -192,6 +231,18 @@
     },
 
     "十六位模拟数据" : {
+    "31" : "EHBSMotSpd",              
+    "30" : "EHBSMotVol",              
+    "29" : "EHDSMotSpd",              
+    "141": "NavigationBasedVehicleSpeed",
+    "143": "Altitude",                   
+    "28" : "EHDSMotVol",              
+    "7"  : "BatDisCurMax",              
+    "8"  : "BatChaCurMax",              
+    "9"  : "BatInsDisCurMax",           
+    "10" : "BatFbkChaCurMax",           
+    "13" : "CharingCycle",     
+    "33" : "FuelCellMinVol",            
     "101"  : "VCU_VehSpd" ,          
     "102"  : "MCU_DCCurrent" ,       
     "103"  : "MCU_DCVoltage" ,       

@@ -7,6 +7,8 @@ from parse_sq_le import *
 
 bind_ip = "0.0.0.0"  #监听所有可用的接口
 bind_port = 40228   #非特权端口号都可以使用
+g_online = False
+g_vin = ""
 
 def deal_recv_data(client_socket, data):
     obj = SqParseMsg()
@@ -28,10 +30,13 @@ def deal_recv_data(client_socket, data):
             d_arry[3] = 1
             d_arry[-1] = parse_gb32960.CalcCrc(d_arry[2:-1])
             client_socket.send(bytes(d_arry))
-            #time.sleep(0.5)
-            #send_info = key_exchange_msg(sm4_key_, package['消息头']['VIN'])
-            #client_socket.send(send_info)
-            #print("密钥下发", send_info.hex())
+            global g_online, g_vin
+            g_online = True
+            g_vin = package['消息头']['VIN']
+            send_info = key_exchange_msg(sm4_key_, g_vin)
+            client_socket.send(send_info)
+            print("密钥下发", send_info.hex())
+
         elif cmd == 0x04:
             pass
         elif cmd == 0x07:
@@ -87,11 +92,19 @@ def handle_event(client_socket):
             elif cmd == 6:  # 车钥
                 package = struct.pack(">BB", cmd, param)
                 remote_ctrl_msg(client_socket, package)
+            elif cmd == 7:  # 寻车
+                package = struct.pack(">BBB", cmd, param, param2)
+                remote_ctrl_msg(client_socket, package)
+            elif cmd == 99 and g_online:
+                send_info = key_exchange_msg(sm4_key_, g_vin)
+                client_socket.send(send_info)
+                print("密钥下发", send_info.hex())
+
 def main():
     # AF_INET：使用标准的IPv4地址或主机名，SOCK_STREAM：说明这是一个TCP服务器
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((bind_ip, bind_port))
-    print("[*] Listening on %s:%d" % (bind_ip, bind_port))
+    print(f"[*] Listening on {bind_ip}:{bind_port}")
     # 最大连接数
     server.listen(5)
     while True:

@@ -27,10 +27,10 @@ class SqParse0x80:
                 idx += 4
                 data_id = str(data_id)
                 if factor_offset:
-                    self.__data.update({data_id: '%d, %f' % (
+                    self.__data.update({data_id: '%d, %d' % (
                     time_offset, val * factor_offset[data_id][0] + factor_offset[data_id][1])})
                 else:
-                    self.__data.update({data_id: '%d, %f' % (time_offset, val)})
+                    self.__data.update({data_id: '%d, %d' % (time_offset, val)})
         len_out[0] = idx
 
     def as_dict(self):
@@ -84,6 +84,7 @@ class SqParse0x86:
             if idx < total:
                 data_id, time_offset, val = struct.unpack(">HB5s", data[idx:idx + 8])
                 idx += 8
+                data_id = str(data_id)
                 self.__data.update({data_id: '%d, %s' % (time_offset, val.hex())})
         len_out[0] = idx
 
@@ -125,6 +126,7 @@ class SqParse0x88:
                 data_len = data[idx+1]
                 data_id, tmp, time_offset, val = struct.unpack(">BBB%ds" % data_len, data[idx:idx+data_len+3])
                 idx += (data_len+3)
+                data_id = str(data_id)
                 self.__data.update({data_id: '%d, %s' % (time_offset, val.hex())})
         len_out[0] = idx
 
@@ -152,25 +154,26 @@ class SqParseMsg(parse_gb32960.MainParseMsg):
                     factor_offset = self._cfg[hex(block_id)]
                 except KeyError:
                     factor_offset = None
+                #factor_offset = None
                 #print(block_id, data[idx:].hex())
                 if block_id == 0x80:
-                    package.update({'四状态枚举量': SqParse0x80(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'四状态枚举量': SqParse0x80(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x81:
-                    package.update({'八状态枚举量': SqParse0x81(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'八状态枚举量': SqParse0x81(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x82:
-                    package.update({'十六状态枚举量': SqParse0x82(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'十六状态枚举量': SqParse0x82(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x83:
                     package.update({'八位模拟数据': SqParse0x83(data[idx:], used_len, factor_offset).as_dict()})
                 elif block_id == 0x84:
                     package.update({'十六位模拟数据': SqParse0x84(data[idx:], used_len, factor_offset).as_dict()})
                 elif block_id == 0x85:
-                    package.update({'一位开关量': SqParse0x85(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'一位开关量': SqParse0x85(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x86:
-                    package.update({'诊断类信号': SqParse0x86(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'诊断类信号': SqParse0x86(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x87:
-                    package.update({'其他信号': SqParse0x87(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'其他信号': SqParse0x87(data[idx:], used_len, None).as_dict()})
                 elif block_id == 0x88:
-                    package.update({'字符型信号': SqParse0x88(data[idx:], used_len, factor_offset).as_dict()})
+                    package.update({'字符型信号': SqParse0x88(data[idx:], used_len, None).as_dict()})
                 else:
                     print('Unkonw id, block_id=', hex(block_id))
                     break
@@ -196,9 +199,12 @@ def analyse_data(package):
                         result      = False
                         send_val    = send_data[data_cfg[k][i]]  # can报文发送值
                         upload_val  = int(j.split(',')[1].strip())
+                        cnt += 1
                         if send_val != upload_val:
-                            cnt += 1
+                            #cnt += 1
                             print('Test Fail %d:' % cnt, k, '类型编号:', i, 'CAN报文模拟值:%d, 网络上报值:%d' % (send_val, upload_val))
+                        else:
+                            print('Test success %d:' % cnt, k, data_cfg[k][i], '类型编号:', i, 'CAN报文模拟值:%d, 网络上报值:%d' % (send_val, upload_val))
                     except KeyError:
                         continue
     return result

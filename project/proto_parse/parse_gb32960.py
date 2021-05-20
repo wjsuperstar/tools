@@ -92,49 +92,46 @@ class GbParse0x07:
         idx += 6
         self.__fault_data = dict(zip(g_fault_keys, tmp_values))
 
-        fault_list = []
         # 可充电蓄能装置故障总数
+        fault_list = []
         bms_fault_num = self.__fault_data['bms_num']
         if bms_fault_num > 0:
             for i in range(bms_fault_num):
                 fault_list.append(struct.unpack(">I", data[idx:idx + 4])[0])
                 idx += 4
         self.__fault_data['bms_list'] = fault_list
-        fault_list.clear()
 
         # 电机故障总数
         monitor_fault_num = struct.unpack(">B", data[idx:idx + 1])[0]
         idx += 1
+        fault_list = []
         if monitor_fault_num > 0:
-            fault_list = []
             for i in range(monitor_fault_num):
                 fault_list.append(struct.unpack(">I", data[idx:idx + 4])[0])
                 idx += 4
         self.__fault_data['motor_num'] = monitor_fault_num
         self.__fault_data['motor_list'] = fault_list
-        fault_list.clear()
+
         # 发动机故障总数
         engine_fault_num = struct.unpack(">B", data[idx:idx + 1])[0]
         idx += 1
+        fault_list = []
         if engine_fault_num > 0:
-            fault_list = []
             for i in range(engine_fault_num):
                 fault_list.append(struct.unpack(">I", data[idx:idx + 4])[0])
                 idx += 4
         self.__fault_data['engine_num'] = engine_fault_num
         self.__fault_data['engine_list'] = fault_list
-        fault_list.clear()
         # 其他故障总数
         other_fault_num = struct.unpack(">B", data[idx:idx + 1])[0]
         idx += 1
+        fault_list = []
         if other_fault_num > 0:
-            fault_list = []
             for i in range(other_fault_num):
                 fault_list.append(struct.unpack(">I", data[idx:idx + 4])[0])
                 idx += 4
         self.__fault_data['other_num'] = other_fault_num
         self.__fault_data['other_list'] = fault_list
-        fault_list.clear()
 
         len_out[0] = idx
 

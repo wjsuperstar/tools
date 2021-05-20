@@ -6,7 +6,7 @@ VCI_DEV_USBCAN1 = 3
 VCI_DEV_USBCAN2 = 4
 
 VCI_DEV_BAUD = 0 # 0 : 500k, 1 : 250k 
-FileName=r'D:\tools\python368\EM19-2.txt'
+FileName=r'D:\test\test_py\project\can_test\zq123.txt'
 #FileName=r'playback.txt'
 FileFormat="txt"   #txt, csv
 
@@ -92,7 +92,7 @@ elif FileFormat == "txt2":
     parse_txt2()
 
 for i in range(len(can_id)):
-    time.sleep(0.001);
+    time.sleep(0.001)
     vco.ID = int(can_id[i], 16)
     if vco.ID > 0x7FF:
         vco.ExternFlag = 1

@@ -116,6 +116,8 @@ class TSqleVcu():
                     print(time.strftime('%Y-%m-%d %H:%M:%S'), ' 下发车速报文 ', hex(can_id), [hex(i) for i in data])
                     self._lock_cmd_param = data[0]
                     print('车速:', self._lock_cmd_param)
+                elif can_id == 0x18FFF6EB:
+                    print(time.strftime('%Y-%m-%d %H:%M:%S'), ' 预警报文 ', hex(can_id), [hex(i) for i in data])
     def start(self):
         cfg = self.load()
         if cfg:

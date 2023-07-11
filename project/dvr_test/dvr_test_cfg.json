@@ -1,0 +1,9 @@
+{
+    "atCmdList":{
+        {"enable":"1", "at":"AT@SWVERSION", "mode":"Get",    "flag":0, "setCtx":"",                  "desc":"获取软件版本"},
+        {"enable":"1", "at":"AT+BTMAC",     "mode":"GetSet", "flag":0, "setCtx":"AB:23:B1:D8:E7:0E", "desc":"测试蓝牙MAC"},
+        {"enable":"1", "at":"AT+WIFIMAC",   "mode":"GetSet", "flag":0, "setCtx":"A0:23:B2:D9:C7:0E", "desc":"测试WIFI MAC"},
+        
+    },
+
+}
